@@ -113,27 +113,38 @@ a{color:inherit}
 .modal[hidden]{display:none}
 .modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:20px}
 .modal-backdrop{position:absolute;inset:0;background:rgba(12,10,9,.7);backdrop-filter:blur(4px)}
-.modal-panel{position:relative;width:min(660px,100%);max-height:90vh;overflow:auto;background:var(--paper);padding:42px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.modal-close{position:absolute;top:12px;right:14px;border:0;background:transparent;font-size:1.8rem;line-height:1;padding:10px;cursor:pointer}
-.modal h2{font:500 2.35rem/1 var(--serif);margin:0 35px 10px 0}
-.modal-intro{font-size:.82rem;margin:0 0 23px}
-.channels{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.channel{border:1px solid var(--line);padding:18px}
-.channel h3{font:500 1.35rem var(--serif);margin:0 0 5px}
-.channel p{font-size:.74rem;margin:0 0 14px}
-.channel a,.qr-toggle{width:100%;min-height:42px;display:flex;align-items:center;justify-content:center;margin-top:7px;font:700 .65rem var(--sans);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;cursor:pointer}
-.channel a{background:var(--ink);color:#fff}
-.qr-toggle{background:transparent;border:1px solid var(--ink)}
-.qr{display:none;text-align:center;padding-top:14px}
+.modal-panel{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--paper);padding:46px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-close{position:absolute;top:15px;right:17px;border:0;background:transparent;font-size:2rem;line-height:1;padding:10px;cursor:pointer}
+.modal h2{font:500 clamp(2.2rem,4vw,3.35rem)/.98 var(--serif);margin:0 45px 11px 0;letter-spacing:-.04em}
+.modal-intro{font-size:.91rem;margin:0 0 27px;max-width:550px}
+.channels{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.channel{border:1px solid;padding:20px;border-radius:10px}
+.channel--telegram{border-color:#70b8df;background:#f3faff}
+.channel--max{border-color:#93a9ff;background:#f5f7ff}
+.channel-head{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.channel-icon{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;flex:0 0 31px;color:#fff;font:700 .93rem/1 var(--sans)}
+.channel--telegram .channel-icon{background:#32a9e0}
+.channel--max .channel-icon{background:linear-gradient(135deg,#176cff,#8a34dd)}
+.channel h3{font:500 1.55rem var(--serif);margin:0}
+.channel p{font-size:.74rem;margin:0 0 15px;min-height:36px}
+.channel-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.channel a,.qr-toggle{width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:999px;font:700 .62rem/1.1 var(--sans);text-transform:none;letter-spacing:0;text-decoration:none;cursor:pointer;transition:transform .18s ease,filter .18s ease}
+.channel a:hover,.qr-toggle:hover{transform:translateY(-1px);filter:brightness(.97)}
+.channel--telegram a{background:#32a9e0;color:#fff}
+.channel--telegram .qr-toggle{background:transparent;border:1px solid #32a9e0;color:#19749e}
+.channel--max a{background:linear-gradient(135deg,#176cff,#4a63ff 62%,#9a37da);color:#fff}
+.channel--max .qr-toggle{background:transparent;border:1px solid #5875ed;color:#304ec6}
+.action-mobile{display:none}
+.qr{display:none;text-align:center;padding-top:16px}
 .qr.open{display:block}
 .qr img{width:126px;height:126px;background:#fff}
-.callback{border-top:1px solid var(--line);margin-top:24px;padding-top:23px}
-.callback h3{font:500 1.6rem var(--serif);margin:0 0 8px}
-.callback p{font-size:.76rem;margin:0 0 13px}
+.callback{border-top:1px solid var(--line);margin-top:28px;padding-top:27px}
+.callback h3{font:500 2rem var(--serif);margin:0 0 8px}
+.callback p{font-size:.76rem;margin:0 0 15px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .callback label{font-size:.68rem;display:block}
 .callback input{display:block;width:100%;margin-top:5px;border:1px solid var(--line);background:#fff;padding:11px;min-height:43px}
-.callback .button{margin-top:11px}
+.callback .button{margin-top:14px}
 .consent{font-size:.63rem;color:var(--muted);margin:14px 0 0}
 .hamburger{display:none;background:transparent;border:0;padding:10px;font-size:1.35rem;cursor:pointer}
 .nav a:focus-visible,.button:focus-visible,.filter:focus-visible,.modal-close:focus-visible,.sticky:focus-visible,.hamburger:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
@@ -190,9 +201,14 @@ a{color:inherit}
 .footer-bottom div+div{margin-top:8px}
 .modal{align-items:end;padding:0}
 .modal-panel{padding:32px 20px 23px}
-.modal h2{font-size:2rem}
+.modal h2{font-size:2.35rem}
 .channels,.form-row{grid-template-columns:1fr}
+.channel{padding:18px}
+.channel p{min-height:auto}
+.channel-actions{grid-template-columns:1fr}
 .qr-toggle,.qr{display:none!important}
+.action-desktop{display:none}
+.action-mobile{display:inline}
 .sticky{width:56px;height:56px;right:14px;bottom:14px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
@@ -209,7 +225,7 @@ a{color:inherit}
 <section class="contact-band" id="contacts"><div class="contact-copy"><p class="eyebrow">Начните с одной идеи</p><h2>Будущее<br><em>украшение</em><br>уже близко</h2></div><div class="contact-action"><p>Пришлите референс в мессенджер, позвоните или оставьте номер — выберите удобный способ, а мастер вернётся с точными вопросами по вашему проекту.</p><button class="button js-contact" type="button">Выбрать способ связи</button><div class="contact-links"><a href="tel:+74957998910">+7 (495) 799-89-10</a><a href="mailto:jewelry@kolvika.ru">jewelry@kolvika.ru</a></div></div><figure class="contact-photo"><img src="assets/portrait.jpg" alt="Украшение Kolvika в образе"></figure></section>
  </main>
 <footer class="footer"><div class="footer-top"><div><p class="eyebrow">Kolvika jewelry</p><h2 class="footer-title">Ваша идея<br>начинается<br>здесь</h2><h3>Контакты</h3><p><a href="tel:+74957998910">+7 (495) 799-89-10</a></p><p><a href="tel:+79639968512">+7 (963) 996-85-12</a></p><p><a href="mailto:jewelry@kolvika.ru">jewelry@kolvika.ru</a></p><p>Пн–Пт · 10:00–19:00</p></div><div><h3>Как нас найти</h3><div class="footer-map"><iframe title="Kolvika jewelry на Яндекс Картах" src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%91%D0%B5%D1%80%D0%B5%D0%B3%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%204%2F6%2C%20%D1%81%D1%82%D1%80.%202&z=16"></iframe></div><p style="margin-top:13px"><a href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%91%D0%B5%D1%80%D0%B5%D0%B3%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%204%2F6%2C%20%D1%81%D1%82%D1%80.%202" target="_blank" rel="noopener">Москва, Береговой проезд, д. 4/6, стр. 2</a></p></div><div><h3>Оставить заявку</h3><form class="footer-form" id="footer-form"><input id="footer-name" autocomplete="name" placeholder="Ваше имя" required><input id="footer-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Телефон" required><textarea id="footer-message" placeholder="Расскажите, какое украшение хотите создать"></textarea><button class="button" type="submit">Отправить заявку</button></form><p style="margin-top:13px;font-size:.66rem">Отправляя форму, вы соглашаетесь с <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p></div></div><div class="footer-bottom"><div>© KOLVIKA jewelry · 2026</div><div>Изготовление украшений на заказ в Москве</div></div></footer><button class="sticky js-contact" type="button" aria-label="Открыть варианты связи"></button>
-<div class="modal" id="contact-modal" hidden aria-hidden="true"><div class="modal-backdrop" data-close></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" type="button" aria-label="Закрыть" data-close>×</button><h2 id="modal-title">Как вам удобнее?</h2><p class="modal-intro">Напишите мастеру — можно сразу прикрепить фото, эскиз или референс.</p><div class="channels"><article class="channel"><h3>Telegram</h3><p>Быстро обсудим идею и материалы.</p><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Написать в Telegram</a><button class="qr-toggle" type="button" data-qr="tg">Продолжить с телефона</button><div class="qr" id="tg"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Ft.me%2Fkolvikajewelry" alt="QR-код для Telegram"><p>Наведите камеру телефона</p></div></article><article class="channel"><h3>MAX</h3><p>Напишите в привычный мессенджер.</p><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">Написать в MAX</a><button class="qr-toggle" type="button" data-qr="max">Продолжить с телефона</button><div class="qr" id="max"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" alt="QR-код для MAX"><p>Наведите камеру телефона</p></div></article></div><form class="callback" id="callback-form"><h3>Перезвонить вам?</h3><p>Оставьте имя и телефон — письмо с заявкой откроется в вашем почтовом приложении.</p><div class="form-row"><label>Ваше имя<input id="callback-name" autocomplete="name" required></label><label>Телефон<input id="callback-phone" type="tel" inputmode="tel" autocomplete="tel" required></label></div><button class="button" type="submit">Оставить контакты</button></form><p class="consent">Переходя в мессенджер или отправляя заявку, вы соглашаетесь с <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p></section></div>
+<div class="modal" id="contact-modal" hidden aria-hidden="true"><div class="modal-backdrop" data-close></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" type="button" aria-label="Закрыть" data-close>×</button><h2 id="modal-title">Как вам удобнее?</h2><p class="modal-intro">Напишите мастеру — можно сразу прикрепить фото, эскиз или референс.</p><div class="channels"><article class="channel channel--telegram"><div class="channel-head"><span class="channel-icon" aria-hidden="true">↗</span><h3>Telegram</h3></div><p>Быстро обсудим идею и материалы.</p><div class="channel-actions"><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener"><span class="action-desktop">На компьютере</span><span class="action-mobile">Открыть Telegram</span></a><button class="qr-toggle" type="button" data-qr="tg">На телефоне</button></div><div class="qr" id="tg"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Ft.me%2Fkolvikajewelry" alt="QR-код для Telegram"><p>Отсканируйте код камерой телефона</p></div></article><article class="channel channel--max"><div class="channel-head"><span class="channel-icon" aria-hidden="true">M</span><h3>MAX</h3></div><p>Напишите в привычный мессенджер.</p><div class="channel-actions"><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener"><span class="action-desktop">На компьютере</span><span class="action-mobile">Открыть MAX</span></a><button class="qr-toggle" type="button" data-qr="max">На телефоне</button></div><div class="qr" id="max"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fmax.ru%2Fu%2Ff9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" alt="QR-код для MAX"><p>Отсканируйте код камерой телефона</p></div></article></div><form class="callback" id="callback-form"><h3>Перезвонить вам?</h3><p>Оставьте имя и телефон — письмо с заявкой откроется в вашем почтовом приложении.</p><div class="form-row"><label>Ваше имя<input id="callback-name" autocomplete="name" required></label><label>Телефон<input id="callback-phone" type="tel" inputmode="tel" autocomplete="tel" required></label></div><button class="button" type="submit">Оставить контакты</button></form><p class="consent">Переходя в мессенджер или отправляя заявку, вы соглашаетесь с <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политикой конфиденциальности</a>.</p></section></div>
 <script>const modal=document.getElementById('contact-modal'),triggers=document.querySelectorAll('.js-contact'),closers=modal.querySelectorAll('[data-close]');let previous;function openModal(){previous=document.activeElement;modal.hidden=false;modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';modal.querySelector('.modal-close').focus()}function closeModal(){modal.hidden=true;modal.setAttribute('aria-hidden','true');document.body.style.overflow='';previous?.focus()}triggers.forEach(t=>t.addEventListener('click',openModal));closers.forEach(c=>c.addEventListener('click',closeModal));document.querySelectorAll('[data-qr]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.qr).classList.toggle('open')));document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.card').forEach(c=>c.hidden=b.dataset.filter!=='all'&&c.dataset.category!==b.dataset.filter)}));document.querySelector('.hamburger').addEventListener('click',e=>{const nav=document.querySelector('.nav-links'),open=nav.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)});document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));document.getElementById('callback-form').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('callback-name').value.trim(),phone=document.getElementById('callback-phone').value.trim();if(!name||!phone)return;location.href='mailto:jewelry@kolvika.ru?subject='+encodeURIComponent('Заявка с лендинга Kolvika')+'&body='+encodeURIComponent('Имя: '+name+'\nТелефон: '+phone+'\n\nПрошу перезвонить мне по поводу изготовления украшения на заказ.');});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeModal();if(e.key==='Tab'&&!modal.hidden){const items=[...modal.querySelectorAll('button,a[href],input')].filter(el=>el.offsetParent!==null),first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});</script>
 <script>document.documentElement.classList.add('js');const processSteps=[...document.querySelectorAll('.step[data-process-image]')],processImages=[...document.querySelectorAll('.process-visual img')];if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){const reveal=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');const index=Number(entry.target.dataset.processImage);processImages.forEach((image,i)=>image.classList.toggle('is-active',i===index))}}),{threshold:.35});processSteps.forEach(step=>reveal.observe(step))}else{processSteps.forEach(step=>step.classList.add('is-visible'))}</script>
 <script>document.getElementById('footer-form').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('footer-name').value.trim(),phone=document.getElementById('footer-phone').value.trim(),message=document.getElementById('footer-message').value.trim();if(!name||!phone)return;location.href='mailto:jewelry@kolvika.ru?subject='+encodeURIComponent('Заявка с лендинга Kolvika')+'&body='+encodeURIComponent('Имя: '+name+'\nТелефон: '+phone+'\nЗапрос: '+message);});</script>
