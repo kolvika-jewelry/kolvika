@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'landings/custom-jewelry/dist/**'
+      - 'landings/jewelry-repair/dist/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -29,10 +30,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Assemble landings
+        run: |
+          mkdir -p _site/repair
+          cp -R landings/custom-jewelry/dist/. _site/
+          cp -R landings/jewelry-repair/dist/. _site/repair/
+          cp -R landings/custom-jewelry/dist/assets _site/repair/assets
       - name: Upload landing
         uses: actions/upload-pages-artifact@v3
         with:
-          path: landings/custom-jewelry/dist
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
