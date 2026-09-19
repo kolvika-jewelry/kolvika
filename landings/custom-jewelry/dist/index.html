@@ -6,16 +6,17 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans)}
 button,input{font:inherit}
 a{color:inherit}
-.topbar{height:36px;padding:0 4.5vw;background:var(--ink);color:#f7f3ed;display:flex;align-items:center;justify-content:space-between;font-size:.69rem;letter-spacing:.06em}
+.topbar{height:31px;padding:0 4.5vw;background:var(--ink);color:#f7f3ed;display:flex;align-items:center;justify-content:space-between;font-size:.66rem;letter-spacing:.06em}
 .topbar a,.brand,.nav a{ text-decoration:none}
-.nav{height:82px;padding:0 4.5vw;display:flex;align-items:center;gap:28px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:8}
-.brand{font:500 1.45rem var(--serif);letter-spacing:.1em;white-space:nowrap}
-.brand small{font:600 .55rem var(--sans);letter-spacing:.18em}
+.nav{height:68px;padding:0 4.5vw;display:flex;align-items:center;gap:20px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:8}
+.brand{display:inline-flex;align-items:center;line-height:0;white-space:nowrap}
+.brand img{width:156px;height:auto;display:block}
+.nav-socials{display:flex;align-items:center;gap:7px}.nav-socials a{width:27px;height:27px;border:1px solid var(--line);display:grid;place-items:center;text-decoration:none;font-size:0;transition:.2s}.nav-socials a:hover{border-color:var(--gold);background:#f0eadf}.nav-socials img{width:16px;height:16px;object-fit:contain}
 .nav-links{display:flex;align-items:center;gap:23px;margin:auto;font-size:.69rem;text-transform:uppercase;letter-spacing:.1em}
 .nav-links a:hover{color:var(--gold)}
 .nav-call{font-size:.72rem;font-weight:700;white-space:nowrap}
 .nav-button,.button{border:1px solid var(--gold);background:var(--gold);color:#171515;padding:14px 20px;min-height:48px;font:700 .69rem var(--sans);text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.nav-button{min-height:42px;padding:11px 15px}
+.nav-button{min-height:38px;padding:9px 13px}
 .button:hover,.nav-button:hover{background:transparent;color:var(--gold)}
 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:640px;background:#282422;color:#fff}
 .hero-copy{padding:105px 7vw 78px 9vw;display:flex;flex-direction:column;justify-content:center}
@@ -153,10 +154,11 @@ a{color:inherit}
 }
 @media(max-width:720px){.topbar{height:31px;padding:0 20px;font-size:.58rem}
 .topbar span{display:none}
-.nav{height:65px;padding:0 20px;gap:12px}
-.brand{font-size:1.18rem}
+.nav{height:58px;padding:0 20px;gap:9px}
+.brand img{width:124px}
+.nav-socials a{width:25px;height:25px}
 .hamburger{display:block;margin-left:auto}
-.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:16px 20px;flex-direction:column;align-items:flex-start;gap:15px}
+.nav-links{display:none;position:absolute;top:57px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:16px 20px;flex-direction:column;align-items:flex-start;gap:15px}
 .nav-links.open{display:flex}
 .nav-button{display:none}
 .hero{display:flex;flex-direction:column}
@@ -215,7 +217,7 @@ a{color:inherit}
 .card img,.button,.nav-button{transition:none}
 }
 </style></head>
-<body><div class="topbar"><span>Москва · Береговой проезд, д. 4/6, стр. 2</span><a href="tel:+74957998910">+7 (495) 799-89-10</a></div><header class="nav"><a class="brand" href="#top">KOLVIKA <small>jewelry</small></a><button class="hamburger" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button><nav class="nav-links" aria-label="Основная навигация"><a href="#works">Работы</a><a href="#materials">Материалы</a><a href="#process">Процесс</a><a href="#services">Услуги</a><a href="#contacts">Контакты</a></nav><a class="nav-call" href="tel:+74957998910">Позвонить</a><button class="nav-button js-contact" type="button">Обсудить заказ</button></header>
+<body><div class="topbar"><span>Москва · Береговой проезд, д. 4/6, стр. 2</span><a href="tel:+74957998910">+7 (495) 799-89-10</a></div><header class="nav"><a class="brand" href="#top" aria-label="Kolvika jewelry"><img src="https://static.insales-cdn.com/files/1/6881/129120993/original/blob_5e30a94c387864a152601e79da129f98_.png" alt="Kolvika jewelry"></a><div class="nav-socials" aria-label="Мессенджеры"><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener" aria-label="Написать в Telegram"><img src="https://cdn.insales-shop.ru/files/1/3073/118090753/original/telegram_72c3705ab685c55f8825f9373ef12f48.png" alt=""></a><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener" aria-label="Написать в MAX"><img src="https://cdn.insales-shop.ru/files/1/4769/118551201/original/макс_f25da25a19e6fe940d11ed459d795882.png" alt=""></a></div><button class="hamburger" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button><nav class="nav-links" aria-label="Основная навигация"><a href="#works">Работы</a><a href="#materials">Материалы</a><a href="#process">Процесс</a><a href="#services">Услуги</a><a href="#contacts">Контакты</a></nav><a class="nav-call" href="tel:+74957998910">Позвонить</a><button class="nav-button js-contact" type="button">Обсудить заказ</button></header>
 <main id="top"><section class="hero"><div class="hero-copy"><p class="eyebrow">Ювелирное ателье Kolvika</p><h1>Украшение,<br><em>созданное</em> для вас</h1><p>Изготовим кольцо, серьги, колье или браслет по фотографии, эскизу или вашей идее — с вашими или нашими камнями и металлом.</p><div class="hero-actions"><button class="button js-contact" type="button">Рассчитать ваш проект</button><a class="button button--ghost" href="tel:+74957998910">Позвонить мастеру</a></div></div><div class="hero-visual"><img src="assets/hero.jpg" alt="Индивидуальное кольцо с голубым камнем от Kolvika"><div class="hero-stamp">Срок<br>изготовления<br>от 14 дней</div></div></section><div class="metrics"><div class="metric"><b>14 дней</b><span>средний срок изготовления</span></div><div class="metric"><b>10+ лет</b><span>индивидуальных заказов</span></div><div class="metric"><b>1:1</b><span>сопровождение мастером</span></div></div>
 <section class="section intro"><h2 class="title">Ваш замысел.<br>Наше мастерство.</h2><div class="intro-copy"><p>Начните с референса, фотографии или даже одного предложения. Мы поможем подобрать форму, камни и технологию, заранее обсудим смету и останемся на связи на каждом этапе.</p><p>Изделие можно создать из вашего золота или камней — либо подобрать материалы вместе с нами.</p><button class="button inline-cta js-contact" type="button">Отправить идею мастеру</button></div></section>
 <section class="section extras" id="services"><div class="extras-head"><div><p class="eyebrow">Дополнительные услуги</p><h2 class="title">Украшения<br>с историей</h2></div><a class="button" href="https://kolvika.jewelry/page/remont-i-restavratsiya-2">Все услуги</a></div><div class="extra-grid"><a class="extra" href="https://kolvika.jewelry/page/remont-i-restavratsiya-2"><img src="assets/gems-ring.webp" alt="Переплавка ювелирного изделия"><div class="extra-copy"><h3>Переплавка</h3><p>Новый дизайн из вашего металла</p></div></a><a class="extra" href="https://kolvika.jewelry/page/remont-i-restavratsiya-2"><img src="assets/ring.jpg" alt="Переделка кольца"><div class="extra-copy"><h3>Переделка</h3><p>Вторая жизнь любимых украшений</p></div></a><a class="extra" href="https://kolvika.jewelry/page/remont-i-restavratsiya-2"><img src="assets/bracelet.jpg" alt="Ремонт ювелирного изделия"><div class="extra-copy"><h3>Ремонт</h3><p>Деликатная работа любой сложности</p></div></a></div></section>
