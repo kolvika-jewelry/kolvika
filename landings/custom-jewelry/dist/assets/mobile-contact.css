@@ -1,0 +1,112 @@
+/* A compact, touch-first contact path shared by every Kolvika landing. */
+.mobile-quick-contact, .quick-contact-modal { display: none; }
+
+@media (max-width: 720px) {
+  .mobile-quick-contact {
+    position: fixed;
+    z-index: 80;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #c59d59;
+    color: #211e1c;
+    box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  }
+  .mobile-quick-contact svg { width: 25px; height: 25px; }
+  .mobile-contact-bar ~ .mobile-quick-contact { bottom: 80px; }
+  .mobile-contact-bar ~ .sticky { display: none !important; }
+  .modal:not([hidden]) ~ .mobile-quick-contact { display: none; }
+
+  .quick-contact-modal[hidden] { display: none !important; }
+  .quick-contact-modal {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 8px;
+  }
+  .quick-contact-shade { position: absolute; inset: 0; background: rgba(24,20,18,.72); }
+  .quick-contact-panel {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 460px);
+    max-height: calc(100dvh - 16px);
+    overflow: auto;
+    padding: 20px;
+    background: #fffdf9;
+    color: #211e1c;
+    box-shadow: 0 12px 45px rgba(0,0,0,.3);
+  }
+  .quick-contact-close {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    color: #211e1c;
+    font-size: 30px;
+    line-height: 1;
+  }
+  .quick-contact-panel h2 { margin: 0 42px 5px 0; font: 500 31px/.98 Georgia, serif; }
+  .quick-contact-panel > p { margin: 0 0 13px; font-size: 13px; line-height: 1.35; }
+  .quick-contact-channels { display: grid; gap: 8px; }
+  .quick-contact-channel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 58px;
+    padding: 10px 12px;
+    border: 1px solid #d8d1c8;
+  }
+  .quick-contact-channel b { font: 500 23px/1 Georgia, serif; }
+  .quick-contact-channel a { padding: 10px 13px; color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .quick-contact-channel.telegram a { background: #229ed9; }
+  .quick-contact-channel.max a { background: linear-gradient(110deg,#1877f2,#8a3ffc); }
+  .quick-contact-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd5cb; }
+  .quick-contact-form h3 { margin: 0 0 8px; font: 500 23px/1 Georgia, serif; }
+  .quick-contact-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .quick-contact-fields input { width: 100%; height: 39px; border: 1px solid #cfc7bd; padding: 0 10px; font: 14px Arial, sans-serif; }
+  .quick-contact-consent { display: flex; gap: 7px; align-items: flex-start; margin: 8px 0; font-size: 10px; line-height: 1.2; }
+  .quick-contact-consent input { margin: 0; }
+  .quick-contact-send { width: 100%; min-height: 40px; border: 0; background: #211e1c; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+  /* Existing page dialogs: compact cards and a panel that stays inside the viewport. */
+  .modal { padding: 8px !important; align-items: center !important; }
+  .modal .panel, .modal .dialog, .modal .modal-panel {
+    width: min(100%, 500px) !important;
+    max-height: calc(100dvh - 16px) !important;
+    overflow: auto !important;
+    padding: 20px !important;
+  }
+  .modal .panel h2, .modal .dialog h2, .modal .modal-panel h2 { margin-bottom: 6px !important; font-size: 31px !important; }
+  .modal .channels { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .modal .channel { min-height: 0 !important; padding: 12px !important; }
+  .modal .channel h3 { margin: 0 !important; font-size: 24px !important; }
+  .modal .channel > p, .modal .channel .channel-head + p { display: none !important; }
+  .modal .channel a, .modal .channel-actions a { display: block !important; min-height: 38px !important; padding: 11px !important; text-align: center !important; }
+  .modal .channel-actions { display: block !important; }
+  .modal .qr-toggle, .modal .qr { display: none !important; }
+  .modal .callback { margin-top: 12px !important; padding-top: 12px !important; }
+  .modal .callback > p, .modal > .consent { display: none !important; }
+  .modal .formrow, .modal .form-row { grid-template-columns: 1fr !important; gap: 7px !important; }
+  .modal .callback input { min-height: 38px !important; }
+  .modal .callback h3 { margin: 0 0 8px !important; font-size: 24px !important; }
+}
+
+@media (max-width: 360px) {
+  .quick-contact-panel { padding: 15px; }
+  .quick-contact-panel h2 { font-size: 27px; }
+  .quick-contact-channel { min-height: 51px; }
+  .quick-contact-fields { grid-template-columns: 1fr; }
+  .quick-contact-consent { margin: 6px 0; }
+}
