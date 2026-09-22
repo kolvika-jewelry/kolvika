@@ -2,32 +2,33 @@
 .hero { min-height: 580px; }
 .hero-visual img { object-position: center 46%; }
 
-/* Replaces circular product cut-outs with a quiet, editorial image sequence. */
+/* A complete product strip: six whole pieces instead of cropped fragments. */
 .intro-visuals { display: none; }
 .intro-strip {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1.1fr .78fr .9fr;
-  gap: 12px;
-  height: 220px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  height: 190px;
   margin-top: 18px;
-  overflow: hidden;
+  overflow: visible;
 }
 .intro-strip img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  filter: saturate(.92);
+  padding: 8px;
+  background: #fff;
+  filter: saturate(.94);
 }
-.intro-strip img:nth-child(1) { animation: editorialDrift 8s ease-in-out infinite alternate; }
-.intro-strip img:nth-child(2) { animation: editorialDrift 10s ease-in-out infinite alternate-reverse; }
-.intro-strip img:nth-child(3) { animation: editorialDrift 9s ease-in-out 1s infinite alternate; }
 
-@keyframes editorialDrift {
-  from { transform: scale(1.02) translateY(-4px); }
-  to { transform: scale(1.08) translateY(5px); }
-}
+/* Product photography stays fully visible in the service and work cards. */
+.extra { background: #fff; }
+.extra img,
+.gallery-grid .card img { object-fit: contain; padding: 10px; background: #fff; }
+.extra::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, .72)); }
+.gallery-grid .card { background: #fff; }
 
 .mobile-contact-bar { display: none; }
 
@@ -36,7 +37,20 @@
   .hero { min-height: auto; }
   .hero-visual { min-height: 330px; }
   .hero-visual img { object-position: center 40%; }
-  .intro-strip { height: 150px; gap: 7px; margin-top: 22px; }
+  .intro-strip {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 146px;
+    height: 164px;
+    gap: 8px;
+    margin-top: 22px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+  .intro-strip::-webkit-scrollbar { display: none; }
+  .intro-strip img { scroll-snap-align: start; padding: 6px; }
   .mobile-contact-bar {
     position: fixed;
     z-index: 30;
@@ -67,8 +81,4 @@
   .mobile-contact-bar a:first-child { background: #229ed9; }
   .mobile-contact-bar a:last-child { background: #7355ff; }
   .sticky { bottom: 76px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .intro-strip img { animation: none; }
 }
