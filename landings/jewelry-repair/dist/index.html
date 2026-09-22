@@ -1995,6 +1995,7 @@
             /></label>
           </div>
           <button class="btn gold" type="submit">Оставить контакты</button>
+          <p class="callback-send-note" hidden>Чтобы мастер получил контакты, выберите Telegram или MAX выше.</p>
         </form>
         <p class="consent">
           Переходя в мессенджер или отправляя заявку, вы соглашаетесь с
@@ -2044,8 +2045,8 @@
         document.querySelectorAll(".callback-form").forEach((form) =>
           form.addEventListener("submit", (event) => {
             event.preventDefault();
-            form.querySelector(".btn").textContent = "Заявка принята";
-            form.querySelector(".btn").disabled = true;
+            const note = form.querySelector(".callback-send-note");
+            if (note) note.hidden = false;
           }),
         ),
         document.addEventListener("keydown", (e) => {
