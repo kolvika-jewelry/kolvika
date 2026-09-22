@@ -1,0 +1,72 @@
+/* Shared trust block placed directly above contacts on Kolvika landings. */
+.trust-block {
+  padding: 64px 5vw;
+  background: #efe8dc;
+  color: #211e1c;
+}
+.trust-block__inner {
+  display: grid;
+  grid-template-columns: minmax(240px, .82fr) minmax(0, 1.5fr);
+  gap: 52px;
+  align-items: start;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.trust-block__eyebrow {
+  margin: 0 0 14px;
+  color: #a67d3f;
+  font: 700 .72rem/1.3 Arial, sans-serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.trust-block h2 {
+  margin: 0;
+  font: 500 clamp(2.3rem, 4vw, 4.5rem)/.94 Georgia, serif;
+  letter-spacing: -.05em;
+}
+.trust-block__copy {
+  margin: 0 0 26px;
+  max-width: 760px;
+  font: 400 clamp(1rem, 1.2vw, 1.22rem)/1.48 Arial, sans-serif;
+}
+.trust-block__items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(33, 30, 28, .22);
+  border-bottom: 1px solid rgba(33, 30, 28, .22);
+}
+.trust-block__item {
+  padding: 19px 18px 20px 0;
+}
+.trust-block__item + .trust-block__item {
+  padding-left: 18px;
+  border-left: 1px solid rgba(33, 30, 28, .22);
+}
+.trust-block__item b {
+  display: block;
+  margin-bottom: 7px;
+  font: 500 1.25rem/1.08 Georgia, serif;
+}
+.trust-block__item span {
+  display: block;
+  font: 400 .83rem/1.45 Arial, sans-serif;
+}
+.trust-block__link {
+  display: inline-block;
+  margin-top: 19px;
+  color: inherit;
+  font: 700 .75rem/1 Arial, sans-serif;
+  letter-spacing: .06em;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-transform: uppercase;
+}
+@media (max-width: 800px) {
+  .trust-block { padding: 50px 20px; }
+  .trust-block__inner { display: block; }
+  .trust-block h2 { margin-bottom: 25px; }
+  .trust-block__items { grid-template-columns: 1fr; }
+  .trust-block__item,
+  .trust-block__item + .trust-block__item { padding: 16px 0; border-left: 0; }
+  .trust-block__item + .trust-block__item { border-top: 1px solid rgba(33, 30, 28, .22); }
+}
