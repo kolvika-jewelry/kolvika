@@ -1,9 +1,25 @@
 /* Repair page: workshop imagery and a lower, calmer first screen. */
 .hero { min-height: 470px; }
-.hero-photo { min-height: 420px; }
+.hero-photo { min-height: 420px; margin: 0; }
 .hero-photo img { object-position: center; filter: saturate(.82) contrast(1.03); }
 
-/* One clear CTA language across the repair landing. */
+/* Contrast on the first screen makes the two repair actions immediately distinct. */
+.hero-actions .btn:not(.ghost) {
+  background: #1d1a18;
+  border-color: #1d1a18;
+  color: #fff;
+  box-shadow: none;
+}
+.hero-actions .btn.ghost {
+  background: transparent;
+  border-color: #1d1a18;
+  color: #1d1a18;
+  box-shadow: none;
+}
+.hero-actions .btn:not(.ghost):hover { background: #39332e; border-color: #39332e; color: #fff; }
+.hero-actions .btn.ghost:hover { background: #1d1a18; border-color: #1d1a18; color: #fff; }
+
+/* One clear CTA language across the remaining repair landing. */
 .btn,
 .btn.gold,
 .btn.ghost {
@@ -19,6 +35,8 @@
   border-color: #af8747;
   color: #1d1a18;
 }
+.hero-actions .btn:not(.ghost),
+.hero-actions .btn.ghost { box-shadow: none; }
 
 /* Six process cards form a calm, even 3 × 2 composition. */
 .gallery {
