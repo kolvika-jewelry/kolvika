@@ -2,12 +2,41 @@
 .hero { min-height: 470px; }
 .hero-photo { min-height: 420px; }
 .hero-photo img { object-position: center; filter: saturate(.82) contrast(1.03); }
-.hero-card { left: 22px; bottom: 22px; }
+
+/* One clear CTA language across the repair landing. */
+.btn,
+.btn.gold,
+.btn.ghost {
+  background: #c6a362;
+  border-color: #c6a362;
+  color: #1d1a18;
+  box-shadow: 0 8px 20px rgba(52, 38, 20, .15);
+}
+.btn:hover,
+.btn.gold:hover,
+.btn.ghost:hover {
+  background: #af8747;
+  border-color: #af8747;
+  color: #1d1a18;
+}
+
+/* Six process cards form a calm, even 3 × 2 composition. */
+.gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.work,
+.work.tall {
+  min-height: 260px;
+  grid-row: auto;
+}
 
 @media (max-width: 800px) {
   .hero { min-height: auto; }
   .hero-copy { padding-top: 48px; padding-bottom: 32px; }
   .hero-photo { min-height: 270px; }
   .hero-photo img { object-position: center 46%; }
-  .hero-card { left: 14px; bottom: 14px; max-width: 230px; padding: 13px 15px; font-size: 14px; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .work,
+  .work.tall { min-height: 205px; }
 }
