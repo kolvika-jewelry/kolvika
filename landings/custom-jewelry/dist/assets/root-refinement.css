@@ -1,25 +1,29 @@
 /* Editorial refinement for the custom-jewelry landing. */
-.hero { min-height: 510px; }
-.hero-copy { padding-top: 62px; padding-bottom: 52px; }
-.hero-visual { min-height: 410px; }
-.hero-visual img { object-position: center 38%; }
+.hero { min-height: 460px; }
+.hero-copy { padding-top: 48px; padding-bottom: 40px; }
+.hero-visual { min-height: 370px; max-height: 460px; }
+.hero-visual img { object-position: center 33%; }
 .section { padding-top: 78px; padding-bottom: 78px; }
 
 /* A complete product strip: six whole pieces instead of cropped fragments. */
 .intro-visuals { display: none; }
+.intro-carousel {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+}
 .intro-strip {
   grid-column: 1 / -1;
   display: flex;
   gap: 10px;
-  height: 228px;
-  margin-top: 18px;
+  height: 194px;
+  margin-top: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 .intro-strip::-webkit-scrollbar { display: none; }
 .intro-strip img {
-  flex: 0 0 228px;
+  flex: 0 0 206px;
   height: 100%;
   object-fit: contain;
   display: block;
@@ -28,6 +32,31 @@
   filter: saturate(.94);
   scroll-snap-align: start;
 }
+.intro-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+  margin-top: 13px;
+  color: #6f665d;
+  font: 700 .66rem/1 Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.intro-carousel__arrow {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid #26211e;
+  background: #c39b58;
+  color: #171515;
+  box-shadow: 0 7px 16px rgba(33, 26, 21, .15);
+  cursor: pointer;
+  font: 400 1.25rem/1 Arial, sans-serif;
+}
+.intro-carousel__arrow:hover,
+.intro-carousel__arrow:focus-visible { background: #d8b978; }
 
 /* Product photography stays fully visible in the service and work cards. */
 .extra { background: #fff; }
@@ -39,16 +68,56 @@
 .gallery-grid .card--model img { object-fit: cover; padding: 0; background: transparent; }
 .gallery-grid .card--model:nth-child(even) img { object-position: center 44%; }
 
+.reviews-block {
+  padding: 58px max(5vw, 32px);
+  background: #211e1b;
+  color: #fff;
+}
+.reviews-block__head {
+  display: flex;
+  max-width: 1420px;
+  margin: 0 auto 24px;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.reviews-block__eyebrow {
+  margin: 0 0 10px;
+  color: #d0a75e;
+  font: 700 .72rem/1.2 Arial, sans-serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.reviews-block h2 {
+  margin: 0;
+  font: 500 clamp(2rem, 3.7vw, 4rem)/.96 Georgia, serif;
+  letter-spacing: -.045em;
+}
+.reviews-block__widget {
+  max-width: 1420px;
+  height: min(48vh, 470px);
+  min-height: 390px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+}
+.reviews-block__widget iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
 .mobile-contact-bar { display: none; }
 
 @media (max-width: 720px) {
   body { padding-bottom: 64px; }
   .hero { min-height: auto; }
-  .hero-visual { min-height: 330px; }
+  .hero-visual { min-height: 270px; max-height: 330px; }
   .hero-visual img { object-position: center 40%; }
   .section { padding-top: 60px; padding-bottom: 60px; }
   .intro-strip {
-    height: 196px;
+    height: 178px;
     gap: 8px;
     margin-top: 22px;
     overflow-x: auto;
@@ -57,7 +126,11 @@
     scrollbar-width: none;
   }
   .intro-strip::-webkit-scrollbar { display: none; }
-  .intro-strip img { flex-basis: 196px; scroll-snap-align: start; padding: 6px; }
+  .intro-strip img { flex-basis: 182px; scroll-snap-align: start; padding: 6px; }
+  .intro-carousel__controls { justify-content: center; margin-top: 12px; }
+  .reviews-block { padding: 48px 20px; }
+  .reviews-block__head { align-items: flex-start; flex-direction: column; margin-bottom: 20px; }
+  .reviews-block__widget { height: 420px; min-height: 0; }
   .mobile-contact-bar {
     position: fixed;
     z-index: 30;
