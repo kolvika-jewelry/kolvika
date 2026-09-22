@@ -1,8 +1,8 @@
 /* Editorial refinement for the custom-jewelry landing. */
-.hero { min-height: 460px; }
-.hero-copy { padding-top: 48px; padding-bottom: 40px; }
-.hero-visual { min-height: 370px; max-height: 460px; }
-.hero-visual img { object-position: center 33%; }
+.hero { min-height: calc(100svh - 118px); }
+.hero-copy { padding-top: 58px; padding-bottom: 54px; }
+.hero-visual { min-height: 100%; max-height: none; }
+.hero-visual img { object-position: center 32%; }
 .section { padding-top: 78px; padding-bottom: 78px; }
 
 /* A complete product strip: six whole pieces instead of cropped fragments. */
@@ -140,8 +140,8 @@
   .hero p:not(.eyebrow) { width: 100%; max-width: 100%; margin: 16px 0 19px; font-size: .97rem; line-height: 1.45; overflow-wrap: anywhere; }
   .hero-actions { gap: 8px; }
   .hero-actions .button { min-height: 44px; padding: 11px 13px; font-size: .58rem; }
-  .hero-visual { min-height: 230px; max-height: 260px; }
-  .hero-visual img { object-position: center 40%; }
+  .hero-visual { min-height: 300px; height: min(43svh, 360px); max-height: none; }
+  .hero-visual img { object-position: center 28%; }
   .hero-stamp { display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px !important; line-height: 1.35; }
   .section { padding-top: 60px; padding-bottom: 60px; }
   .intro-strip {
