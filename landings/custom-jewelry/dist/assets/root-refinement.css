@@ -1,34 +1,43 @@
 /* Editorial refinement for the custom-jewelry landing. */
-.hero { min-height: 580px; }
-.hero-visual img { object-position: center 46%; }
+.hero { min-height: 510px; }
+.hero-copy { padding-top: 62px; padding-bottom: 52px; }
+.hero-visual { min-height: 410px; }
+.hero-visual img { object-position: center 38%; }
+.section { padding-top: 78px; padding-bottom: 78px; }
 
 /* A complete product strip: six whole pieces instead of cropped fragments. */
 .intro-visuals { display: none; }
 .intro-strip {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
   gap: 10px;
-  height: 190px;
+  height: 228px;
   margin-top: 18px;
-  overflow: visible;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
+.intro-strip::-webkit-scrollbar { display: none; }
 .intro-strip img {
-  width: 100%;
+  flex: 0 0 228px;
   height: 100%;
   object-fit: contain;
   display: block;
   padding: 8px;
   background: #fff;
   filter: saturate(.94);
+  scroll-snap-align: start;
 }
 
 /* Product photography stays fully visible in the service and work cards. */
 .extra { background: #fff; }
-.extra img,
-.gallery-grid .card img { object-fit: contain; padding: 10px; background: #fff; }
+.extra img { object-fit: contain; padding: 10px; background: #fff; }
 .extra::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, .72)); }
 .gallery-grid .card { background: #fff; }
+.gallery-grid .card:not(.card--model) img { object-fit: contain; padding: 10px; background: #fff; }
+.gallery-grid .card figcaption { display: none; }
+.gallery-grid .card--model img { object-fit: cover; padding: 0; background: transparent; }
+.gallery-grid .card--model:nth-child(even) img { object-position: center 44%; }
 
 .mobile-contact-bar { display: none; }
 
@@ -37,11 +46,9 @@
   .hero { min-height: auto; }
   .hero-visual { min-height: 330px; }
   .hero-visual img { object-position: center 40%; }
+  .section { padding-top: 60px; padding-bottom: 60px; }
   .intro-strip {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: 146px;
-    height: 164px;
+    height: 196px;
     gap: 8px;
     margin-top: 22px;
     overflow-x: auto;
@@ -50,7 +57,7 @@
     scrollbar-width: none;
   }
   .intro-strip::-webkit-scrollbar { display: none; }
-  .intro-strip img { scroll-snap-align: start; padding: 6px; }
+  .intro-strip img { flex-basis: 196px; scroll-snap-align: start; padding: 6px; }
   .mobile-contact-bar {
     position: fixed;
     z-index: 30;

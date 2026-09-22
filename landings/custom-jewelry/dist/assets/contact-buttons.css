@@ -1,0 +1,26 @@
+.messenger-button {
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .15);
+}
+
+.messenger-button--telegram { background: #229ed9 !important; }
+.messenger-button--max { background: #7655e8 !important; }
+
+.messenger-button:hover,
+.messenger-button:focus-visible {
+  color: #fff !important;
+  filter: brightness(.91);
+}
+
+.footer-contact-messengers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.footer-contact-messengers .btn,
+.footer-contact-messengers .button {
+  min-height: 42px;
+}
