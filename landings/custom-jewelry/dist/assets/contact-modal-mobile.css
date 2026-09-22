@@ -1,0 +1,47 @@
+/* Mobile-first messenger choice: two direct actions, no secondary QR controls. */
+@media (max-width: 800px) {
+  .modal .channels,
+  .dialog .channels,
+  .panel .channels {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .modal .channel,
+  .dialog .channel,
+  .panel .channel {
+    min-width: 0;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  .modal .channel h3,
+  .modal .channel p,
+  .modal .channel-head,
+  .dialog .channel h3,
+  .dialog .channel p,
+  .panel .channel h3,
+  .panel .channel p,
+  .modal .qr-toggle,
+  .modal .qr,
+  .dialog .qr-toggle,
+  .dialog .qr,
+  .panel .qr-toggle,
+  .panel .qr {
+    display: none !important;
+  }
+  .modal .channel-actions,
+  .dialog .channel-actions,
+  .panel .channel-actions {
+    display: block !important;
+  }
+  .modal .channel a,
+  .dialog .channel a,
+  .panel .channel a {
+    min-height: 52px !important;
+    padding: 12px 8px !important;
+    border-radius: 0 !important;
+    font-size: .74rem !important;
+    letter-spacing: .06em !important;
+    text-transform: uppercase !important;
+  }
+}
