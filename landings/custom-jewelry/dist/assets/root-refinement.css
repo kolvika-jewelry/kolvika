@@ -168,7 +168,7 @@
     right: 0;
     bottom: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
     background: rgba(31, 27, 24, .96);
@@ -188,7 +188,8 @@
     text-transform: uppercase;
   }
   .mobile-contact-bar img { width: 25px; height: 25px; object-fit: contain; }
-  .mobile-contact-bar a:first-child { background: #229ed9; }
+  .mobile-contact-bar__call { background: #c6a362; color: #1d1a18 !important; }
+  .mobile-contact-bar a:nth-child(2) { background: #229ed9; }
   .mobile-contact-bar a:last-child { background: #7355ff; }
   .sticky { bottom: 76px; }
 }

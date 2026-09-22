@@ -1,5 +1,11 @@
 (() => {
-  const markup = `
+  const directBar = document.querySelector('.mobile-contact-bar') ? '' : `
+    <nav class="mobile-direct-contact" aria-label="Быстрая связь">
+      <a class="mobile-direct-contact__call" href="tel:+74957998910">Позвонить</a>
+      <a class="mobile-direct-contact__telegram" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Telegram</a>
+      <a class="mobile-direct-contact__max" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">MAX</a>
+    </nav>`;
+  const markup = `${directBar}
     <button class="mobile-quick-contact" type="button" aria-label="Открыть способы связи" aria-controls="quick-contact-dialog">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 15.5a4 4 0 0 1-4 4H9l-5 3v-14a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v7Z" stroke="currentColor" stroke-width="1.7"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
     </button>
@@ -10,8 +16,8 @@
         <h2 id="quick-contact-title">Связаться с ювелиром</h2>
         <p>Выберите удобный канал — фото украшения можно прикрепить сразу.</p>
         <div class="quick-contact-channels">
-          <div class="quick-contact-channel telegram"><b>Telegram</b><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Открыть</a></div>
-          <div class="quick-contact-channel max"><b>MAX</b><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">Открыть</a></div>
+          <div class="quick-contact-channel telegram"><b>Telegram</b><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Telegram</a></div>
+          <div class="quick-contact-channel max"><b>MAX</b><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">MAX</a></div>
         </div>
         <form class="quick-contact-form">
           <h3>Перезвонить вам?</h3>

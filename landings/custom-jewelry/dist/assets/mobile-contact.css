@@ -1,7 +1,53 @@
 /* A compact, touch-first contact path shared by every Kolvika landing. */
 .mobile-quick-contact, .quick-contact-modal { display: none; }
+.mobile-header-call, .mobile-direct-contact { display: none; }
 
 @media (max-width: 720px) {
+  .mobile-header-call {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: #c59d59;
+    color: #211e1c;
+    font-size: 19px;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .mobile-header-call + .hamburger,
+  .mobile-header-call + .hamb,
+  .mobile-header-call + .btn { margin-left: 0 !important; }
+  .mobile-direct-contact {
+    position: fixed;
+    z-index: 79;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    background: rgba(31, 27, 24, .96);
+    box-shadow: 0 -8px 22px rgba(0, 0, 0, .16);
+  }
+  .mobile-direct-contact a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+  .mobile-direct-contact__call { background: #c59d59; color: #211e1c !important; }
+  .mobile-direct-contact__telegram { background: #229ed9; }
+  .mobile-direct-contact__max { background: #7655e8; }
+  body { padding-bottom: 68px; }
   .mobile-quick-contact {
     position: fixed;
     z-index: 80;
@@ -20,6 +66,7 @@
   }
   .mobile-quick-contact svg { width: 25px; height: 25px; }
   .mobile-contact-bar ~ .mobile-quick-contact { bottom: 80px; }
+  .mobile-direct-contact ~ .mobile-quick-contact { bottom: 80px; }
   .mobile-contact-bar ~ .sticky { display: none !important; }
   .modal:not([hidden]) ~ .mobile-quick-contact { display: none; }
 
