@@ -1466,13 +1466,20 @@
             <img src="assets/quiz-gallery/earrings-long.jpg" alt="" />
             <img src="assets/quiz-gallery/ring-flower.jpg" alt="" />
             <img src="assets/quiz-gallery/earrings-tanzanite.jpg" alt="" />
-            <img src="assets/quiz-gallery/workshop-1.jpg" alt="" />
-            <img src="assets/quiz-gallery/workshop-2.jpg" alt="" />
           </div>
           <div class="intro-carousel__controls" aria-label="Управление галереей">
-            <button class="intro-carousel__arrow" type="button" data-intro-direction="prev" aria-label="Предыдущее фото">←</button>
-            <span>Листайте галерею</span>
-            <button class="intro-carousel__arrow" type="button" data-intro-direction="next" aria-label="Следующее фото">→</button>
+            <button class="intro-carousel__arrow intro-carousel__arrow--prev" type="button" data-intro-direction="prev" aria-label="Предыдущее фото"></button>
+            <button class="intro-carousel__arrow intro-carousel__arrow--next" type="button" data-intro-direction="next" aria-label="Следующее фото"></button>
+          </div>
+          <div class="intro-carousel__dots" aria-label="Навигация по галерее">
+            <button class="is-active" type="button" aria-label="Фото 1"></button>
+            <button type="button" aria-label="Фото 2"></button>
+            <button type="button" aria-label="Фото 3"></button>
+            <button type="button" aria-label="Фото 4"></button>
+            <button type="button" aria-label="Фото 5"></button>
+            <button type="button" aria-label="Фото 6"></button>
+            <button type="button" aria-label="Фото 7"></button>
+            <button type="button" aria-label="Фото 8"></button>
           </div>
         </div>
       </section>
@@ -1570,17 +1577,17 @@
               alt="Кольцо с морганитом и бриллиантами"
             />
           </figure>
-          <figure class="card card--model" data-category="earrings">
-            <img src="assets/model-jewelry.jpg" alt="Украшение на модели" />
+          <figure class="card" data-category="earrings">
+            <img src="assets/quiz-gallery/earrings-beryl.jpg" alt="Серьги с бериллами" />
           </figure>
           <figure class="card" data-category="rings">
-            <img src="assets/sapphire.jpg" alt="Кольцо с сапфирами" />
+            <img src="assets/quiz-gallery/ring-pattern.jpg" alt="Кольцо с узором" />
           </figure>
           <figure class="card" data-category="bracelets">
             <img src="assets/bracelet.jpg" alt="Теннисный браслет" />
           </figure>
-          <figure class="card card--model" data-category="other">
-            <img src="assets/portrait.jpg" alt="Украшения KOLVIKA в образе" />
+          <figure class="card" data-category="earrings">
+            <img src="assets/quiz-gallery/earrings-long.jpg" alt="Длинные серьги" />
           </figure>
           <figure class="card" data-category="earrings">
             <img src="assets/earrings.jpg" alt="Серьги с топазами" />
@@ -2061,11 +2068,29 @@
         );
       }
       const introStrip = document.querySelector(".intro-strip");
+      const introDots = [...document.querySelectorAll(".intro-carousel__dots button")];
+      const setIntroDot = () => {
+        if (!introStrip || !introDots.length) return;
+        const distance = introStrip.scrollWidth - introStrip.clientWidth;
+        const index = distance ? Math.round((introStrip.scrollLeft / distance) * (introDots.length - 1)) : 0;
+        introDots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === index));
+      };
       document.querySelectorAll("[data-intro-direction]").forEach((button) =>
         button.addEventListener("click", () => {
           if (!introStrip) return;
           const direction = button.dataset.introDirection === "next" ? 1 : -1;
           introStrip.scrollBy({ left: direction * introStrip.clientWidth * .78, behavior: "smooth" });
+        }),
+      );
+      if (introStrip) {
+        introStrip.addEventListener("scroll", setIntroDot, { passive: !0 });
+        setIntroDot();
+      }
+      introDots.forEach((dot, index) =>
+        dot.addEventListener("click", () => {
+          if (!introStrip) return;
+          const distance = introStrip.scrollWidth - introStrip.clientWidth;
+          introStrip.scrollTo({ left: (distance * index) / (introDots.length - 1), behavior: "smooth" });
         }),
       );
     </script>
