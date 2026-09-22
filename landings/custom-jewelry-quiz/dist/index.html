@@ -398,9 +398,9 @@
       }
       .chip.selected,
       .chip:hover {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--ink);
+        background: var(--gold);
+        color: var(--ink);
+        border-color: var(--gold);
       }
       .quiz-next {
         margin-top: 28px;
@@ -433,6 +433,11 @@
         grid-template-columns: 1fr auto;
         gap: 25px;
         align-items: end;
+      }
+      .quiz-result .btn {
+        background: #e4c185;
+        border-color: #e4c185;
+        color: var(--ink);
       }
       .quiz-result h3 {
         margin: 0;
@@ -525,25 +530,23 @@
         color: #f3eae3;
       }
       .materials-visual {
-        height: 430px;
+        min-height: 430px;
         position: relative;
+        align-self: stretch;
       }
       .materials-visual img {
         position: absolute;
-        width: 55%;
-        height: 83%;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        box-shadow: 0 19px 42px rgba(0, 0, 0, 0.25);
+        box-shadow: none;
       }
       .materials-visual img:first-child {
-        right: 5%;
-        top: 0;
-        transform: rotate(5deg);
+        transform: none;
       }
       .materials-visual img:last-child {
-        left: 3%;
-        bottom: -10px;
-        transform: rotate(-7deg);
+        transform: none;
       }
       .process {
         padding: 95px 5vw;
@@ -605,6 +608,19 @@
         color: #fff;
         border-color: #aaa;
       }
+      .reviews-block { padding: 82px 5vw; background: #211e1b; color: #fff; }
+      .reviews-block__head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+      .reviews-block__head h2 { margin: 0; font: 500 clamp(2.7rem, 5vw, 5rem)/.94 var(--serif); letter-spacing: -.05em; }
+      .reviews-block__content { display: grid; grid-template-columns: .78fr 1.42fr .8fr; gap: 1px; background: rgba(255,255,255,.22); }
+      .reviews-block__rating, .reviews-block__card, .reviews-block__more { min-height: 210px; padding: 28px; background: #fffdf9; color: var(--ink); }
+      .reviews-block__rating b { display: block; font: 500 4rem/.9 var(--serif); }
+      .reviews-block__rating span, .reviews-block__card-head span { color: #bf9148; letter-spacing: .1em; }
+      .reviews-block__rating p { margin: 12px 0 0; color: #716860; font-size: .88rem; }
+      .reviews-block__card { display:flex; flex-direction:column; justify-content:space-between; }
+      .reviews-block__card-head { display:flex; justify-content:space-between; gap:12px; }
+      .reviews-block__card p { margin:24px 0 0; font:500 clamp(1.15rem,1.7vw,1.65rem)/1.25 var(--serif); }
+      .reviews-block__more { display:flex; align-items:end; justify-content:space-between; color:var(--ink); text-decoration:none; font:700 .72rem/1.35 var(--sans); letter-spacing:.08em; text-transform:uppercase; }
+      .reviews-block__more span { font:500 2rem/1 var(--serif); }
       .footer {
         padding: 19px 5vw;
         background: #171412;
@@ -803,6 +819,7 @@
         }
         .materials-visual {
           height: 320px;
+          min-height: 320px;
         }
         .process-grid {
           display: block;
@@ -818,6 +835,11 @@
           padding: 70px 20px;
           display: block;
         }
+        .reviews-block { padding: 62px 20px; }
+        .reviews-block__head { display:block; }
+        .reviews-block__head .btn { margin-top:20px; }
+        .reviews-block__content { grid-template-columns:1fr; }
+        .reviews-block__rating, .reviews-block__card, .reviews-block__more { min-height:0; padding:24px; }
         .contact .contact-links {
           margin: 25px 0 0;
         }
@@ -999,21 +1021,17 @@
               <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
             </div>
             <div class="step" data-step="3">
-              <h3>Из чего будем делать?</h3>
+              <h3>Из каких материалов хотите изготовить украшение?</h3>
               <div class="choice-row">
                 <button
-                  class="chip"
-                  data-value="Используем мои металл или камни"
+                  class="chip" data-value="У меня свой металл и камни"
                 >
-                  Есть свои металл или камни</button
-                ><button class="chip" data-value="Подберём материалы в ателье">
-                  Подберём вместе</button
-                ><button
-                  class="chip"
-                  data-value="Хочу переплавить старое украшение"
-                >
-                  Хочу переплавить украшение
-                </button>
+                  У меня свой металл и камни</button
+                ><button class="chip" data-value="Нужен ваш металл и камни">
+                  Нужен ваш металл и камни</button
+                ><button class="chip" data-value="Хочу переделать своё украшение">
+                  Хочу переделать своё украшение</button
+                ><button class="chip" data-value="Нужно обсудить">Нужно обсудить</button>
               </div>
               <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
             </div>
@@ -1035,7 +1053,7 @@
                     ориентировочную стоимость.
                   </p>
                 </div>
-                <button class="btn contact-trigger">Обсудить с ювелиром</button>
+                <button class="btn contact-trigger">Получить расчёт стоимости</button>
               </div>
             </div>
           </div>
@@ -1242,34 +1260,6 @@
           </article>
         </div>
       </section>
-      <section class="contact">
-        <div>
-          <p class="eyebrow" style="color: #e1bb78">KOLVIKA jewelry · Москва</p>
-          <h2>Покажите<br />то, что<br />нравится</h2>
-        </div>
-        <div>
-          <p>
-            Отправьте фотографию, эскиз или пару слов. Ювелир ответит, какие
-            варианты можно рассмотреть.
-          </p>
-          <div class="contact-links">
-            <button class="btn contact-trigger">Выбрать связь</button
-            ><a
-              class="btn messenger-button messenger-button--telegram"
-              href="https://t.me/kolvikajewelry"
-              target="_blank"
-              rel="noopener"
-              >Telegram</a
-            ><a
-              class="btn messenger-button messenger-button--max"
-              href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4"
-              target="_blank"
-              rel="noopener"
-              >MAX</a
-            >
-          </div>
-        </div>
-      </section>
       <section class="trust-block" aria-labelledby="trust-title">
         <div class="trust-block__inner">
           <div>
@@ -1288,6 +1278,17 @@
           <figure class="trust-block__visual">
             <img src="../assets/stone-certificate.jpg" alt="Сертификат на камни KOLVIKA" />
           </figure>
+        </div>
+      </section>
+      <section class="reviews-block" aria-labelledby="reviews-title">
+        <div class="reviews-block__head">
+          <div><p class="eyebrow">Отзывы клиентов</p><h2 id="reviews-title">Отзывы на Яндекс Картах</h2></div>
+          <a class="btn" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/?ll=37.503208%2C55.758296&utm_campaign=v1&utm_medium=rating&utm_source=badge&z=16" target="_blank" rel="noopener">Все отзывы</a>
+        </div>
+        <div class="reviews-block__content">
+          <div class="reviews-block__rating"><b>5,0</b><span aria-label="5 из 5 звёзд">★★★★★</span><p>90 отзывов на Яндекс Картах</p></div>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Анна S.</b><span>★★★★★</span></div><p>Спасибо за отличный сервис и внимательное отношение к пожеланиям. Продукция соответствует ожиданиям.</p></article>
+          <a class="reviews-block__more" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/?ll=37.503208%2C55.758296&utm_campaign=v1&utm_medium=rating&utm_source=badge&z=16" target="_blank" rel="noopener">Читать отзывы<br />на Яндекс Картах <span>↗</span></a>
         </div>
       </section>
     </main>

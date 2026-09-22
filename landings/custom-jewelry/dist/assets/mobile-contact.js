@@ -1,4 +1,7 @@
 (() => {
+  const modalStyle = document.createElement('style');
+  modalStyle.textContent = '.modal .channel-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.modal .channel-actions a,.modal .channel-actions .qr-toggle{min-height:42px;display:flex;align-items:center;justify-content:center;margin:0;border-radius:0;box-sizing:border-box}.modal .channel-actions .qr-toggle{border:1px solid #6e655d;background:transparent;color:#211e1b;cursor:pointer;font:700 .65rem/1 Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase}.modal .channel .qr{display:none;margin-top:14px;padding:14px;background:#fff;text-align:center}.modal .channel .qr.open{display:block}.modal .channel .qr img{display:block;width:150px;height:150px;margin:0 auto}.modal .channel .qr p{min-height:0;margin:9px 0 0}.modal .callback{display:grid;gap:12px}.modal .callback h3,.modal .callback p{margin:0}.modal .callback .consent{display:flex;align-items:flex-start;gap:8px;margin:0;line-height:1.35}.modal .callback .btn,.modal .callback .button{justify-self:start;margin:0}.modal .panel,.modal .dialog,.modal .modal-panel{box-sizing:border-box}@media(max-width:800px){.modal .channel-actions{grid-template-columns:1fr}.modal .channel-actions .qr-toggle,.modal .channel .qr{display:none!important}.modal .callback .btn,.modal .callback .button{width:100%;justify-content:center}}';
+  document.head.append(modalStyle);
   const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
       const parent = node.parentElement;
@@ -9,6 +12,28 @@
   while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
   textNodes.forEach((node) => {
     node.nodeValue = node.nodeValue.replace(/\b(в|во|к|ко|с|со|у|о|об|от|до|за|на|по|из|изо|и|а|но)\s+/giu, '$1\u00a0');
+  });
+  document.querySelectorAll('.modal .channel').forEach((channel) => {
+    if (channel.querySelector('.qr-toggle')) return;
+    const directLink = [...channel.querySelectorAll('a[href]')].find((link) => link.parentElement === channel);
+    if (!directLink) return;
+    const actions = document.createElement('div');
+    actions.className = 'channel-actions';
+    const qrId = `qr-handoff-${Math.random().toString(36).slice(2)}`;
+    const qrButton = document.createElement('button');
+    qrButton.type = 'button';
+    qrButton.className = 'qr-toggle';
+    qrButton.textContent = 'С телефона';
+    qrButton.setAttribute('aria-expanded', 'false');
+    qrButton.setAttribute('aria-controls', qrId);
+    const qr = document.createElement('div');
+    qr.className = 'qr';
+    qr.id = qrId;
+    qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(directLink.href)}" alt="QR-код для перехода в мессенджер"><p>Отсканируйте QR-код камерой смартфона</p>`;
+    directLink.parentElement.replaceChild(actions, directLink);
+    actions.append(directLink, qrButton);
+    channel.append(qr);
+    qrButton.addEventListener('click', () => { const open = qr.classList.toggle('open'); qrButton.setAttribute('aria-expanded', String(open)); });
   });
   const isRepair = location.pathname.includes('/repair');
   const repairAction = isRepair ? '<button class="mobile-direct-contact__repair" type="button">Обсудить</button>' : '';
