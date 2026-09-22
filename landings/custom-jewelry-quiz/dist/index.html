@@ -609,18 +609,14 @@
         border-color: #aaa;
       }
       .reviews-block { padding: 82px 5vw; background: #211e1b; color: #fff; }
-      .reviews-block__head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+      .reviews-block__head { display: flex; align-items: end; gap: 24px; margin-bottom: 28px; }
       .reviews-block__head h2 { margin: 0; font: 500 clamp(2.7rem, 5vw, 5rem)/.94 var(--serif); letter-spacing: -.05em; }
-      .reviews-block__content { display: grid; grid-template-columns: .78fr 1.42fr .8fr; gap: 1px; background: rgba(255,255,255,.22); }
-      .reviews-block__rating, .reviews-block__card, .reviews-block__more { min-height: 210px; padding: 28px; background: #fffdf9; color: var(--ink); }
-      .reviews-block__rating b { display: block; font: 500 4rem/.9 var(--serif); }
-      .reviews-block__rating span, .reviews-block__card-head span { color: #bf9148; letter-spacing: .1em; }
-      .reviews-block__rating p { margin: 12px 0 0; color: #716860; font-size: .88rem; }
-      .reviews-block__card { display:flex; flex-direction:column; justify-content:space-between; }
+      .reviews-block__content { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: rgba(255,255,255,.22); }
+      .reviews-block__card { min-height: 178px; padding: 26px; background: #fffdf9; color: var(--ink); display:flex; flex-direction:column; justify-content:space-between; }
+      .reviews-block__card-head span { color: #bf9148; letter-spacing: .1em; }
       .reviews-block__card-head { display:flex; justify-content:space-between; gap:12px; }
-      .reviews-block__card p { margin:24px 0 0; font:500 clamp(1.15rem,1.7vw,1.65rem)/1.25 var(--serif); }
-      .reviews-block__more { display:flex; align-items:end; justify-content:space-between; color:var(--ink); text-decoration:none; font:700 .72rem/1.35 var(--sans); letter-spacing:.08em; text-transform:uppercase; }
-      .reviews-block__more span { font:500 2rem/1 var(--serif); }
+      .reviews-block__card p { margin:22px 0 0; font:500 clamp(1rem,1.35vw,1.3rem)/1.3 var(--serif); }
+      .reviews-block__button { display:table; margin:24px auto 0; }
       .footer {
         padding: 19px 5vw;
         background: #171412;
@@ -839,7 +835,8 @@
         .reviews-block__head { display:block; }
         .reviews-block__head .btn { margin-top:20px; }
         .reviews-block__content { grid-template-columns:1fr; }
-        .reviews-block__rating, .reviews-block__card, .reviews-block__more { min-height:0; padding:24px; }
+        .reviews-block__card { min-height:0; padding:24px; }
+        .reviews-block__card:nth-child(n + 5) { display:none; }
         .contact .contact-links {
           margin: 25px 0 0;
         }
@@ -1282,14 +1279,17 @@
       </section>
       <section class="reviews-block" aria-labelledby="reviews-title">
         <div class="reviews-block__head">
-          <div><p class="eyebrow">Отзывы клиентов</p><h2 id="reviews-title">Отзывы на Яндекс Картах</h2></div>
-          <a class="btn" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/?ll=37.503208%2C55.758296&utm_campaign=v1&utm_medium=rating&utm_source=badge&z=16" target="_blank" rel="noopener">Все отзывы</a>
+          <h2 id="reviews-title">Ваши отзывы</h2>
         </div>
         <div class="reviews-block__content">
-          <div class="reviews-block__rating"><b>5,0</b><span aria-label="5 из 5 звёзд">★★★★★</span><p>90 отзывов на Яндекс Картах</p></div>
-          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Анна S.</b><span>★★★★★</span></div><p>Спасибо за отличный сервис и внимательное отношение к пожеланиям. Продукция соответствует ожиданиям.</p></article>
-          <a class="reviews-block__more" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/?ll=37.503208%2C55.758296&utm_campaign=v1&utm_medium=rating&utm_source=badge&z=16" target="_blank" rel="noopener">Читать отзывы<br />на Яндекс Картах <span>↗</span></a>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Анна S.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Спасибо за отличный сервис и внимательное отношение к пожеланиям. Продукция соответствует ожиданиям.</p></article>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Елена К.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Помогли подобрать камень, подробно рассказали о характеристиках и подготовили документы.</p></article>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Марина В.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Очень деликатно восстановили любимое кольцо. Работа аккуратная, срок согласовали заранее.</p></article>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Ольга Н.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Заказали украшение по эскизу — мастер был на связи на каждом этапе, результатом довольны.</p></article>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Светлана Р.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Большой выбор камней и внимательный подход. Украшение получилось именно таким, как хотелось.</p></article>
+          <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Алексей П.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Понятно объяснили варианты ремонта и стоимость. После полировки украшение выглядит как новое.</p></article>
         </div>
+        <a class="btn reviews-block__button" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/?ll=37.503208%2C55.758296&utm_campaign=v1&utm_medium=rating&utm_source=badge&z=16" target="_blank" rel="noopener">Смотреть все отзывы</a>
       </section>
     </main>
     <footer class="footer" id="contacts">
