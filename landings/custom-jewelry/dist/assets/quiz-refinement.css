@@ -25,3 +25,74 @@
   .hero-collage img:nth-child(3) { width: 43%; height: 40%; right: 5%; bottom: 6%; }
   .hero-collage img:nth-child(4) { width: 35%; height: 31%; left: 2%; bottom: 5%; }
 }
+
+/* Compact, image-led sections below the quiz. */
+.catalog { padding-top: 70px; padding-bottom: 70px; }
+.catalog-head { margin-bottom: 22px; }
+.catalog-head .title { font-size: clamp(2.35rem, 3.7vw, 4.1rem); }
+.catalog-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.catalog-grid .work { aspect-ratio: 1 / 1.05; }
+.catalog-grid .work img { object-fit: contain; background: #fff; padding: 5px; }
+.catalog-grid .work figcaption { padding: 22px 10px 9px; font-size: .88rem; }
+
+.materials .copy { padding-top: 58px; padding-bottom: 58px; }
+.materials h2 { font-size: clamp(2.45rem, 3.75vw, 4.35rem); }
+.materials-visual { height: 350px; }
+.materials-visual img { width: 54%; height: 82%; }
+
+.process { padding-top: 66px; padding-bottom: 66px; }
+.process-head .title { font-size: clamp(2.4rem, 3.7vw, 4.15rem); }
+.process-grid { margin-top: 24px; }
+.process-grid article { padding: 14px 16px 17px; }
+.process-grid article img { width: 100%; height: 120px; object-fit: cover; margin-bottom: 9px; }
+.process-grid b { font-size: 1rem; }
+.process-grid h3 { margin: 8px 0 5px; font-size: 1.35rem; }
+.process-grid p { font-size: .75rem; line-height: 1.38; }
+
+/* The quiz footer follows the same three-column contact rhythm as the repair page. */
+.footer {
+  padding: 62px 5vw 34px;
+  display: grid;
+  grid-template-columns: .82fr 1.1fr 1fr;
+  align-items: start;
+  gap: 4vw;
+  font-size: .82rem;
+}
+.footer .eyebrow { color: #e1bb78; }
+.footer h2 { margin: 0 0 24px; color: #fff; font: 500 clamp(2rem, 3vw, 3.25rem)/.94 var(--serif); letter-spacing: -.04em; }
+.footer p { margin: 0 0 10px; }
+.footer a { color: inherit; }
+.footer-map iframe { display: block; width: 100%; height: 235px; border: 0; }
+.footer-map p { margin-top: 12px; line-height: 1.35; }
+.footer-lead { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.footer-lead input,
+.footer-lead textarea { min-width: 0; width: 100%; border: 1px solid #796e62; background: #fffdf9; color: #1d1a18; padding: 11px; font: inherit; }
+.footer-lead textarea { grid-column: 1 / -1; min-height: 76px; resize: vertical; }
+.footer-lead .btn { grid-column: 1 / -1; width: 100%; }
+.footer-note { margin-top: 12px !important; color: #cfc3b6; font-size: .68rem; line-height: 1.45; }
+
+@media (max-width: 860px) {
+  .catalog { padding-top: 52px; padding-bottom: 52px; }
+  .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .catalog-grid .work { aspect-ratio: 1 / 1.05; }
+  .catalog-grid .work figcaption { padding: 21px 8px 8px; font-size: .76rem; }
+
+  .materials .copy { padding-top: 48px; padding-bottom: 28px; }
+  .materials h2 { font-size: clamp(2.2rem, 10vw, 3.3rem); }
+  .materials-visual { height: 250px; }
+  .materials-visual img { width: 57%; height: 80%; }
+
+  .process { padding-top: 52px; padding-bottom: 52px; }
+  .process-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin-top: 18px; border: 0; }
+  .process-grid article,
+  .process-grid article:last-child { padding: 0 4px 9px; border: 0; }
+  .process-grid article img { height: 88px; margin-bottom: 5px; }
+  .process-grid b { font-size: .82rem; }
+  .process-grid h3 { margin: 4px 0; font-size: 1rem; line-height: 1; }
+  .process-grid p { font-size: .62rem; line-height: 1.28; }
+
+  .footer { display: block; padding: 52px 20px 78px; font-size: .86rem; }
+  .footer-info, .footer-map { margin-bottom: 36px; }
+  .footer h2 { font-size: 2.65rem; }
+  .footer-map iframe { height: 230px; }
+}

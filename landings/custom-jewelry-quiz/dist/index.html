@@ -873,9 +873,9 @@
             Ювелир задаст несколько вопросов и предложит, с чего начать.
           </p>
           <div class="hero-actions">
-            <a class="btn" href="#quiz">Подобрать идею</a
+            <a class="btn" href="#quiz">Рассчитать стоимость</a
             ><button class="btn btn--light contact-trigger">
-              Спросить ювелира
+              Связаться с ювелиром
             </button>
           </div>
           <div class="hero-note">
@@ -914,7 +914,9 @@
         <div class="quiz-shell reveal">
           <aside class="quiz-side">
             <small>Ваш выбор</small
-            ><b id="side-text">Ваш заказ<br />в деталях</b>
+            ><b id="side-text"
+              >Воплотим в реальность вашу мечту об идеальном украшении</b
+            >
             <div class="progress">
               <span class="active"></span><span></span><span></span>
             </div>
@@ -989,7 +991,7 @@
         <div class="catalog-head reveal">
           <div>
             <p class="eyebrow">Изделия наших клиентов</p>
-            <h2 class="title">Выберите<br />настроение</h2>
+            <h2 class="title">Примеры наших работ</h2>
           </div>
           <button class="btn contact-trigger">Хочу похожее</button>
         </div>
@@ -1100,9 +1102,8 @@
       </section>
       <section class="materials" id="materials">
         <div class="copy reveal">
-          <p class="eyebrow" style="color: #e8ca92">
-            Материалы для вашего украшения
-          </p>
+          <p class="eyebrow" style="color: #e8ca92">Материалы</p>
+          <h2>Работаем с вашими<br />или нашими материалами</h2>
           <p class="materials-text">
             Работаем с вашими и нашими материалами. Можно принести свой металл,
             переплавить старое украшение, использовать камни из семейной вещи
@@ -1121,14 +1122,11 @@
         </div>
         <div class="materials-visual">
           <img
-            src="../assets/quiz-gallery/ring-pattern.jpg"
-            alt="Кольцо Kolvika"
+            src="../assets/repair-workshop-hero.jpg"
+            alt="Ювелир работает над украшением"
           /><img
-            src="../assets/quiz-gallery/earrings-tourmaline.jpg"
-            alt="Серьги Kolvika"
-          /><img
-            src="../assets/quiz-gallery/ring-pink.jpg"
-            alt="Кольцо Kolvika"
+            src="../assets/repair-workshop-2.jpg"
+            alt="Работа руками в ювелирной мастерской"
           />
         </div>
       </section>
@@ -1136,7 +1134,7 @@
         <div class="process-head reveal">
           <div>
             <p class="eyebrow">Как проходит работа</p>
-            <h2 class="title">Идея<br />до коробки</h2>
+            <h2 class="title">Как происходит<br />работа</h2>
           </div>
           <p>
             Согласовываем детали, материалы, стоимость и срок до начала работы.
@@ -1201,7 +1199,7 @@
     <footer class="footer" id="contacts">
       <div class="footer-info">
         <p class="eyebrow">Kolvika jewelry · Москва</p>
-        <h2>Будем рады<br />видеть вас<br />в шоуруме</h2>
+        <h2>Приглашаем вас<br />в наш офис<br />и шоурум</h2>
         <p><a href="tel:+74957998910">+7 (495) 799-89-10</a></p>
         <p><a href="tel:+79639968512">+7 (963) 996-85-12</a></p>
         <p><a href="mailto:jewelry@kolvika.ru">jewelry@kolvika.ru</a></p>
@@ -1355,7 +1353,7 @@
           .forEach((x, i) => x.classList.toggle("active", i < n));
         document.querySelector("#side-text").innerHTML = answers.length
           ? answers.join("<br>")
-          : "Ваш заказ<br>в деталях";
+          : "Воплотим в реальность вашу мечту об идеальном украшении";
         document
           .querySelector(".quiz-main")
           .scrollIntoView({ block: "nearest", behavior: "smooth" });
