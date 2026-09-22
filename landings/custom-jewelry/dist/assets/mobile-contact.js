@@ -16,17 +16,18 @@
       <div class="quick-contact-shade" data-quick-close></div>
       <section class="quick-contact-panel" role="dialog" aria-modal="true" aria-labelledby="quick-contact-title">
         <button class="quick-contact-close" type="button" aria-label="Закрыть" data-quick-close>×</button>
-        <h2 id="quick-contact-title">Связаться с ювелиром</h2>
-        <p>Выберите удобный канал — фото украшения можно прикрепить сразу.</p>
+        <h2 id="quick-contact-title">Готово! Куда прислать расчёт?</h2>
+        <p>Или напишите сразу в Telegram / MAX — фото украшения можно прикрепить к сообщению.</p>
         <div class="quick-contact-channels">
           <div class="quick-contact-channel telegram"><b>Telegram</b><a href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Telegram</a></div>
           <div class="quick-contact-channel max"><b>MAX</b><a href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">MAX</a></div>
         </div>
         <form class="quick-contact-form">
-          <h3>Перезвонить вам?</h3>
-          <div class="quick-contact-fields"><input name="name" autocomplete="name" placeholder="Ваше имя" required><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Телефон" required></div>
+          <h3>Оставьте телефон — мастер перезвонит</h3>
+          <div class="quick-contact-fields"><input name="name" autocomplete="name" placeholder="Ваше имя" required><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required></div>
           <label class="quick-contact-consent"><input type="checkbox" required><span>Соглашаюсь с <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span></label>
           <button class="quick-contact-send" type="submit">Оставить контакты</button>
+          <p class="quick-contact-send-note" hidden>Чтобы отправить заявку мастеру, выберите Telegram или MAX выше.</p>
         </form>
       </section>
     </div>`;
@@ -47,10 +48,36 @@
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
     if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
+  const maskPhone = (input) => {
+    if (input.dataset.phoneMaskReady) return;
+    input.dataset.phoneMaskReady = 'true';
+    input.placeholder = '+7 (___) ___-__-__';
+    input.inputMode = 'tel';
+    input.autocomplete = 'tel';
+    input.addEventListener('input', () => {
+      let digits = input.value.replace(/\D/g, '');
+      if (digits.startsWith('8')) digits = `7${digits.slice(1)}`;
+      if (digits && !digits.startsWith('7')) digits = `7${digits}`;
+      digits = digits.slice(0, 11);
+      const local = digits.slice(1);
+      let value = '+7';
+      if (local.length) value += ` (${local.slice(0, 3)}`;
+      if (local.length >= 3) value += ')';
+      if (local.length > 3) value += ` ${local.slice(3, 6)}`;
+      if (local.length > 6) value += `-${local.slice(6, 8)}`;
+      if (local.length > 8) value += `-${local.slice(8, 10)}`;
+      input.value = value;
+      input.setCustomValidity(digits.length === 11 ? '' : 'Введите номер в формате +7 (___) ___-__-__');
+    });
+    input.addEventListener('blur', () => {
+      if (input.value && input.value.replace(/\D/g, '').length !== 11) input.reportValidity();
+    });
+  };
+  document.querySelectorAll('input[type="tel"]').forEach(maskPhone);
   dialog.querySelector('.quick-contact-form').addEventListener('submit', (event) => {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const body = `Имя: ${form.get('name')}\nТелефон: ${form.get('phone')}\n\nПрошу перезвонить мне по поводу украшения.`;
-    location.href = `mailto:jewelry@kolvika.ru?subject=${encodeURIComponent('Заявка с лендинга Kolvika')}&body=${encodeURIComponent(body)}`;
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    form.querySelector('.quick-contact-send-note').hidden = false;
   });
 })();

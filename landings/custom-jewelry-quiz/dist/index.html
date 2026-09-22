@@ -291,16 +291,32 @@
         text-transform: uppercase;
       }
       .progress {
+        margin-top: 24px;
+      }
+      .progress-meta {
         display: flex;
-        gap: 7px;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
       }
-      .progress span {
-        height: 3px;
-        flex: 1;
+      .progress-meta b {
+        font: 600 1rem/1 var(--sans);
+      }
+      .progress-track {
+        height: 5px;
         background: rgba(33, 29, 26, 0.25);
+        overflow: hidden;
       }
-      .progress span.active {
+      .progress-bar {
+        display: block;
+        width: 0;
+        height: 100%;
         background: var(--ink);
+        transition: width 0.3s ease;
       }
       .quiz-main {
         padding: 42px;
@@ -388,6 +404,26 @@
       }
       .quiz-next {
         margin-top: 28px;
+      }
+      .quiz-navigation {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 26px;
+      }
+      .quiz-back {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 12px 18px;
+        cursor: pointer;
+        font: 600 0.72rem/1 var(--sans);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .quiz-auto-note {
+        color: #766e65;
+        font-size: 0.8rem;
       }
       .quiz-result {
         background: var(--ink);
@@ -909,11 +945,11 @@
         <div class="quiz-heading reveal">
           <div>
             <p class="eyebrow">Короткий расчёт</p>
-            <h2 class="title">Расскажите<br />о своей идее</h2>
+            <h2 class="title">Воплотим в реальность<br />вашу мечту</h2>
           </div>
           <p>
-            Ответьте на несколько вопросов — ювелир рассчитает стоимость
-            изготовления и предложит следующий шаг.
+            Ответьте на 4 вопроса, и мы пришлём вам варианты и стоимость
+            изготовления украшения в течение дня.
           </p>
         </div>
         <div class="quiz-shell reveal">
@@ -923,7 +959,8 @@
               >Воплотим в реальность вашу мечту об идеальном украшении</b
             >
             <div class="progress">
-              <span class="active"></span><span></span><span></span>
+              <div class="progress-meta"><span id="step-num">Шаг 1 из 4</span><b id="progress-value">0%</b></div>
+              <div class="progress-track"><span class="progress-bar" id="progress-bar"></span></div>
             </div>
           </aside>
           <div class="quiz-main">
@@ -959,7 +996,7 @@
                   Есть только идея
                 </button>
               </div>
-              <button class="btn quiz-next">Дальше</button>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
             </div>
             <div class="step" data-step="3">
               <h3>Из чего будем делать?</h3>
@@ -978,12 +1015,24 @@
                   Хочу переплавить украшение
                 </button>
               </div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
+            </div>
+            <div class="step" data-step="4">
+              <h3>На какой бюджет ориентируетесь?</h3>
+              <div class="choice-row">
+                <button class="chip" data-value="до 100 000 ₽">до 100 000 ₽</button>
+                <button class="chip" data-value="100 000–150 000 ₽">100 000–150 000 ₽</button>
+                <button class="chip" data-value="150 000–250 000 ₽">150 000–250 000 ₽</button>
+                <button class="chip" data-value="более 250 000 ₽">более 250 000 ₽</button>
+                <button class="chip" data-value="пока не определился">пока не определился</button>
+              </div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Сохраняем ваши ответы</span></div>
               <div class="quiz-result" hidden>
                 <div>
-                  <h3>Есть направление.</h3>
+                  <h3>Готово! Подготовим расчёт.</h3>
                   <p>
-                    Отправьте выбор ювелиру — он уточнит детали и предложит
-                    следующий шаг.
+                    Ювелир изучит ответы и в течение дня пришлёт варианты и
+                    ориентировочную стоимость.
                   </p>
                 </div>
                 <button class="btn contact-trigger">Обсудить с ювелиром</button>
@@ -1305,9 +1354,9 @@
         aria-labelledby="dialog-title"
       >
         <button class="close" data-close aria-label="Закрыть">×</button>
-        <h2 id="dialog-title">Как вам удобнее?</h2>
+        <h2 id="dialog-title">Готово! Куда прислать расчёт?</h2>
         <p>
-          Напишите ювелиру — можно сразу прикрепить фото, эскиз или референс.
+          Или напишите сразу в Telegram / MAX — фото, эскиз или референс можно прикрепить к сообщению.
         </p>
         <div class="channels">
           <article class="channel">
@@ -1329,7 +1378,7 @@
           </article>
         </div>
         <form class="callback" id="callback">
-          <h3>Или перезвонить вам?</h3>
+          <h3>Оставьте телефон — мастер перезвонит</h3>
           <div class="formrow">
             <label
               >Ваше имя<input name="name" autocomplete="name" required /></label
@@ -1339,6 +1388,7 @@
                 type="tel"
                 inputmode="tel"
                 autocomplete="tel"
+                placeholder="+7 (___) ___-__-__"
                 required
             /></label>
           </div>
@@ -1392,48 +1442,59 @@
           }
         }
       });
-      let answers = [],
-        step = 1;
+      const totalSteps = 4;
+      const answers = Array(totalSteps).fill("");
+      let step = 1;
+      let advanceTimer;
+      const refreshSummary = () => {
+        document.querySelector("#side-text").innerHTML = answers.some(Boolean)
+          ? answers.filter(Boolean).join("<br>")
+          : "Воплотим в реальность вашу мечту об идеальном украшении";
+      };
+      const refreshProgress = () => {
+        const percent = Math.round((answers.filter(Boolean).length / totalSteps) * 100);
+        document.querySelector("#step-num").textContent = `Шаг ${step} из ${totalSteps}`;
+        document.querySelector("#progress-value").textContent = `${percent}%`;
+        document.querySelector("#progress-bar").style.width = `${percent}%`;
+      };
       const go = (n) => {
-        step = n;
+        step = Math.min(Math.max(n, 1), totalSteps);
         document
           .querySelectorAll(".step")
-          .forEach((x) => x.classList.toggle("active", +x.dataset.step === n));
-        document
-          .querySelectorAll(".progress span")
-          .forEach((x, i) => x.classList.toggle("active", i < n));
-        document.querySelector("#side-text").innerHTML = answers.length
-          ? answers.join("<br>")
-          : "Воплотим в реальность вашу мечту об идеальном украшении";
+          .forEach((x) => x.classList.toggle("active", +x.dataset.step === step));
+        document.querySelector(".quiz-result").hidden = true;
+        refreshSummary();
+        refreshProgress();
         document
           .querySelector(".quiz-main")
           .scrollIntoView({ block: "nearest", behavior: "smooth" });
       };
-      document.querySelectorAll('.step[data-step="1"] .option').forEach((b) =>
-        b.addEventListener("click", () => {
-          answers[0] = b.dataset.value;
-          go(2);
-        }),
-      );
+      const choose = (button) => {
+        window.clearTimeout(advanceTimer);
+        const selectedStep = +button.closest(".step").dataset.step;
+        button.parentElement
+          .querySelectorAll(".option, .chip")
+          .forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        answers[selectedStep - 1] = button.dataset.value;
+        refreshSummary();
+        advanceTimer = window.setTimeout(() => {
+          if (selectedStep < totalSteps) go(selectedStep + 1);
+          else {
+            refreshProgress();
+            document.querySelector(".quiz-result").hidden = false;
+          }
+        }, 300);
+      };
       document
-        .querySelectorAll(
-          '.step[data-step="2"] .chip,.step[data-step="3"] .chip',
-        )
-        .forEach((b) =>
-          b.addEventListener("click", () => {
-            b.parentElement
-              .querySelectorAll(".chip")
-              .forEach((x) => x.classList.remove("selected"));
-            b.classList.add("selected");
-            answers[step - 1] = b.dataset.value;
-            if (step === 3) {
-              document.querySelector(".quiz-result").hidden = false;
-            } else document.querySelector(".quiz-next").disabled = false;
-          }),
-        );
+        .querySelectorAll(".step .option, .step .chip")
+        .forEach((button) => button.addEventListener("click", () => choose(button)));
       document
-        .querySelector(".quiz-next")
-        .addEventListener("click", () => go(3));
+        .querySelectorAll(".quiz-back")
+        .forEach((button) => button.addEventListener("click", () => {
+          window.clearTimeout(advanceTimer);
+          go(step - 1);
+        }));
       document.querySelector("#callback").addEventListener("submit", (e) => {
         e.preventDefault();
         const d = new FormData(e.currentTarget);

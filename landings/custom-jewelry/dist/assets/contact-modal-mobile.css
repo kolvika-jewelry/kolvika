@@ -45,3 +45,10 @@
     text-transform: uppercase !important;
   }
 }
+
+.quick-contact-send-note {
+  margin: 10px 0 0;
+  color: #6e655d;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
