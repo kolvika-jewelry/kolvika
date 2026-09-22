@@ -1,9 +1,12 @@
 (() => {
+  const isRepair = location.pathname.includes('/repair');
+  const repairAction = isRepair ? '<button class="mobile-direct-contact__repair" type="button">Обсудить</button>' : '';
   const directBar = document.querySelector('.mobile-contact-bar') ? '' : `
-    <nav class="mobile-direct-contact" aria-label="Быстрая связь">
+    <nav class="mobile-direct-contact${isRepair ? ' mobile-direct-contact--repair' : ''}" aria-label="Быстрая связь">
       <a class="mobile-direct-contact__call" href="tel:+74957998910">Позвонить</a>
       <a class="mobile-direct-contact__telegram" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Telegram</a>
       <a class="mobile-direct-contact__max" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">MAX</a>
+      ${repairAction}
     </nav>`;
   const markup = `${directBar}
     <button class="mobile-quick-contact" type="button" aria-label="Открыть способы связи" aria-controls="quick-contact-dialog">
@@ -33,6 +36,7 @@
   const close = () => { dialog.hidden = true; dialog.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; trigger.focus(); };
   const open = () => { dialog.hidden = false; dialog.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; dialog.querySelector('.quick-contact-close').focus(); };
   trigger.addEventListener('click', open);
+  document.querySelector('.mobile-direct-contact__repair')?.addEventListener('click', () => document.querySelector('.contact-trigger')?.click());
   dialog.querySelectorAll('[data-quick-close]').forEach((el) => el.addEventListener('click', close));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && !dialog.hidden) { close(); return; }

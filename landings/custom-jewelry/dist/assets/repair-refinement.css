@@ -31,6 +31,29 @@
   grid-row: auto;
 }
 
+@media (min-width: 801px) {
+  .numbers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.price-cta { margin-top: 22px; }
+.repair-before-after {
+  display: grid;
+  grid-template-columns: minmax(240px, .7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 42px;
+  padding: 58px 7vw;
+  background: #e9dfcf;
+}
+.repair-before-after h2 { margin: 0; font: 400 clamp(34px, 4vw, 56px)/.98 Georgia, serif; }
+.repair-before-after__copy > p:not(.eyebrow) { margin: 18px 0 22px; line-height: 1.55; }
+.repair-before-after .btn { white-space: nowrap; }
+.repair-before-after__pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.repair-pair { display: grid; grid-template-columns: 1fr 28px 1fr; align-items: center; gap: 6px; margin: 0; }
+.repair-pair > span { font: 26px Georgia, serif; text-align: center; color: #80633a; }
+.repair-pair figure { position: relative; height: 160px; margin: 0; overflow: hidden; background: #ddd3c5; }
+.repair-pair img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.repair-pair figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 9px; background: rgba(29, 26, 24, .8); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
 /* A small, tactile visual cue keeps the repair route from reading as a wall of copy. */
 .repair-process-gems {
   display: flex;
@@ -105,4 +128,9 @@
   .repair-cases__head h2 { font-size: 36px; }
   .repair-cases__controls button { width: 40px; height: 40px; }
   .repair-cases__strip { grid-auto-columns: minmax(210px, 76vw); grid-template-rows: 170px; }
+  .repair-before-after { grid-template-columns: 1fr; gap: 22px; padding: 44px 20px; }
+  .repair-before-after__pairs { gap: 10px; }
+  .repair-pair { grid-template-columns: 1fr 20px 1fr; }
+  .repair-pair figure { height: 132px; }
+  .repair-before-after .btn { width: 100%; white-space: normal; }
 }

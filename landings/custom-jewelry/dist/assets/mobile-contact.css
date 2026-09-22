@@ -44,6 +44,17 @@
     letter-spacing: .03em;
     text-transform: uppercase;
   }
+  .mobile-direct-contact--repair { grid-template-columns: repeat(4, 1fr); }
+  .mobile-direct-contact button {
+    min-height: 42px;
+    border: 0;
+    background: #f2e7d1;
+    color: #211e1c;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
   .mobile-direct-contact__call { background: #c59d59; color: #211e1c !important; }
   .mobile-direct-contact__telegram { background: #229ed9; }
   .mobile-direct-contact__max { background: #7655e8; }

@@ -326,6 +326,16 @@
         color: var(--muted);
         font-size: 13px;
       }
+      .price-disclosure {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #6d5128;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
       .price-toggle {
         display: grid;
         place-items: center;
@@ -334,12 +344,13 @@
         border: 1px solid #a9864d;
         border-radius: 50%;
         color: #6d5128;
-        font-size: 25px;
-        transition: transform 0.25s;
+        font-size: 0;
       }
-      .price-group[open] .price-toggle {
-        transform: rotate(45deg);
-      }
+      .price-toggle::before { content: "▸"; font-size: 23px; line-height: 1; }
+      .price-group[open] .price-toggle::before { content: "▾"; }
+      .price-disclosure .when-open { display: none; }
+      .price-group[open] .price-disclosure .when-closed { display: none; }
+      .price-group[open] .price-disclosure .when-open { display: inline; }
       .price-table-wrap {
         overflow-x: auto;
         border-top: 1px solid #c9bda9;
@@ -859,10 +870,11 @@
           font-size: 12px;
           line-height: 1.35;
         }
+        .price-disclosure { gap: 6px; font-size: 9px; }
         .price-toggle {
           width: 31px;
           height: 31px;
-          font-size: 22px;
+          font-size: 0;
         }
         .price-table {
           min-width: 0;
@@ -910,6 +922,7 @@
         .price-table td:nth-child(3)::before {
           content: "Серебро";
         }
+        .price-table-wrap { overflow: visible; }
         .item button {
           grid-template-columns: 32px 1fr auto;
           gap: 9px;
@@ -1355,6 +1368,9 @@
           <b>Современная мастерская</b
           ><span>точная работа с вашим или нашим металлом</span>
         </div>
+        <div>
+          <b>Быстро</b><span>простой ремонт часто занимает 1–3 дня</span>
+        </div>
       </div>
       <section class="block services" id="services">
         <div class="services-head reveal">
@@ -1416,7 +1432,7 @@
               ><span
                 ><b>Пайка, размер и уход</b
                 ><small>Цепочки, кольца, чистка и полировка</small></span
-              ><span class="price-toggle" aria-hidden="true">+</span>
+              ><span class="price-disclosure"><span class="when-closed">Развернуть прайс</span><span class="when-open">Свернуть прайс</span><span class="price-toggle" aria-hidden="true"></span></span>
             </summary>
             <div class="price-table-wrap">
               <table class="price-table">
@@ -1496,7 +1512,7 @@
               ><span
                 ><b>Камни и жемчуг</b
                 ><small>Выкрепка, закрепка и работа со вставками</small></span
-              ><span class="price-toggle" aria-hidden="true">+</span>
+              ><span class="price-disclosure"><span class="when-closed">Развернуть прайс</span><span class="when-open">Свернуть прайс</span><span class="price-toggle" aria-hidden="true"></span></span>
             </summary>
             <div class="price-table-wrap">
               <table class="price-table">
@@ -1560,7 +1576,7 @@
               ><span
                 ><b>Детали и фурнитура</b
                 ><small>Замки, штифты, касты и элементы украшений</small></span
-              ><span class="price-toggle" aria-hidden="true">+</span>
+              ><span class="price-disclosure"><span class="when-closed">Развернуть прайс</span><span class="when-open">Свернуть прайс</span><span class="price-toggle" aria-hidden="true"></span></span>
             </summary>
             <div class="price-table-wrap">
               <table class="price-table">
@@ -1646,6 +1662,9 @@
           Цены указаны с учётом НДС 22 %. Если нужна новая вставка или
           фурнитура, мастер отдельно рассчитает её стоимость после осмотра.
         </p>
+        <button class="btn gold contact-trigger price-cta" type="button">
+          Отправить фото — назовём точную цену
+        </button>
       </section>
       <section class="block" id="works">
         <div class="works-head reveal">
@@ -1697,6 +1716,26 @@
           <button class="btn contact-trigger" type="button">
             Узнать стоимость ремонта
           </button>
+        </div>
+      </section>
+      <section class="repair-before-after" aria-labelledby="before-after-title">
+        <div class="repair-before-after__copy">
+          <p class="eyebrow">Результат в деталях</p>
+          <h2 id="before-after-title">До и после ремонта</h2>
+          <p>Покажем похожие кейсы по вашему украшению до начала работы — с учётом металла, камней и состояния изделия.</p>
+          <button class="btn gold contact-trigger" type="button">Показать похожие работы</button>
+        </div>
+        <div class="repair-before-after__pairs" aria-label="Примеры этапов ремонта">
+          <article class="repair-pair">
+            <figure><img src="assets/repair-case-workshop-1.jpg" alt="Украшение на этапе подготовки к ремонту" /><figcaption>До</figcaption></figure>
+            <span aria-hidden="true">→</span>
+            <figure><img src="assets/repair-workshop-2.jpg" alt="Ювелир закрепляет камень после ремонта" /><figcaption>После</figcaption></figure>
+          </article>
+          <article class="repair-pair">
+            <figure><img src="assets/repair-case-workshop-2.jpg" alt="Детали украшения до восстановления" /><figcaption>До</figcaption></figure>
+            <span aria-hidden="true">→</span>
+            <figure><img src="assets/repair-workshop-hero.jpg" alt="Восстановленное украшение в работе мастера" /><figcaption>После</figcaption></figure>
+          </article>
         </div>
       </section>
       <section class="company-story" aria-labelledby="company-story-title">
@@ -1856,7 +1895,7 @@
         </div>
         <div>
           <h3>Оставить заявку</h3>
-          <form class="footer-form mail-form">
+          <form class="footer-form callback-form">
             <input name="name" placeholder="Ваше имя" required /><input
               name="phone"
               type="tel"
@@ -1937,11 +1976,11 @@
             </div>
           </article>
         </div>
-        <form class="callback mail-form">
+        <form class="callback callback-form">
           <h3>Перезвонить вам?</h3>
           <p>
-            Оставьте имя и телефон — письмо с заявкой откроется в вашем почтовом
-            приложении.
+            Оставьте имя и телефон — мастер перезвонит и рассчитает стоимость
+            ремонта.
           </p>
           <div class="formrow">
             <label
@@ -2002,22 +2041,11 @@
             e.setAttribute("aria-expanded", t);
           }),
         ),
-        document.querySelectorAll(".mail-form").forEach((e) =>
-          e.addEventListener("submit", (t) => {
-            t.preventDefault();
-            const o = new FormData(e),
-              l = o.get("name")?.trim(),
-              n = o.get("phone")?.trim(),
-              a = o.get("message")?.trim() || "Ремонт ювелирного изделия";
-            l &&
-              n &&
-              (location.href =
-                "mailto:jewelry@kolvika.ru?subject=" +
-                encodeURIComponent("Заявка на ремонт с лендинга KOLVIKA") +
-                "&body=" +
-                encodeURIComponent(
-                  "Имя: " + l + "\nТелефон: " + n + "\nЗапрос: " + a,
-                ));
+        document.querySelectorAll(".callback-form").forEach((form) =>
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            form.querySelector(".btn").textContent = "Заявка принята";
+            form.querySelector(".btn").disabled = true;
           }),
         ),
         document.addEventListener("keydown", (e) => {
