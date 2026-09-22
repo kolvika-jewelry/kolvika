@@ -1,4 +1,15 @@
 (() => {
+  const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      return parent && !parent.closest('script, style, textarea') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const textNodes = [];
+  while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
+  textNodes.forEach((node) => {
+    node.nodeValue = node.nodeValue.replace(/\b(в|во|к|ко|с|со|у|о|об|от|до|за|на|по|из|изо|и|а|но)\s+/giu, '$1\u00a0');
+  });
   const isRepair = location.pathname.includes('/repair');
   const repairAction = isRepair ? '<button class="mobile-direct-contact__repair" type="button">Обсудить</button>' : '';
   const directBar = document.querySelector('.mobile-contact-bar') ? '' : `
