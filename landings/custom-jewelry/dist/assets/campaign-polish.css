@@ -84,4 +84,9 @@
   .process-visual figcaption,.quiz-side small,.progress-meta span{font-size:12px!important;line-height:1.4!important}
   .price-disclosure{font-size:12px!important;line-height:1.25!important;letter-spacing:.03em!important}
   .gallery .work figcaption{font-size:13px!important;line-height:1.25!important}
+  .gallery .work figcaption{box-sizing:border-box;overflow-wrap:anywhere;padding-right:12px!important;padding-left:12px!important}
+}
+@media(max-width:360px){
+  .hero-actions--mobile{flex-direction:column}
+  .hero-actions--mobile .button{flex:auto;width:100%;min-height:50px}
 }
