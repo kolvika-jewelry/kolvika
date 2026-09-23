@@ -10,21 +10,33 @@
     }
   }
 
-  function utm(name) {
-    return new URLSearchParams(window.location.search).get("utm_" + name) || "";
+  function collectUtms() {
+    var tags = {};
+    new URLSearchParams(window.location.search).forEach(function (value, key) {
+      if (/^utm_/i.test(key)) tags[key.toLowerCase()] = value;
+    });
+    return tags;
   }
 
   window.KolvikaLead = {
     submit: function (payload) {
+      var tags = collectUtms();
+      var standardTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
       var data = Object.assign(
         {
           landing: document.body.dataset.landing || document.title,
           type: "Заявка",
           page: window.location.href,
           referrer: document.referrer || "",
-          utm_source: utm("source"),
-          utm_medium: utm("medium"),
-          utm_campaign: utm("campaign")
+          utm_source: tags.utm_source || "",
+          utm_medium: tags.utm_medium || "",
+          utm_campaign: tags.utm_campaign || "",
+          utm_term: tags.utm_term || "",
+          utm_content: tags.utm_content || "",
+          utm_other: Object.keys(tags)
+            .filter(function (key) { return standardTags.indexOf(key) === -1; })
+            .map(function (key) { return key + "=" + tags[key]; })
+            .join("&")
         },
         payload || {}
       );
