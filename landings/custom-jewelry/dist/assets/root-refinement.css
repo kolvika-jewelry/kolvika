@@ -1,8 +1,9 @@
 /* Editorial refinement for the custom-jewelry landing. */
-.hero { min-height: min(700px, calc(100svh - 96px)); }
-.hero-copy { padding-top: 44px; padding-bottom: 40px; }
+.hero { min-height: min(500px, calc(100svh - 96px)); }
+.hero-copy { padding-top: 30px; padding-bottom: 30px; }
 .hero-visual { min-height: 0; height: 100%; max-height: none; }
-.hero-visual img { object-position: center 42%; }
+.hero-visual img { object-position: center 47%; }
+.footer-map iframe { filter: none; }
 .hero-actions--mobile { display: none; }
 .section { padding-top: 78px; padding-bottom: 78px; }
 
