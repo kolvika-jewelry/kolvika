@@ -67,6 +67,9 @@
   .mobile-contact-bar,.mobile-direct-contact,.mobile-quick-contact,.sticky{display:none!important}
   .eyebrow,.reviews-block__eyebrow,.trust-block__eyebrow,.company-story__eyebrow{font-size:12px!important;line-height:1.4!important;letter-spacing:.11em!important}
   .metric span{font-size:13px!important;line-height:1.4!important}
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .metric{min-width:0!important;padding:18px 7px!important}
+  .metric b,.metric span{min-width:0;overflow-wrap:anywhere}
   .btn,.button,.materials-link,.final-cta__form button{font-size:13px!important;line-height:1.25!important;letter-spacing:.04em!important;min-height:44px}
   .final-cta__form label span{font-size:12px!important;line-height:1.3!important}
   .final-cta__note,.gift-block small{font-size:12px!important;line-height:1.5!important}
@@ -78,4 +81,7 @@
   .process-grid p{font-size:16px!important;line-height:1.5!important;margin:0!important}
   .repair-pair figure{height:180px!important}
   .repair-pair figcaption,.before-after-mini__pairs figcaption{font-size:12px!important}
+  .process-visual figcaption,.quiz-side small,.progress-meta span{font-size:12px!important;line-height:1.4!important}
+  .price-disclosure{font-size:12px!important;line-height:1.25!important;letter-spacing:.03em!important}
+  .gallery .work figcaption{font-size:13px!important;line-height:1.25!important}
 }
