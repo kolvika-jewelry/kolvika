@@ -1,7 +1,7 @@
 /* One compact mobile header across the three KOLVIKA landings. */
 .mobile-site-menu { display: none; }
 
-@media (max-width: 800px) {
+@media (max-width: 1150px) {
   .topbar, .top, .notice { display: none !important; }
   .mobile-header-call { display: none !important; }
   .nav .nav-socials,
@@ -70,4 +70,8 @@
     letter-spacing: .06em;
     text-decoration: none;
   }
+}
+
+@media (min-width: 801px) and (max-width: 1150px) {
+  .mobile-site-menu { top: 68px; }
 }

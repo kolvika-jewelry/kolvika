@@ -12,8 +12,9 @@
     nav.append(toggle);
   }
 
+  toggle.setAttribute('aria-label', 'Открыть меню');
   toggle.setAttribute('aria-expanded', 'false');
-  const links = [...nav.querySelectorAll('.nav-links a, .links a')]
+  const links = [...nav.querySelectorAll('.nav-links > a, .links > a')]
     .map((link) => `<a href="${link.getAttribute('href')}">${link.textContent.trim()}</a>`)
     .join('');
   const telegram = nav.querySelector('a[href*="t.me"]');
@@ -32,13 +33,21 @@
     </div>`;
   nav.insertAdjacentElement('afterend', menu);
 
+  const syncMenuTop = () => {
+    menu.style.top = `${nav.getBoundingClientRect().height}px`;
+  };
+  syncMenuTop();
+  window.addEventListener('resize', syncMenuTop);
+
   const close = () => {
     menu.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Открыть меню');
   };
   toggle.addEventListener('click', () => {
     const isOpen = menu.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
   });
   menu.querySelectorAll('.mobile-site-menu__links a').forEach((link) => link.addEventListener('click', close));
 })();
