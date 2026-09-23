@@ -8,7 +8,7 @@
   max-width: 1420px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(240px, .58fr) minmax(0, 1.42fr);
   gap: clamp(32px, 5vw, 88px);
   align-items: start;
 }
@@ -42,7 +42,7 @@
 
 .company-story__eyebrow {
   margin: 0 0 15px;
-  color: #a77e42;
+  color: #8d672f;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .12em;
@@ -60,7 +60,7 @@
 }
 
 .company-story__lead {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0;
   font-size: clamp(16px, 1.35vw, 20px);
   line-height: 1.45;
@@ -83,7 +83,7 @@
 .company-story__fact b {
   display: block;
   margin-bottom: 10px;
-  color: #a77e42;
+  color: #8d672f;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 27px;
   font-weight: 400;
@@ -96,7 +96,7 @@
 }
 
 .company-story__note {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0;
   font-size: 15px;
   line-height: 1.45;
@@ -122,5 +122,10 @@
   .company-story__caption { right: 12px; bottom: 12px; max-width: 185px; font-size: 12px; }
   .company-story__facts { grid-template-columns: 1fr; margin-top: 25px; }
   .company-story__fact { min-height: 0; padding: 16px; }
-  .company-story__fact b { margin-bottom: 4px; font-size: 24px; }
+  .company-story__eyebrow { margin-bottom: 13px; color: #825d29; font-size: 14px; }
+  .company-story h2 { margin-bottom: 17px; }
+  .company-story__lead { font-size: 18px; line-height: 1.5; }
+  .company-story__fact b { margin-bottom: 6px; color: #825d29; font-size: 27px; }
+  .company-story__fact span { font-size: 16px; line-height: 1.42; }
+  .company-story__note { font-size: 17px; line-height: 1.5; }
 }
