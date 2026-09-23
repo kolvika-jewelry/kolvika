@@ -1986,19 +1986,17 @@
             e.preventDefault();
             const t = document.getElementById("callback-name").value.trim(),
               o = document.getElementById("callback-phone").value.trim();
-            t &&
-              o &&
-              (location.href =
-                "mailto:jewelry@kolvika.ru?subject=" +
-                encodeURIComponent("Заявка с лендинга KOLVIKA") +
-                "&body=" +
-                encodeURIComponent(
-                  "Имя: " +
-                    t +
-                    "\nТелефон: " +
-                    o +
-                    "\n\nПрошу перезвонить мне по поводу изготовления украшения на заказ.",
-                ));
+            if (!t || !o) return;
+            window.KolvikaLead.submit({
+              type: "Обратный звонок",
+              name: t,
+              phone: o,
+              message: "Прошу перезвонить по поводу изготовления украшения на заказ."
+            });
+            e.currentTarget.reset();
+            const button = e.currentTarget.querySelector('[type="submit"]');
+            button.textContent = "Заявка отправлена";
+            button.disabled = true;
           }),
         document.addEventListener("keydown", (e) => {
           if (
@@ -2101,15 +2099,17 @@
         const t = document.getElementById("footer-name").value.trim(),
           o = document.getElementById("footer-phone").value.trim(),
           n = document.getElementById("footer-message").value.trim();
-        t &&
-          o &&
-          (location.href =
-            "mailto:jewelry@kolvika.ru?subject=" +
-            encodeURIComponent("Заявка с лендинга KOLVIKA") +
-            "&body=" +
-            encodeURIComponent(
-              "Имя: " + t + "\nТелефон: " + o + "\nЗапрос: " + n,
-            ));
+        if (!t || !o) return;
+        window.KolvikaLead.submit({
+          type: "Заявка с сайта",
+          name: t,
+          phone: o,
+          message: n
+        });
+        e.currentTarget.reset();
+        const button = e.currentTarget.querySelector('[type="submit"]');
+        button.textContent = "Заявка отправлена";
+        button.disabled = true;
       });
     </script>
     <script src="assets/lead-analytics.js"></script>

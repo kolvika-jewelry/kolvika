@@ -1502,18 +1502,16 @@
       document.querySelector("#callback").addEventListener("submit", (e) => {
         e.preventDefault();
         const d = new FormData(e.currentTarget);
-        location.href =
-          "mailto:jewelry@kolvika.ru?subject=" +
-          encodeURIComponent("Заявка · квиз KOLVIKA") +
-          "&body=" +
-          encodeURIComponent(
-            "Имя: " +
-              d.get("name") +
-              "\nТелефон: " +
-              d.get("phone") +
-              "\nВыбор: " +
-              answers.join("; "),
-          );
+        window.KolvikaLead.submit({
+          type: "Расчёт по квизу",
+          name: String(d.get("name") || "").trim(),
+          phone: String(d.get("phone") || "").trim(),
+          message: answers.filter(Boolean).join("; ")
+        });
+        e.currentTarget.reset();
+        const button = e.currentTarget.querySelector('[type="submit"]');
+        button.textContent = "Заявка отправлена";
+        button.disabled = true;
       });
       const io = new IntersectionObserver(
         (es) =>
@@ -1530,12 +1528,19 @@
           e.preventDefault();
           var name = form.elements.name.value.trim(),
             phone = form.elements.phone.value.trim();
-          if (name && phone)
-            location.href =
-              "mailto:jewelry@kolvika.ru?subject=" +
-              encodeURIComponent("Заявка с лендинга KOLVIKA") +
-              "&body=" +
-              encodeURIComponent("Имя: " + name + "\nТелефон: " + phone);
+          if (!name || !phone) return;
+          window.KolvikaLead.submit({
+            type: "Заявка с квиз-лендинга",
+            name: name,
+            phone: phone,
+            message: ""
+          });
+          form.reset();
+          var button = form.querySelector('[type="submit"]');
+          if (button) {
+            button.textContent = "Заявка отправлена";
+            button.disabled = true;
+          }
         });
       });
     </script>

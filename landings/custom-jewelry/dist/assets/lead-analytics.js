@@ -2,6 +2,7 @@
   "use strict";
 
   var COUNTER_ID = 112938684;
+  var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtuT4b6ZFmorJqCanJS_IWlUKlKqmjpbXcekvGsY5n3u_x2cf5yMfDt-V6k6Ie3Ie_BA/exec";
 
   function reachGoal(name) {
     if (typeof window.ym === "function") {
@@ -17,7 +18,7 @@
     submit: function (payload) {
       var data = Object.assign(
         {
-          landing: document.documentElement.dataset.landing || document.title,
+          landing: document.body.dataset.landing || document.title,
           type: "Заявка",
           page: window.location.href,
           referrer: document.referrer || "",
@@ -30,13 +31,12 @@
 
       reachGoal("lead_submit");
 
-      if (!window.KOLVIKA_LEAD_ENDPOINT) return;
       var body = new URLSearchParams();
       Object.keys(data).forEach(function (key) {
         body.append(key, data[key] == null ? "" : String(data[key]));
       });
 
-      fetch(window.KOLVIKA_LEAD_ENDPOINT, {
+      fetch(LEAD_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },

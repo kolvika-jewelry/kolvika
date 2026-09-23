@@ -1998,7 +1998,7 @@
             /></label>
           </div>
           <button class="btn gold" type="submit">Оставить контакты</button>
-          <p class="callback-send-note" hidden>Чтобы мастер получил контакты, выберите Telegram или MAX выше.</p>
+          <p class="callback-send-note" hidden>Спасибо! Мастер получил контакты и скоро свяжется с вами.</p>
         </form>
         <p class="consent">
           Переходя в мессенджер или отправляя заявку, вы соглашаетесь с
@@ -2048,6 +2048,21 @@
         document.querySelectorAll(".callback-form").forEach((form) =>
           form.addEventListener("submit", (event) => {
             event.preventDefault();
+            const data = new FormData(form);
+            window.KolvikaLead.submit({
+              type: form.classList.contains("footer-form")
+                ? "Заявка на ремонт"
+                : "Обратный звонок по ремонту",
+              name: String(data.get("name") || "").trim(),
+              phone: String(data.get("phone") || "").trim(),
+              message: String(data.get("message") || "Ремонт ювелирного изделия").trim()
+            });
+            form.reset();
+            const button = form.querySelector('[type="submit"]');
+            if (button) {
+              button.textContent = "Заявка отправлена";
+              button.disabled = true;
+            }
             const note = form.querySelector(".callback-send-note");
             if (note) note.hidden = false;
           }),
