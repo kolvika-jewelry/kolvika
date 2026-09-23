@@ -66,10 +66,10 @@
 .repair-before-after__copy > p:not(.eyebrow) { margin: 18px 0 22px; line-height: 1.55; }
 .repair-before-after .btn { white-space: nowrap; }
 .callback-send-note { margin: 10px 0 0; font-size: 12px; line-height: 1.4; color: #6d5128; }
-.repair-before-after__pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.repair-before-after__pairs { display: grid; grid-template-columns: 1fr; gap: 14px; }
 .repair-pair { display: grid; grid-template-columns: 1fr 28px 1fr; align-items: center; gap: 6px; margin: 0; }
 .repair-pair > span { font: 26px Georgia, serif; text-align: center; color: #80633a; }
-.repair-pair figure { position: relative; height: 160px; margin: 0; overflow: hidden; background: #ddd3c5; }
+.repair-pair figure { position: relative; height: 190px; margin: 0; overflow: hidden; background: #ddd3c5; }
 .repair-pair img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .repair-pair figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 9px; background: rgba(29, 26, 24, .8); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
