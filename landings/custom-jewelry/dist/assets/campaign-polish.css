@@ -56,13 +56,16 @@
   .gift-block,.final-cta{grid-template-columns:1fr}
   .gift-block>div,.final-cta__content{padding:42px 22px}
   .gift-block img{height:280px;max-height:none}
-  .final-cta>img{height:290px;grid-row:1}
+  .final-cta__content{grid-row:1}
+  .final-cta>img{height:220px;grid-row:2}
   .final-cta__form{grid-template-columns:1fr}
   .final-cta__form button{width:100%}
   .gallery-call-desktop{display:none!important}
   .gallery-call-mobile{display:inline-flex!important}
 }
 @media(max-width:800px){
+  .company-story__content{order:1}
+  .company-story__visual{order:2}
   body{padding-bottom:0!important}
   .mobile-contact-bar,.mobile-direct-contact,.mobile-quick-contact,.sticky{display:none!important}
   .eyebrow,.reviews-block__eyebrow,.trust-block__eyebrow,.company-story__eyebrow{font-size:12px!important;line-height:1.4!important;letter-spacing:.11em!important}
