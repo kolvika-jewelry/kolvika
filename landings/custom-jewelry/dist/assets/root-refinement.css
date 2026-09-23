@@ -95,8 +95,9 @@
 .extra { background: #fff; }
 .extra img { object-fit: contain; padding: 10px; background: #fff; }
 .extra::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, .72)); }
-.gallery-grid .card { background: #fff; }
-.gallery-grid .card img { object-fit: contain; padding: 10px; background: #fff; }
+.gallery-grid { grid-auto-rows: auto; }
+.gallery-grid .card { aspect-ratio: 1; background: #fff; }
+.gallery-grid .card img { object-fit: cover; padding: 0; background: #fff; }
 .gallery-grid .card figcaption { display: none; }
 
 .materials-band {
@@ -190,7 +191,7 @@
   .intro-carousel__arrow--next::before { border-left-width: 8px; }
   .intro-carousel__dots { margin-top: 12px; }
   .materials-band { padding: 26px 20px; }
-  .materials-band__visual { width: min(100%, 260px); height: 118px; margin: 18px 0 2px; }
+  .materials-band__visual { width: 100%; height: auto; aspect-ratio: 2.2 / 1; margin: 18px 0 2px; }
   .reviews-block { padding: 48px 20px; }
   .reviews-block__head { align-items: flex-start; flex-direction: column; margin-bottom: 20px; }
   .reviews-block__content { grid-template-columns: 1fr; }

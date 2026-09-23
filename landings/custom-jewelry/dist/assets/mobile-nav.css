@@ -1,0 +1,73 @@
+/* One compact mobile header across the three KOLVIKA landings. */
+.mobile-site-menu { display: none; }
+
+@media (max-width: 800px) {
+  .topbar, .top, .notice { display: none !important; }
+  .mobile-header-call { display: none !important; }
+  .nav .nav-socials,
+  .nav .nav-call,
+  .nav .nav-button,
+  .nav > .btn,
+  .nav > .links,
+  .nav > .socials,
+  .nav > .call,
+  .nav > .nav-links { display: none !important; }
+  .nav .hamburger,
+  .nav .hamb {
+    display: block !important;
+    margin-left: auto !important;
+    padding: 10px !important;
+    color: #211e1c;
+    font-size: 1.45rem !important;
+    line-height: 1;
+  }
+  .mobile-site-menu {
+    position: fixed;
+    z-index: 70;
+    top: 58px;
+    right: 0;
+    left: 0;
+    padding: 22px 20px 24px;
+    background: #fffdf9;
+    border-top: 1px solid #ded6cc;
+    border-bottom: 1px solid #ded6cc;
+    box-shadow: 0 16px 30px rgba(25, 21, 19, .14);
+  }
+  .mobile-site-menu.is-open { display: flex; flex-direction: column; gap: 18px; }
+  .mobile-site-menu__links { display: grid; gap: 17px; }
+  .mobile-site-menu__links a {
+    color: #211e1c;
+    font: 600 .78rem/1.2 Arial, sans-serif;
+    letter-spacing: .09em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .mobile-site-menu__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+    padding-top: 18px;
+    border-top: 1px solid #ded6cc;
+  }
+  .mobile-site-menu__messenger {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    text-decoration: none;
+  }
+  .mobile-site-menu__messenger img { width: 38px; height: 38px; object-fit: contain; }
+  .mobile-site-menu__call {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid #211e1c;
+    color: #211e1c;
+    font: 700 .75rem/1 Arial, sans-serif;
+    letter-spacing: .06em;
+    text-decoration: none;
+  }
+}
