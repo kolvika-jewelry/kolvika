@@ -1337,6 +1337,7 @@
     <link rel="stylesheet" href="assets/contact-buttons.css" />
     <link rel="stylesheet" href="assets/contact-modal-mobile.css" />
     <link rel="stylesheet" href="assets/campaign-polish.css?v=7" />
+    <link rel="stylesheet" href="assets/main-refinement-20260924.css" />
   </head>
   <body data-landing="Украшения на заказ">
     <div class="topbar">
@@ -1435,15 +1436,13 @@
         <h2 class="title">Ваш замысел.<br />Наше мастерство.</h2>
         <div class="intro-copy">
           <p>
-            Бывает, образ украшения живёт только в вашей голове: вы увидели его в фильме,
-            сохранили фотографию или придумали деталь, которой нет ни в одной витрине.
-            Расскажите нам эту историю — мы поможем превратить фантазию в украшение,
-            которое можно держать в руках и носить каждый день.
+            Украшение может начаться с фотографии, сцены из фильма или вашей идеи.
+            Расскажите, каким вы его видите, — мы воплотим замысел в изделии,
+            которое захочется носить каждый день.
           </p>
           <p>
-            Вместе выберем форму, металл и камни, настроим каждую деталь, подготовим
-            3D-модель и заранее согласуем стоимость. Можно использовать ваши материалы
-            или подобрать новые с нашей помощью.
+            Подберём форму, металл и камни, подготовим 3D-модель и заранее
+            согласуем стоимость. Работаем с вашими материалами или предложим свои.
           </p>
           <button class="button inline-cta js-contact" type="button">
             Связаться с ювелиром
@@ -1494,14 +1493,14 @@
             </div>
           </article>
           <article class="extra">
-            <img src="assets/repair-after-ring.webp" alt="Украшение после переделки и переплавки" />
+            <img src="assets/repair-casting-illustration.jpg" alt="Иллюстрация процесса переплавки металла в мастерской" />
             <div class="extra-copy">
               <h3>Переделка и переплавка</h3>
               <p>Новый облик из вашего металла и памятных деталей</p>
             </div>
           </article>
           <article class="extra">
-            <img src="assets/bracelet.jpg" alt="Ремонт ювелирного изделия" />
+            <img src="assets/repair-soldering-illustration.jpg" alt="Иллюстрация процесса ювелирной пайки" />
             <div class="extra-copy">
               <h3>Ремонт</h3>
               <p>Деликатная работа любой сложности</p>
@@ -1518,7 +1517,7 @@
           металл и натуральные камни под вашу идею и бюджет.
         </p>
         <figure class="materials-band__visual">
-          <img src="assets/jewelry-3d-design.webp" alt="Трёхмерная модель будущего украшения на экране ювелира" />
+          <img src="assets/materials-gems-gold-20260924.jpg" alt="Натуральные цветные камни и золото для будущего украшения" />
         </figure>
         <button class="materials-link js-contact" type="button">
           Связаться с ювелиром
@@ -1587,15 +1586,13 @@
           </figure>
         </div>
         <div class="gallery-actions">
-          <button class="button js-contact" type="button">
-            Хочу похожее украшение</button
-          ><button class="button button--ghost js-contact gallery-call-desktop" type="button" style="color: var(--ink); border-color: var(--ink)">Позвонить и обсудить</button>
-          <a class="button button--ghost gallery-call-mobile" href="tel:+74957998910" style="color: var(--ink); border-color: var(--ink)">Позвонить и обсудить</a>
+          <button class="button js-contact" type="button">Хочу похожее украшение</button>
         </div>
       </section>
       <section class="section process" id="process">
         <div class="process-head">
           <div>
+            <p class="eyebrow">Как происходит работа</p>
             <h2 class="title">От идеи<br />до воплощения</h2>
           </div>
           <p>
@@ -1648,6 +1645,7 @@
               Связаться с ювелиром
             </button>
           </div>
+          <div class="process-gallery">
           <figure class="process-visual">
             <img
               class="is-active"
@@ -1657,8 +1655,18 @@
             <img src="assets/jewelry-3d-design.webp" alt="Трёхмерная модель украшения" />
             <img src="assets/repair-workshop-2.jpg" alt="Ювелир изготавливает украшение" />
             <img src="assets/gift-packaging-concept.webp" alt="Подарочная упаковка украшения — визуализация" />
-            <figcaption>От замысла до готового украшения</figcaption>
           </figure>
+          <div class="process-gallery__controls" aria-label="Этапы создания украшения">
+            <button class="process-gallery__arrow" type="button" data-process-direction="prev" aria-label="Предыдущее фото">←</button>
+            <div class="process-gallery__dots">
+              <button type="button" aria-label="Этап 1"></button>
+              <button type="button" aria-label="Этап 2"></button>
+              <button type="button" aria-label="Этап 3"></button>
+              <button type="button" aria-label="Этап 4"></button>
+            </div>
+            <button class="process-gallery__arrow" type="button" data-process-direction="next" aria-label="Следующее фото">→</button>
+          </div>
+          </div>
         </div>
       </section>
       <section class="trust-block" aria-labelledby="trust-title">
@@ -1693,7 +1701,7 @@
           <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Ирина Г.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Памятный камень из старого украшения превратили в новую подвеску.</p></article>
           <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Татьяна К.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>После полировки и родирования кольца снова выглядят нарядно.</p></article>
         </div>
-        <div class="reviews-proof"><img src="assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
+        <div class="reviews-proof"><img src="assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Смотреть все отзывы</a></p></div>
       </section>
       <section class="final-cta" aria-labelledby="final-cta-title"><div class="final-cta__content"><p class="eyebrow">Ваша история начинается здесь</p><h2 id="final-cta-title">Создайте своё украшение</h2><p>Расскажите, что вы задумали. Ювелир поможет превратить идею в конкретный проект и подскажет следующий шаг.</p><form class="final-cta__form" data-lead-type="Финальная заявка — изготовление"><label><span>Как к вам обращаться</span><input name="name" autocomplete="name" required placeholder="Ваше имя" /></label><label><span>Телефон для связи</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00" /></label><button type="submit">Обсудить идею</button></form><p class="final-cta__note">Отправляя заявку, вы соглашаетесь на обработку данных по <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политике конфиденциальности</a>.</p></div><img src="assets/final-sapphire-ring.webp" alt="Авторское кольцо с сапфиром — художественная визуализация" /></section>
     </main>
@@ -1783,11 +1791,9 @@
         >
           ×
         </button>
-        <h2 id="modal-title">Готово! Куда прислать расчёт?</h2>
-        <p class="modal-phone">Позвоните нам: <a href="tel:+74957998910">+7 (495) 799-89-10</a></p>
-        <p class="modal-intro">
-          Или напишите сразу в Telegram / MAX — фото, эскиз или референс можно прикрепить к сообщению.
-        </p>
+        <h2 id="modal-title">Обсудим ваше украшение</h2>
+        <p class="modal-phone"><span>Позвоните нам</span><a href="tel:+74957998910">+7 (495) 799-89-10</a></p>
+        <p class="modal-intro">Напишите в мессенджерах</p>
         <div class="channels">
           <article class="channel channel--telegram">
             <div class="channel-head">
@@ -1841,10 +1847,8 @@
           </article>
         </div>
         <form class="callback" id="callback-form">
-          <h3>Оставьте телефон — мастер перезвонит</h3>
-          <p>
-            Укажите имя и телефон, чтобы мастер мог уточнить детали расчёта.
-          </p>
+          <h3>Оставьте ваш номер — мы вам перезвоним</h3>
+          <p>Уточним детали и ответим на вопросы об изготовлении.</p>
           <div class="form-row">
             <label
               >Ваше имя<input
@@ -1971,7 +1975,8 @@
       const processSteps = [
           ...document.querySelectorAll(".step[data-process-image]"),
         ],
-        processImages = [...document.querySelectorAll(".process-visual img")];
+        processImages = [...document.querySelectorAll(".process-visual img")],
+        processDots = [...document.querySelectorAll(".process-gallery__dots button")];
       if (
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
         "IntersectionObserver" in window
@@ -1998,13 +2003,21 @@
           activeProcess = index;
           processSteps.forEach((step, stepIndex) => step.classList.toggle("is-current", stepIndex === index));
           processImages.forEach((photo, photoIndex) => photo.classList.toggle("is-active", photoIndex === index));
+          processDots.forEach((dot, dotIndex) => {
+            dot.classList.toggle("is-active", dotIndex === index);
+            dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
+          });
         };
         showProcess(0);
         processSteps.forEach((step, index) => {
           step.addEventListener("mouseenter", () => showProcess(index));
           step.addEventListener("focusin", () => showProcess(index));
         });
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        processDots.forEach((dot, index) => dot.addEventListener("click", () => showProcess(index)));
+        document.querySelectorAll("[data-process-direction]").forEach((arrow) => {
+          arrow.addEventListener("click", () => showProcess((activeProcess + (arrow.dataset.processDirection === "next" ? 1 : -1) + processSteps.length) % processSteps.length));
+        });
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(min-width: 801px)").matches) {
           setInterval(() => showProcess((activeProcess + 1) % processSteps.length), 5500);
         }
       }

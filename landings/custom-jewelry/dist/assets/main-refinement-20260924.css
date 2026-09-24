@@ -1,0 +1,61 @@
+/* Main landing: consistent service imagery, clearer contact choices and process gallery. */
+body[data-landing="Украшения на заказ"] .extra-grid { gap: 16px; }
+body[data-landing="Украшения на заказ"] .extra { background: #ebe5dd; }
+body[data-landing="Украшения на заказ"] .extra img { padding: 0; object-fit: cover; background: #ebe5dd; }
+body[data-landing="Украшения на заказ"] .extra:first-child img { object-fit: contain; background: #fff; }
+body[data-landing="Украшения на заказ"] .extra::after { background: linear-gradient(180deg, transparent 42%, rgba(18, 14, 12, .82)); }
+body[data-landing="Украшения на заказ"] .extra-copy { left: 22px; right: 22px; bottom: 22px; }
+body[data-landing="Украшения на заказ"] .extra h3 { font-size: clamp(1.6rem, 2.4vw, 2.3rem); line-height: 1.05; }
+body[data-landing="Украшения на заказ"] .extra p { font-size: .88rem; line-height: 1.35; }
+
+body[data-landing="Украшения на заказ"] .process-head .eyebrow { color: #d7b77e; margin: 0 0 16px; }
+body[data-landing="Украшения на заказ"] .process-gallery { position: sticky; top: 112px; min-width: 0; }
+body[data-landing="Украшения на заказ"] .process-gallery .process-visual { position: relative; top: auto; margin: 0; }
+body[data-landing="Украшения на заказ"] .process-gallery__controls { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 16px; }
+body[data-landing="Украшения на заказ"] .process-gallery__arrow { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #a58d6f; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+body[data-landing="Украшения на заказ"] .process-gallery__dots { display: flex; align-items: center; gap: 9px; }
+body[data-landing="Украшения на заказ"] .process-gallery__dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: #827972; cursor: pointer; }
+body[data-landing="Украшения на заказ"] .process-gallery__dots button.is-active { width: 22px; border-radius: 6px; background: #d7b77e; }
+body[data-landing="Украшения на заказ"] .process-gallery__controls button:focus-visible { outline: 2px solid #e7c887; outline-offset: 3px; }
+
+body[data-landing="Украшения на заказ"] .modal-phone { display: grid; gap: 10px; justify-items: center; margin: 18px 0 25px; text-align: center; }
+body[data-landing="Украшения на заказ"] .modal-phone span { font: 700 .78rem/1.3 Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+body[data-landing="Украшения на заказ"] .modal-phone a { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 9px 25px; border: 1px solid #b5925d; background: #f9f1e6; color: #221e1b; font: 600 clamp(1.15rem,2vw,1.45rem)/1.2 Arial,sans-serif; text-decoration: none; box-shadow: 0 8px 20px rgba(61,40,15,.1); }
+body[data-landing="Украшения на заказ"] .modal-intro { max-width: none; margin: 0 0 14px; text-align: center; font: 700 .78rem/1.3 Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+body[data-landing="Украшения на заказ"] .modal .channel { min-width: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+body[data-landing="Украшения на заказ"] .modal .channel-head,
+body[data-landing="Украшения на заказ"] .modal .channel p,
+body[data-landing="Украшения на заказ"] .modal .qr-toggle,
+body[data-landing="Украшения на заказ"] .modal .qr,
+body[data-landing="Украшения на заказ"] .modal .action-desktop { display: none !important; }
+body[data-landing="Украшения на заказ"] .modal .action-mobile { display: inline !important; }
+body[data-landing="Украшения на заказ"] .modal .channel-actions { display: block; }
+body[data-landing="Украшения на заказ"] .modal .channel-actions a { display: flex !important; align-items: center !important; justify-content: center !important; text-align: center; line-height: 1.2 !important; }
+body[data-landing="Украшения на заказ"] .modal .channel-actions a { min-height: 55px; border-radius: 0; font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; }
+body[data-landing="Украшения на заказ"] .callback h3 { font-size: clamp(1.5rem,2.5vw,2rem); line-height: 1.1; }
+
+@media (max-width: 800px) {
+  body[data-landing="Украшения на заказ"] .extra-grid { gap: 12px; }
+  body[data-landing="Украшения на заказ"] .extra { min-height: 245px; }
+  body[data-landing="Украшения на заказ"] .extra h3 { font-size: clamp(1.5rem,6vw,2rem); }
+  body[data-landing="Украшения на заказ"] .extra p { font-size: .9rem; }
+  body[data-landing="Украшения на заказ"] .company-story__inner { display: flex; flex-direction: column; gap: 0; }
+  body[data-landing="Украшения на заказ"] .company-story__content { display: contents; }
+  body[data-landing="Украшения на заказ"] .company-story__eyebrow { order: 1; }
+  body[data-landing="Украшения на заказ"] .company-story h2 { order: 2; }
+  body[data-landing="Украшения на заказ"] .company-story__lead { order: 3; }
+  body[data-landing="Украшения на заказ"] .company-story__visual { order: 4; width: 100%; max-width: none; margin: 22px 0 0; }
+  body[data-landing="Украшения на заказ"] .company-story__facts { order: 5; width: 100%; margin-top: 18px; }
+  body[data-landing="Украшения на заказ"] .company-story__note { order: 6; }
+  body[data-landing="Украшения на заказ"] .process-gallery { position: relative; top: auto; margin-top: 30px; }
+  body[data-landing="Украшения на заказ"] .process-gallery .process-visual { height: clamp(250px,76vw,380px); margin: 0; }
+  body[data-landing="Украшения на заказ"] .process-gallery__controls { margin-top: 17px; }
+  body[data-landing="Украшения на заказ"] .process-body .button.js-contact { margin-top: 28px !important; }
+  body[data-landing="Украшения на заказ"] .modal-panel { padding: 30px 20px 25px; }
+  body[data-landing="Украшения на заказ"] .modal h2 { font-size: clamp(2rem,8vw,2.6rem); }
+  body[data-landing="Украшения на заказ"] .modal-phone { margin: 18px 0 22px; }
+  body[data-landing="Украшения на заказ"] .modal-phone a { width: 100%; max-width: 360px; font-size: clamp(1rem,5vw,1.3rem); }
+  body[data-landing="Украшения на заказ"] .modal .channel a { min-height: 54px !important; font-size: .85rem !important; }
+  body[data-landing="Украшения на заказ"] .callback { margin-top: 23px; padding-top: 21px; }
+  body[data-landing="Украшения на заказ"] .callback h3 { font-size: 1.55rem; }
+}
