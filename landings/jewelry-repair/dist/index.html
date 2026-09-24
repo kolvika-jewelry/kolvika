@@ -1306,6 +1306,7 @@
     <link rel="stylesheet" href="assets/contact-buttons.css" />
     <link rel="stylesheet" href="assets/contact-modal-mobile.css" />
     <link rel="stylesheet" href="assets/campaign-polish.css?v=6" />
+    <link rel="stylesheet" href="assets/repair-mobile-20260924.css" />
   </head>
   <body data-landing="Ремонт украшений">
     <div class="top">
@@ -1419,7 +1420,6 @@
       <section class="block price" id="price">
         <div class="price-head reveal">
           <div>
-            <p class="eyebrow">Стоимость ремонта</p>
             <h2 class="title">Услуги<br />и стоимость</h2>
           </div>
           <p>
@@ -1429,11 +1429,11 @@
           </p>
         </div>
         <div class="price-groups reveal">
-          <details class="price-group" open>
+          <details class="price-group">
             <summary>
               <span class="item-number">01</span
               ><span
-                ><b>Пайка, размер и уход</b
+                ><b>Пайка, изменение размера и уход</b
                 ><small>Цепочки, кольца, чистка и полировка</small></span
               ><span class="price-disclosure"><span class="when-closed">Развернуть прайс</span><span class="when-open">Свернуть прайс</span><span class="price-toggle" aria-hidden="true"></span></span>
             </summary>
@@ -1513,7 +1513,7 @@
             <summary>
               <span class="item-number">02</span
               ><span
-                ><b>Камни и жемчуг</b
+                ><b>Ювелирные вставки (камни)</b
                 ><small>Выкрепка, закрепка и работа со вставками</small></span
               ><span class="price-disclosure"><span class="when-closed">Развернуть прайс</span><span class="when-open">Свернуть прайс</span><span class="price-toggle" aria-hidden="true"></span></span>
             </summary>
@@ -1663,10 +1663,10 @@
         </div>
         <p class="note">
           Цены указаны с учётом НДС 22 %. Если нужна новая вставка или
-          фурнитура, мастер отдельно рассчитает её стоимость после осмотра.
+          фурнитура, мы отдельно рассчитаем её стоимость после осмотра.
         </p>
         <button class="btn gold contact-trigger price-cta" type="button">
-          Отправить фото — назовём точную цену
+          Узнать стоимость ремонта
         </button>
       </section>
       <section class="block" id="works">
@@ -1703,8 +1703,8 @@
           </figure>
           <figure class="work reveal">
             <img
-              src="assets/repair-workshop-1.jpg"
-              alt="Подбор цветных камней для ювелирного изделия"
+              src="assets/repair-gem-selection-illustration.jpg"
+              alt="Иллюстрация: ювелир подбирает камень к оправе кольца"
               loading="lazy"
             />
             <figcaption>Подбор камней и материалов</figcaption>
@@ -1840,25 +1840,23 @@
         <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Ирина Г.</b><span>★★★★★</span></div><p>Памятный камень из старого украшения превратили в новую подвеску.</p></article>
         <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Кирилл</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Подобрали камень и сделали для него индивидуальную оправу раньше обещанного срока.</p></article>
         <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Ольга В.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Для украшения подготовили 3D-дизайн; итоговую стоимость согласовали заранее.</p></article>
-      </div><div class="reviews-proof"><img src="assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div></section>
+      </div><a class="reviews-block__all btn gold" href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Смотреть все отзывы</a><div class="reviews-proof"><img src="assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div></section>
     </main>
     <footer id="contacts">
       <div class="footer-grid">
         <div>
           <p class="eyebrow">KOLVIKA jewelry</p>
           <h2 class="footer-title">
-            Подарите своим украшениям<br />новую жизнь!
+            Подарите своим украшениям новую жизнь!
           </h2>
           <p>
-            <a href="tel:+74957998910">+7 (495) 799-89-10</a><br /><a
+            <a class="footer-phone" href="tel:+74957998910">+7 (495) 799-89-10</a><br /><a
               href="mailto:jewelry@kolvika.ru"
               >jewelry@kolvika.ru</a
             ><br />Пн–Пт · 10:00–19:00
           </p>
           <div class="footer-actions">
-            <button class="btn gold contact-trigger" type="button">
-              Быстрая связь с мастером</button
-            ><a
+            <a
               class="footer-messenger messenger-button messenger-button--telegram"
               href="https://t.me/kolvikajewelry"
               target="_blank"
@@ -1926,9 +1924,9 @@
         <button class="close" type="button" aria-label="Закрыть" data-close>
           ×
         </button>
-        <h2 id="modal-title">Готово! Куда прислать расчёт?</h2>
+        <h2 id="modal-title">Рассчитаем стоимость ремонта в течение часа</h2>
         <p class="modal-intro">
-          Или напишите сразу в Telegram / MAX — фото украшения можно прикрепить к сообщению.
+          Напишите нам в мессенджерах — фото украшения можно прикрепить к сообщению.
         </p>
         <div class="channels">
           <article class="channel telegram">
@@ -1967,8 +1965,9 @@
             </div>
           </article>
         </div>
+        <div class="modal-direct-call"><span>Позвоните нам</span><a href="tel:+74957998910">+7 (495) 799-89-10</a></div>
         <form class="callback callback-form">
-          <h3>Оставьте телефон — мастер перезвонит</h3>
+          <h3>Оставьте телефон — перезвоним</h3>
           <p>
             Оставьте имя и телефон — мастер перезвонит и рассчитает стоимость
             ремонта.
