@@ -23,6 +23,7 @@
 .final-cta__form button{height:49px;padding:0 18px;border:0;background:#c5a36d;color:#211e1b;font:700 .72rem Arial,sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer}
 .final-cta__form button:focus-visible,.reviews-proof a:focus-visible{outline:3px solid #d9bc82;outline-offset:3px}
 .final-cta__note{font-size:.7rem!important;color:#bdb4aa!important}
+.final-cta__note a{color:#e5c993;text-decoration:underline;text-underline-offset:3px}
 .gallery-call-mobile{display:none!important}
 .modal-phone{margin:8px 0 18px;font:500 1.1rem/1.4 Arial,sans-serif}
 .modal-phone a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -92,4 +93,17 @@
 @media(max-width:360px){
   .hero-actions--mobile{flex-direction:column}
   .hero-actions--mobile .button{flex:auto;width:100%;min-height:50px}
+}
+@media(min-width:801px){
+  body[data-landing="Украшения на заказ"] .final-cta{min-height:392px}
+  body[data-landing="Украшения на заказ"] .final-cta__content{padding:24px clamp(30px,4vw,72px)}
+  body[data-landing="Украшения на заказ"] .final-cta h2{margin:8px 0 14px;font-size:clamp(3rem,4.45vw,5.1rem)}
+  body[data-landing="Украшения на заказ"] .final-cta__form{margin-top:16px}
+  body[data-landing="Украшения на заказ"] .final-cta>img{position:absolute;top:0;right:0;width:50%;height:100%}
+}
+@media(max-width:720px){
+  body[data-landing="Украшения на заказ"] .final-cta__content{padding:30px 22px}
+  body[data-landing="Украшения на заказ"] .final-cta h2{font-size:clamp(2.5rem,11vw,3rem)}
+  body[data-landing="Украшения на заказ"] .final-cta__form{margin-top:18px}
+  body[data-landing="Украшения на заказ"] .final-cta>img{height:180px}
 }

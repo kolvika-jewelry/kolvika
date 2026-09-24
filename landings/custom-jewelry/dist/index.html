@@ -614,7 +614,7 @@
       }
       .footer-top {
         display: grid;
-        grid-template-columns: 0.8fr 1.05fr 0.9fr;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
         gap: 50px;
         align-items: start;
       }
@@ -649,27 +649,6 @@
         height: 100%;
         border: 0;
         filter: grayscale(0.8) contrast(0.9);
-      }
-      .footer-form {
-        display: grid;
-        gap: 10px;
-      }
-      .footer-form input,
-      .footer-form textarea {
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        background: 0 0;
-        color: #fff;
-        padding: 12px;
-        min-height: 44px;
-      }
-      .footer-form textarea {
-        min-height: 85px;
-        resize: vertical;
-      }
-      .footer-form input::placeholder,
-      .footer-form textarea::placeholder {
-        color: #b8afa5;
       }
       .footer-bottom {
         display: flex;
@@ -1357,7 +1336,7 @@
     <link rel="stylesheet" href="assets/company-story.css" />
     <link rel="stylesheet" href="assets/contact-buttons.css" />
     <link rel="stylesheet" href="assets/contact-modal-mobile.css" />
-    <link rel="stylesheet" href="assets/campaign-polish.css?v=6" />
+    <link rel="stylesheet" href="assets/campaign-polish.css?v=7" />
   </head>
   <body data-landing="Украшения на заказ">
     <div class="topbar">
@@ -1716,8 +1695,7 @@
         </div>
         <div class="reviews-proof"><img src="assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
       </section>
-      <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Красиво подарить.<br />Приятно сохранить.</h2><p>Украшение начинается с предвкушения. Продумываем подарочную подачу, чтобы момент вручения запомнился не меньше самого изделия.</p><small>На фото — визуализация подарочной подачи. Варианты упаковки уточняйте при заказе.</small></div><img src="assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
-      <section class="final-cta" aria-labelledby="final-cta-title"><div class="final-cta__content"><p class="eyebrow">Ваша история начинается здесь</p><h2 id="final-cta-title">Создайте своё украшение</h2><p>Расскажите, что вы задумали. Ювелир поможет превратить идею в конкретный проект и подскажет следующий шаг.</p><form class="final-cta__form" data-lead-type="Финальная заявка — изготовление"><label><span>Как к вам обращаться</span><input name="name" autocomplete="name" required placeholder="Ваше имя" /></label><label><span>Телефон для связи</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00" /></label><button type="submit">Обсудить идею</button></form><p class="final-cta__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p></div><img src="assets/final-sapphire-ring.webp" alt="Авторское кольцо с сапфиром — художественная визуализация" /></section>
+      <section class="final-cta" aria-labelledby="final-cta-title"><div class="final-cta__content"><p class="eyebrow">Ваша история начинается здесь</p><h2 id="final-cta-title">Создайте своё украшение</h2><p>Расскажите, что вы задумали. Ювелир поможет превратить идею в конкретный проект и подскажет следующий шаг.</p><form class="final-cta__form" data-lead-type="Финальная заявка — изготовление"><label><span>Как к вам обращаться</span><input name="name" autocomplete="name" required placeholder="Ваше имя" /></label><label><span>Телефон для связи</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00" /></label><button type="submit">Обсудить идею</button></form><p class="final-cta__note">Отправляя заявку, вы соглашаетесь на обработку данных по <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политике конфиденциальности</a>.</p></div><img src="assets/final-sapphire-ring.webp" alt="Авторское кольцо с сапфиром — художественная визуализация" /></section>
     </main>
     <footer class="footer" id="contacts">
       <div class="footer-top">
@@ -1764,37 +1742,6 @@
               rel="noopener"
               >Москва, Береговой проезд, д. 4/6, стр. 2</a
             >
-          </p>
-        </div>
-        <div>
-          <h3>Оставить заявку</h3>
-          <form class="footer-form" id="footer-form">
-            <input
-              id="footer-name"
-              autocomplete="name"
-              placeholder="Ваше имя"
-              required
-            /><input
-              id="footer-phone"
-              type="tel"
-              inputmode="tel"
-              autocomplete="tel"
-              placeholder="Телефон"
-              required
-            /><textarea
-              id="footer-message"
-              placeholder="Расскажите, какое украшение хотите создать"
-            ></textarea
-            ><button class="button" type="submit">Отправить заявку</button>
-          </form>
-          <p style="margin-top: 13px; font-size: 0.66rem">
-            Отправляя форму, вы соглашаетесь с
-            <a
-              href="https://kolvika.jewelry/page/politika-konfidentsialnosti"
-              target="_blank"
-              rel="noopener"
-              >политикой конфиденциальности</a
-            >.
           </p>
         </div>
       </div>
@@ -2111,25 +2058,6 @@
           introStrip.scrollTo({ left: (distance * index) / (introDots.length - 1), behavior: "smooth" });
         }),
       );
-    </script>
-    <script>
-      document.getElementById("footer-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const t = document.getElementById("footer-name").value.trim(),
-          o = document.getElementById("footer-phone").value.trim(),
-          n = document.getElementById("footer-message").value.trim();
-        if (!t || !o) return;
-        window.KolvikaLead.submit({
-          type: "Заявка с сайта",
-          name: t,
-          phone: o,
-          message: n
-        });
-        e.currentTarget.reset();
-        const button = e.currentTarget.querySelector('[type="submit"]');
-        button.textContent = "Заявка отправлена";
-        button.disabled = true;
-      });
     </script>
     <script src="assets/lead-analytics.js"></script>
     <script src="assets/campaign-polish.js"></script>
