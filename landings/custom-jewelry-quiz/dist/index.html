@@ -425,32 +425,6 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
-      .quiz-auto-note {
-        color: #766e65;
-        font-size: 0.8rem;
-      }
-      .quiz-result {
-        background: var(--ink);
-        color: #fff;
-        padding: 33px;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 25px;
-        align-items: end;
-      }
-      .quiz-result .btn {
-        background: #e4c185;
-        border-color: #e4c185;
-        color: var(--ink);
-      }
-      .quiz-result h3 {
-        margin: 0;
-        font: 500 2.35rem/1 var(--serif);
-      }
-      .quiz-result p {
-        color: #e7dace;
-        max-width: 430px;
-      }
       .marquee {
         overflow: hidden;
         background: #f2d4d0;
@@ -800,12 +774,6 @@
         .option {
           min-height: 150px;
         }
-        .quiz-result {
-          display: block;
-        }
-        .quiz-result .btn {
-          margin-top: 17px;
-        }
         .catalog-grid {
           grid-template-columns: 1fr 1fr;
           gap: 7px;
@@ -973,7 +941,7 @@
             <h2 class="title">Воплотим в реальность<br />вашу мечту</h2>
           </div>
           <p>
-            Ответьте на 4 вопроса, и мы пришлём вам варианты и стоимость
+            Ответьте на 5 вопросов, и мы пришлём вам варианты и стоимость
             изготовления украшения в течение дня.
           </p>
         </div>
@@ -983,9 +951,12 @@
             ><b id="side-text"
               >Воплотим в реальность вашу мечту об идеальном украшении</b
             >
+            <figure class="quiz-side__visual">
+              <img id="quiz-side-image" src="../assets/quiz-gallery/ring-pink.jpg" alt="Кольцо с розовым бриллиантом" />
+            </figure>
             <div class="progress">
-              <div class="progress-meta"><span id="step-num">Шаг 1 из 4</span><b id="progress-value">0%</b></div>
-              <div class="progress-track"><span class="progress-bar" id="progress-bar"></span></div>
+              <div class="progress-meta"><span id="step-num">Шаг 1 из 5</span><b id="progress-value">0%</b></div>
+              <div class="progress-track" role="progressbar" aria-label="Прогресс квиза" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="progress-bar" id="progress-bar"></span></div>
             </div>
           </aside>
           <div class="quiz-main">
@@ -1021,7 +992,7 @@
                   Есть только идея
                 </button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
             </div>
             <div class="step" data-step="3">
               <h3>Из каких материалов хотите изготовить украшение?</h3>
@@ -1036,7 +1007,7 @@
                   Хочу переделать своё украшение</button
                 ><button class="chip" data-value="Нужно обсудить">Нужно обсудить</button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Следующий вопрос откроется автоматически</span></div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
             </div>
             <div class="step" data-step="4">
               <h3>На какой бюджет ориентируетесь?</h3>
@@ -1047,17 +1018,27 @@
                 <button class="chip" data-value="более 250 000 ₽">более 250 000 ₽</button>
                 <button class="chip" data-value="пока не определился">пока не определился</button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><span class="quiz-auto-note">Сохраняем ваши ответы</span></div>
-              <div class="quiz-result" hidden>
-                <div>
-                  <h3>Готово! Подготовим расчёт.</h3>
-                  <p>
-                    Ювелир изучит ответы и в течение дня пришлёт варианты и
-                    ориентировочную стоимость.
-                  </p>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
+            </div>
+            <div class="step" data-step="5">
+              <h3>Куда отправить расчёт?</h3>
+              <form id="quiz-contact-form" class="quiz-contact-form">
+                <fieldset class="quiz-contact-channels">
+                  <legend>Удобный способ связи</legend>
+                  <div class="quiz-contact-channels__options">
+                    <label><input type="radio" name="channel" value="Telegram" required /><span>Telegram</span></label>
+                    <label><input type="radio" name="channel" value="MAX" /><span>MAX</span></label>
+                    <label><input type="radio" name="channel" value="Звонок" /><span>Звонок</span></label>
+                  </div>
+                </fieldset>
+                <div class="quiz-contact-fields">
+                  <label>Ваше имя<input name="name" autocomplete="name" required placeholder="Как к вам обращаться" /></label>
+                  <label>Телефон<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00" /></label>
                 </div>
-                <button class="btn contact-trigger">Получить расчёт стоимости</button>
-              </div>
+                <label class="quiz-contact-consent"><input type="checkbox" name="consent" required /><span>Соглашаюсь с <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">политикой конфиденциальности</a></span></label>
+                <div class="quiz-contact-actions"><button class="quiz-back" type="button">Назад</button><button class="btn" type="submit">Получить расчёт</button></div>
+              </form>
+              <p class="quiz-contact-status" role="status" aria-live="polite" hidden>Спасибо! Ювелир свяжется с вами по выбранному каналу.</p>
             </div>
           </div>
         </div>
@@ -1297,8 +1278,7 @@
         </div>
         <div class="reviews-proof"><img src="../assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
       </section>
-      <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Красиво подарить.<br />Приятно сохранить.</h2><p>Продумываем подарочную подачу, чтобы момент вручения запомнился не меньше самого украшения.</p><small>На фото — визуализация подарочной подачи. Варианты упаковки уточняйте при заказе.</small></div><img src="../assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
-      <section class="final-cta" aria-labelledby="final-cta-title"><div class="final-cta__content"><p class="eyebrow">Ваша история начинается здесь</p><h2 id="final-cta-title">Создайте своё украшение</h2><p>Расскажите, каким вы его представляете. Поможем выбрать форму, металл и камни.</p><form class="final-cta__form" data-lead-type="Финальная заявка — квиз"><label><span>Как к вам обращаться</span><input name="name" autocomplete="name" required placeholder="Ваше имя" /></label><label><span>Телефон для связи</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00" /></label><button type="submit">Обсудить идею</button></form><p class="final-cta__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p></div><img src="../assets/final-sapphire-ring.webp" alt="Авторское кольцо с сапфиром — художественная визуализация" /></section>
+      <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Создайте украшение с особым смыслом</h2></div><img src="../assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
     </main>
     <footer class="footer" id="contacts">
       <div class="footer-info">
@@ -1362,7 +1342,7 @@
         aria-labelledby="dialog-title"
       >
         <button class="close" data-close aria-label="Закрыть">×</button>
-        <h2 id="dialog-title">Готово! Куда прислать расчёт?</h2>
+        <h2 id="dialog-title">Связаться с ювелиром</h2>
         <p>
           Или напишите сразу в Telegram / MAX — фото, эскиз или референс можно прикрепить к сообщению.
         </p>
@@ -1450,8 +1430,15 @@
           }
         }
       });
-      const totalSteps = 4;
-      const answers = Array(totalSteps).fill("");
+      const totalSteps = 5;
+      const answers = Array(totalSteps - 1).fill("");
+      const sideImages = [
+        { src: "../assets/quiz-gallery/ring-pink.jpg", alt: "Кольцо с розовым бриллиантом" },
+        { src: "../assets/materials-gold-design.jpg", alt: "Эскизы ювелирного украшения" },
+        { src: "../assets/quiz-gallery/workshop-2.jpg", alt: "Работа с материалами в ювелирной мастерской" },
+        { src: "../assets/quiz-gallery/ring-sapphire.jpg", alt: "Кольцо с сапфиром" },
+        { src: "../assets/final-sapphire-ring.webp", alt: "Визуализация кольца с сапфиром" }
+      ];
       let step = 1;
       let advanceTimer;
       const refreshSummary = () => {
@@ -1460,21 +1447,25 @@
           : "Воплотим в реальность вашу мечту об идеальном украшении";
       };
       const refreshProgress = () => {
-        const percent = Math.round((answers.filter(Boolean).length / totalSteps) * 100);
+        const completed = answers.filter(Boolean).length + (document.querySelector("#quiz-contact-form").dataset.submitted === "true" ? 1 : 0);
+        const percent = Math.round((completed / totalSteps) * 100);
         document.querySelector("#step-num").textContent = `Шаг ${step} из ${totalSteps}`;
         document.querySelector("#progress-value").textContent = `${percent}%`;
         document.querySelector("#progress-bar").style.width = `${percent}%`;
+        document.querySelector(".progress-track").setAttribute("aria-valuenow", String(percent));
       };
       const go = (n) => {
         step = Math.min(Math.max(n, 1), totalSteps);
         document
           .querySelectorAll(".step")
           .forEach((x) => x.classList.toggle("active", +x.dataset.step === step));
-        document.querySelector(".quiz-result").hidden = true;
+        const image = document.querySelector("#quiz-side-image");
+        image.src = sideImages[step - 1].src;
+        image.alt = sideImages[step - 1].alt;
         refreshSummary();
         refreshProgress();
         document
-          .querySelector(".quiz-main")
+          .querySelector(".quiz-shell")
           .scrollIntoView({ block: "nearest", behavior: "smooth" });
       };
       const choose = (button) => {
@@ -1487,11 +1478,7 @@
         answers[selectedStep - 1] = button.dataset.value;
         refreshSummary();
         advanceTimer = window.setTimeout(() => {
-          if (selectedStep < totalSteps) go(selectedStep + 1);
-          else {
-            refreshProgress();
-            document.querySelector(".quiz-result").hidden = false;
-          }
+          go(selectedStep + 1);
         }, 300);
       };
       document
@@ -1503,11 +1490,27 @@
           window.clearTimeout(advanceTimer);
           go(step - 1);
         }));
+      document.querySelector("#quiz-contact-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (!form.reportValidity() || form.dataset.submitted === "true") return;
+        const data = new FormData(form);
+        window.KolvikaLead.submit({
+          type: "Расчёт по квизу",
+          name: String(data.get("name") || "").trim(),
+          phone: String(data.get("phone") || "").trim(),
+          message: [...answers, `Способ связи: ${data.get("channel")}`].join("; ")
+        });
+        form.dataset.submitted = "true";
+        form.hidden = true;
+        document.querySelector(".quiz-contact-status").hidden = false;
+        refreshProgress();
+      });
       document.querySelector("#callback").addEventListener("submit", (e) => {
         e.preventDefault();
         const d = new FormData(e.currentTarget);
         window.KolvikaLead.submit({
-          type: "Расчёт по квизу",
+          type: "Обратная связь с квиз-лендинга",
           name: String(d.get("name") || "").trim(),
           phone: String(d.get("phone") || "").trim(),
           message: answers.filter(Boolean).join("; ")
