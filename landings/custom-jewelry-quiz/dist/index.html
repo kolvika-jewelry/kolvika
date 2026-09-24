@@ -1049,9 +1049,9 @@
             <p class="eyebrow">Изделия наших клиентов</p>
             <h2 class="title">Примеры наших работ</h2>
           </div>
-          <button class="btn contact-trigger">Хочу похожее</button>
+          <button class="btn contact-trigger catalog-head__contact">Хочу похожее</button>
         </div>
-        <div class="catalog-grid reveal">
+        <div class="catalog-grid reveal" id="quiz-catalog-grid">
           <figure class="work">
             <img
               src="../assets/quiz-gallery/ring-pink.jpg"
@@ -1123,10 +1123,6 @@
             <figcaption>Серьги-трансформеры</figcaption>
           </figure>
           <figure class="work">
-            <img src="../assets/gems-ring.webp" alt="Кольцо и камни" />
-            <figcaption>Кольцо с камнями</figcaption>
-          </figure>
-          <figure class="work">
             <img
               src="../assets/quiz-gallery/ring-sapphire.jpg"
               alt="Кольцо с сапфирами"
@@ -1155,6 +1151,7 @@
             <figcaption>Браслет с камнями</figcaption>
           </figure>
         </div>
+        <button class="catalog-more" type="button" aria-controls="quiz-catalog-grid" aria-expanded="false">Смотреть ещё</button>
       </section>
       <section class="materials" id="materials">
         <div class="copy reveal">
@@ -1466,7 +1463,7 @@
         refreshProgress();
         document
           .querySelector(".quiz-shell")
-          .scrollIntoView({ block: "nearest", behavior: "smooth" });
+          .scrollIntoView({ block: "start", behavior: "smooth" });
       };
       const choose = (button) => {
         window.clearTimeout(advanceTimer);
@@ -1528,6 +1525,16 @@
         { threshold: 0.12 },
       );
       document.querySelectorAll(".reveal").forEach((x) => io.observe(x));
+      const catalogGrid = document.querySelector("#quiz-catalog-grid");
+      const catalogMore = document.querySelector(".catalog-more");
+      if (catalogGrid.querySelectorAll(".work").length > 8) {
+        catalogGrid.closest(".catalog").classList.add("catalog--collapsible");
+        catalogMore.addEventListener("click", () => {
+          const expanded = catalogGrid.classList.toggle("is-expanded");
+          catalogMore.setAttribute("aria-expanded", String(expanded));
+          catalogMore.textContent = expanded ? "Свернуть" : "Смотреть ещё";
+        });
+      }
     </script>
     <script>
       document.querySelectorAll(".footer-lead").forEach(function (form) {
