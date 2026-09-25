@@ -47,6 +47,11 @@ body[data-landing="Украшения на заказ"] .final-cta__form button 
 }
 
 @media (max-width: 800px) {
+  body[data-landing="Украшения на заказ"] .footer-title { max-width: 100%; font-size: clamp(2rem, 8.2vw, 2.7rem); line-height: 1.05; overflow-wrap: normal; }
+  body[data-landing="Украшения на заказ"] .footer-title br { display: none; }
+  body[data-landing="Украшения на заказ"] .footer-quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  body[data-landing="Украшения на заказ"] .footer-quick-actions > .js-contact { grid-column: 1 / -1; }
+  body[data-landing="Украшения на заказ"] .footer-quick-actions .button { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 48px; box-sizing: border-box; text-align: center; white-space: normal; }
   body[data-landing="Украшения на заказ"] .extra-grid { gap: 12px; }
   body[data-landing="Украшения на заказ"] .extra { min-height: 245px; }
   body[data-landing="Украшения на заказ"] .extra h3 { font-size: clamp(1.5rem,6vw,2rem); }
