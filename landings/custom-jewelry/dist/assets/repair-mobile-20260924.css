@@ -82,6 +82,7 @@
   .price-toggle { width: 28px; height: 28px; }
   .price-groups { gap: 10px; }
   .price .note { line-height: 1.5; }
+  .price-cta { max-width: 100%; white-space: normal; text-align: center; line-height: 1.3; }
 
   .gallery .work,
   .gallery .work.tall {
