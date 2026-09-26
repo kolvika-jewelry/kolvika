@@ -72,10 +72,10 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
   box-shadow: inset 0 1px 0 #ffffff35, 0 5px 14px #19130c22;
 }
 @media (min-width: 801px) and (hover: hover) and (pointer: fine) {
-  body { cursor: url("diamond.svg") 16 5, auto; }
-  a, button, summary, [role="button"], label[for] { cursor: url("diamond.svg") 16 5, pointer !important; }
+  body { cursor: url("diamond-cursor-real.png") 26 35, auto; }
+  a, button, summary, [role="button"], label[for] { cursor: url("diamond-cursor-real.png") 26 35, pointer !important; }
   input, textarea, [contenteditable="true"] { cursor: text !important; }
-  input[type="checkbox"], input[type="radio"], input[type="submit"] { cursor: url("diamond.svg") 16 5, pointer !important; }
+  input[type="checkbox"], input[type="radio"], input[type="submit"] { cursor: url("diamond-cursor-real.png") 26 35, pointer !important; }
 }
 @media (max-width: 800px) {
   .sticky { display: none !important; }
