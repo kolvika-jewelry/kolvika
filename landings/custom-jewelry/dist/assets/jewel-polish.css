@@ -95,14 +95,77 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 .nav-button::before, .btn.gold::before, .final-cta__form button::before,
 .sticky::before {
   /* Centre each sparkle on the frame corner, with half outside the button. */
-  content: ""; position: absolute; inset: -9px; pointer-events: none;
-  background: url("button-glint.svg") right 0 top 0 / 18px 18px no-repeat,
-    url("button-glint.svg") left 4px bottom 4px / 10px 10px no-repeat;
+  content: ""; position: absolute; inset: -11px; pointer-events: none;
+  background: url("button-glint.svg?v=2") right 0 top 0 / 22px 22px no-repeat,
+    url("button-glint.svg?v=2") left 5px bottom 5px / 12px 12px no-repeat;
   filter: drop-shadow(0 0 2px #fff1d899);
   opacity: .88;
 }
 .sticky::before { inset: 6px; background-size: 14px 14px, 8px 8px; }
+/* Highlight navigation without shifting neighbouring links. */
+.nav .nav-links > a, .nav .links > a, .mobile-site-menu__links a {
+  position: relative; isolation: isolate;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+.nav .nav-links > a::before, .nav .links > a::before,
+.mobile-site-menu__links a::before {
+  content: ""; position: absolute; inset: -8px -7px; z-index: -1;
+  pointer-events: none; border-radius: 3px;
+  background: linear-gradient(135deg, #fffdf8, #ede3d3);
+  box-shadow: inset 0 1px 0 #fff9, 0 5px 12px #45331d26;
+  opacity: 0; transition: opacity .2s ease;
+}
+.nav .nav-links > a:focus-visible::before, .nav .links > a:focus-visible::before,
+.mobile-site-menu__links a:focus-visible::before { opacity: 1; }
+.hero-title-together { white-space: nowrap; }
+.nav > .nav-call, .nav > .call {
+  flex-shrink: 0; white-space: nowrap; color: #211e1c;
+  font: 700 .75rem/1.2 Arial, sans-serif; text-decoration: none;
+}
+@media (min-width: 1151px) {
+  .nav .nav-links > a, .nav .links > a { white-space: nowrap; }
+  .nav .hamb, .nav .hamburger { display: none !important; }
+}
+@media (min-width: 1151px) and (max-width: 1300px) {
+  .nav { padding-right: 3vw; padding-left: 3vw; gap: 12px; }
+  .nav .brand img, .nav .logo img { width: 140px; }
+  .nav .nav-links, .nav .links { gap: 14px; font-size: .62rem; letter-spacing: .06em; }
+}
+/* Blue and lilac retain their identity; only the finish becomes metallic. */
+.messenger-button, .modal .channel-actions a,
+.quick-contact-channel a, .mobile-direct-contact__telegram, .mobile-direct-contact__max {
+  background-size: 180% 100% !important; background-position: 25% center !important;
+  box-shadow: inset 0 1px 0 #ffffff70, inset 0 -2px 3px #14204a30, 0 5px 12px #171b3026;
+  transition: background-position .55s ease, box-shadow .2s ease, filter .2s ease;
+}
+.messenger-button--telegram, .modal .channel-actions a[href*="t.me"],
+.quick-contact-channel.telegram a, .mobile-direct-contact__telegram {
+  background-image: linear-gradient(115deg, #188abd, #30a4d5 28%, #72c3e3 43%, #289bd0 56%, #1589bc 78%, #4db5dc) !important;
+  color: #fff !important;
+}
+.messenger-button--max, .modal .channel-actions a[href*="max.ru"],
+.quick-contact-channel.max a, .mobile-direct-contact__max {
+  background-image: linear-gradient(115deg, #6541cf, #7b5be0 28%, #b398ef 43%, #805de1 56%, #6240ce 78%, #9778e8) !important;
+  color: #fff !important;
+}
+.nav-socials a, .nav > .socials a, .mobile-site-menu__messenger {
+  position: relative; isolation: isolate;
+  filter: drop-shadow(0 2px 2px #211b2920);
+}
+.nav-socials a::after, .nav > .socials a::after, .mobile-site-menu__messenger::after {
+  content: ""; position: absolute; inset: 3px; pointer-events: none; border-radius: 8px;
+  background: linear-gradient(120deg, transparent 20%, #ffffff48 43%, transparent 58%);
+}
 @media (hover: hover) {
+  .nav .nav-links > a:hover, .nav .links > a:hover,
+  .mobile-site-menu__links a:hover { color: #765e38; text-shadow: 0 1px 1px #fff; }
+  .nav .nav-links > a:hover::before, .nav .links > a:hover::before,
+  .mobile-site-menu__links a:hover::before { opacity: 1; }
+  .messenger-button:hover, .modal .channel-actions a:hover,
+  .quick-contact-channel a:hover {
+    background-position: 85% center !important; filter: brightness(1.04);
+    box-shadow: inset 0 1px 0 #fff9, inset 0 -2px 3px #14204a30, 0 8px 18px #171b3038;
+  }
   .button:not(.button--ghost):not(.button--outline):not(.messenger-button):hover,
   .nav-button:hover, .btn.gold:hover, .final-cta__form button:hover {
     background-position: 85% center;
@@ -123,6 +186,10 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
   .process-grid article > b { width: 34px; height: 34px; min-width: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .nav a, .nav a::before, .mobile-site-menu__links a,
+  .mobile-site-menu__links a::before, .messenger-button,
+  .modal .channel-actions a, .quick-contact-channel a,
+  .mobile-direct-contact__telegram, .mobile-direct-contact__max { transition: none !important; }
   .sticky, .button, .nav-button, .btn.gold, .final-cta__form button { transition: none !important; }
   .sticky:hover { transform: none; }
 }
