@@ -1,0 +1,16 @@
+/* Visible without JavaScript, with normal document links on all three pages. */
+.legal-footer {
+  grid-column: 1 / -1; width: 100%; margin-top: 30px; padding-top: 24px;
+  border-top: 1px solid #ffffff30; color: #e1d9cf;
+  font: 400 13px/1.65 Arial, sans-serif; overflow-wrap: anywhere;
+}
+.legal-footer p { margin: 0 0 8px; }
+.legal-footer .legal-footer__name { font-weight: 700; font-size: 14px; }
+.legal-footer a { color: #ead1a6; text-decoration: underline; text-underline-offset: 3px; }
+.legal-footer a:focus-visible { outline: 2px solid #ead1a6; outline-offset: 4px; }
+.legal-footer__links { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 15px 0; }
+.legal-footer .legal-footer__note { color: #beb5ab; font-size: 12px; }
+@media (max-width: 800px) {
+  .legal-footer { margin-top: 24px; padding-top: 20px; font-size: 13px; }
+  .legal-footer__links { flex-direction: column; gap: 12px; align-items: flex-start; }
+}
