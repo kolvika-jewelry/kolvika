@@ -1,0 +1,44 @@
+/* Contemporary imagery and quiet motion for the repair landing only. */
+body[data-landing="Ремонт украшений"] .hero-photo img {
+  filter: brightness(.84); object-position: center 57%;
+}
+body[data-landing="Ремонт украшений"] .repair-process-gems i,
+body[data-landing="Ремонт украшений"] .repair-process-gems i:nth-child(2),
+body[data-landing="Ремонт украшений"] .repair-process-gems i:nth-child(3) {
+  width: 18px; height: 18px; background: none; border: 0; transform: none;
+}
+body[data-landing="Ремонт украшений"] .repair-process-gems i::before {
+  content: "✦"; font: 18px/1 Arial, sans-serif; color: #211e1c;
+}
+body[data-landing="Ремонт украшений"] .steps .step {
+  display: grid; grid-template-columns: 42px minmax(0, 1fr);
+  column-gap: 12px; row-gap: 12px; align-content: start; align-items: center;
+  transform-origin: center; transition: transform .25s ease, background-color .25s ease;
+}
+body[data-landing="Ремонт украшений"] .steps .step > span:first-child {
+  grid-column: 1; grid-row: 1; margin: 0; transition: transform .3s ease;
+}
+body[data-landing="Ремонт украшений"] .steps .step h3 {
+  grid-column: 2; grid-row: 1; margin: 0; min-width: 0;
+}
+body[data-landing="Ремонт украшений"] .steps .step p {
+  grid-column: 1 / -1; margin: 0; min-width: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  body[data-landing="Ремонт украшений"] .steps .step:hover {
+    transform: scale(1.025); background-color: #ffffff12;
+  }
+  body[data-landing="Ремонт украшений"] .steps .step:hover > span:first-child {
+    transform: translateY(-3px) rotate(7deg);
+  }
+}
+@media (max-width: 800px) {
+  body[data-landing="Ремонт украшений"] .steps .step { grid-template-columns: 34px minmax(0, 1fr); }
+  body[data-landing="Ремонт украшений"] .steps .step p { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-landing="Ремонт украшений"] .steps .step,
+  body[data-landing="Ремонт украшений"] .steps .step > span:first-child {
+    transition: none; transform: none !important;
+  }
+}

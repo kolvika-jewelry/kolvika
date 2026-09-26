@@ -94,14 +94,8 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 .button:not(.button--ghost):not(.button--outline):not(.messenger-button)::before,
 .nav-button::before, .btn.gold::before, .final-cta__form button::before,
 .sticky::before {
-  /* Centre each sparkle on the frame corner, with half outside the button. */
-  content: ""; position: absolute; inset: -11px; pointer-events: none;
-  background: url("button-glint.svg?v=2") right 0 top 0 / 22px 22px no-repeat,
-    url("button-glint.svg?v=2") left 5px bottom 5px / 12px 12px no-repeat;
-  filter: drop-shadow(0 0 2px #fff1d899);
-  opacity: .88;
+  content: none; display: none;
 }
-.sticky::before { inset: 6px; background-size: 14px 14px, 8px 8px; }
 /* Highlight navigation without shifting neighbouring links. */
 .nav .nav-links > a, .nav .links > a, .mobile-site-menu__links a {
   position: relative; isolation: isolate;
