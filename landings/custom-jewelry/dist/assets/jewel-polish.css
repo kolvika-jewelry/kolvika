@@ -16,14 +16,22 @@
 .process .step-num, .process .steps .step > span:first-child,
 .process-grid article > b {
   display: inline-block; width: 42px; height: 42px; min-width: 42px;
-  font-size: 0; background: url("gem-ruby.svg") center / contain no-repeat;
+  font-size: 0; background: url("gem-ruby-real.png") center / contain no-repeat;
   filter: drop-shadow(0 3px 4px #00000035);
 }
 .process .steps .step:nth-child(2) > span:first-child,
-.process-grid article:nth-child(2) > b { background-image: url("gem-sapphire.svg"); }
+.process-grid article:nth-child(2) > b { background-image: url("gem-sapphire-real.png"); }
 .process .steps .step:nth-child(3) > span:first-child,
-.process-grid article:nth-child(3) > b { background-image: url("gem-emerald.svg"); }
-.process .steps .step:nth-child(4) > span:first-child { background-image: url("gem-champagne.svg"); }
+.process-grid article:nth-child(3) > b { background-image: url("gem-emerald-real.png"); }
+.process .steps .step:nth-child(4) > span:first-child { background-image: url("gem-champagne-real.png"); }
+/* Inset the marker, not the whole row: headings keep their alignment. */
+.process .steps .step > span:first-child { margin-left: 15px; }
+.repair-process-gems i, .repair-process-gems i:nth-child(2),
+.repair-process-gems i:nth-child(3) {
+  width: 24px; height: 24px; border: 0; transform: none;
+  background: url("diamond-cursor-real.png") center / contain no-repeat;
+}
+.repair-process-gems i:nth-child(2) { width: 18px; height: 18px; }
 
 /* Stable, generous hit areas; only the active indicator becomes a diamond. */
 .intro-carousel__dots button,
@@ -44,7 +52,7 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 .intro-carousel__dots button.is-active::after,
 body[data-landing="Украшения на заказ"] .process-gallery__dots button.is-active::after {
   width: 21px; height: 21px; border-radius: 0;
-  background: url("diamond.svg") center / contain no-repeat;
+  background: url("diamond-cursor-real.png") center / contain no-repeat;
   filter: drop-shadow(0 2px 2px #00000030);
 }
 .reviews-block__card { box-shadow: 0 9px 24px #00000024, inset 0 1px 0 #fff9; }
@@ -71,6 +79,35 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 .final-cta__form button {
   box-shadow: inset 0 1px 0 #ffffff35, 0 5px 14px #19130c22;
 }
+/* Champagne-beige metal, not saturated yellow gold. Shine stays off the text. */
+.button:not(.button--ghost):not(.button--outline):not(.messenger-button),
+.nav-button, .btn.gold, .final-cta__form button {
+  position: relative; isolation: isolate;
+  background-color: #bba071 !important;
+  background-image: linear-gradient(115deg, #ae9261 0%, #c6ad82 24%, #e0cfac 39%, #c2a777 48%, #b99b68 69%, #d4be97 88%, #b69a6c 100%) !important;
+  background-size: 170% 100%; background-position: 35% center;
+  color: #241d15 !important;
+  border-color: #bca578;
+  box-shadow: inset 0 1px 0 #fff5, inset 0 -1px 0 #6d563833, 0 5px 15px #19130c26;
+  transition: background-position .65s ease, box-shadow .25s ease;
+}
+.button:not(.button--ghost):not(.button--outline):not(.messenger-button)::before,
+.nav-button::before, .btn.gold::before, .final-cta__form button::before,
+.sticky::before {
+  content: ""; position: absolute; inset: 2px; pointer-events: none;
+  background: url("button-glint.svg") right 4px top 2px / 18px 18px no-repeat,
+    url("button-glint.svg") left 4px bottom 2px / 10px 10px no-repeat;
+  filter: drop-shadow(0 0 2px #fff1d899);
+  opacity: .88;
+}
+.sticky::before { inset: 6px; background-size: 14px 14px, 8px 8px; }
+@media (hover: hover) {
+  .button:not(.button--ghost):not(.button--outline):not(.messenger-button):hover,
+  .nav-button:hover, .btn.gold:hover, .final-cta__form button:hover {
+    background-position: 85% center;
+    box-shadow: inset 0 1px 0 #fff7, inset 0 -1px 0 #6d563833, 0 7px 20px #19130c30;
+  }
+}
 @media (min-width: 801px) and (hover: hover) and (pointer: fine) {
   body { cursor: url("diamond-cursor-real.png") 26 35, auto; }
   a, button, summary, [role="button"], label[for] { cursor: url("diamond-cursor-real.png") 26 35, pointer !important; }
@@ -79,10 +116,15 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 }
 @media (max-width: 800px) {
   .sticky { display: none !important; }
+  body[data-landing="Украшения на заказ"] .process .step { grid-template-columns: 46px 1fr; }
+  .process .steps .step > span:first-child { margin-left: 10px; }
   .process .step-num, .process .steps .step > span:first-child,
   .process-grid article > b { width: 34px; height: 34px; min-width: 34px; }
 }
-@media (prefers-reduced-motion: reduce) { .sticky { transition: none; } .sticky:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sticky, .button, .nav-button, .btn.gold, .final-cta__form button { transition: none !important; }
+  .sticky:hover { transform: none; }
+}
 @media (forced-colors: active) {
   .reviews-block__card-head span { background: none; -webkit-text-fill-color: currentColor; filter: none; }
   .process .step-num, .process .steps .step > span:first-child,
