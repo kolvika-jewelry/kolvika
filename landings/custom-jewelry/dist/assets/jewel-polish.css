@@ -82,7 +82,7 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 /* Champagne-beige metal, not saturated yellow gold. Shine stays off the text. */
 .button:not(.button--ghost):not(.button--outline):not(.messenger-button),
 .nav-button, .btn.gold, .final-cta__form button {
-  position: relative; isolation: isolate;
+  position: relative; isolation: isolate; overflow: visible;
   background-color: #bba071 !important;
   background-image: linear-gradient(115deg, #ae9261 0%, #c6ad82 24%, #e0cfac 39%, #c2a777 48%, #b99b68 69%, #d4be97 88%, #b69a6c 100%) !important;
   background-size: 170% 100%; background-position: 35% center;
@@ -94,9 +94,10 @@ body[data-landing="Украшения на заказ"] .process-gallery__dots b
 .button:not(.button--ghost):not(.button--outline):not(.messenger-button)::before,
 .nav-button::before, .btn.gold::before, .final-cta__form button::before,
 .sticky::before {
-  content: ""; position: absolute; inset: 2px; pointer-events: none;
-  background: url("button-glint.svg") right 4px top 2px / 18px 18px no-repeat,
-    url("button-glint.svg") left 4px bottom 2px / 10px 10px no-repeat;
+  /* Centre each sparkle on the frame corner, with half outside the button. */
+  content: ""; position: absolute; inset: -9px; pointer-events: none;
+  background: url("button-glint.svg") right 0 top 0 / 18px 18px no-repeat,
+    url("button-glint.svg") left 4px bottom 4px / 10px 10px no-repeat;
   filter: drop-shadow(0 0 2px #fff1d899);
   opacity: .88;
 }
