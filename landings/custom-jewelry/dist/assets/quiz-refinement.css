@@ -1,3 +1,32 @@
+/* Gem and stage heading share one line, with a deliberate inset from the divider. */
+body[data-landing="Квиз украшения на заказ"] .process-grid article { display: grid; grid-template-columns: 42px minmax(0, 1fr); column-gap: 12px; row-gap: 10px; align-content: start; align-items: center; }
+body[data-landing="Квиз украшения на заказ"] .process-grid article > img { grid-column: 1 / -1; margin-bottom: 4px; }
+body[data-landing="Квиз украшения на заказ"] .process-grid article > b { margin: 0; }
+body[data-landing="Квиз украшения на заказ"] .process-grid article > h3 { margin: 0; min-width: 0; }
+body[data-landing="Квиз украшения на заказ"] .process-grid article > p { grid-column: 1 / -1; margin: 0; }
+@media (max-width: 860px) {
+  body[data-landing="Квиз украшения на заказ"] .process-grid { grid-template-columns: 1fr; gap: 24px; }
+  body[data-landing="Квиз украшения на заказ"] .process-grid article { grid-template-columns: 34px minmax(0, 1fr); padding: 0 12px 20px; border-bottom: 1px solid var(--line); }
+  body[data-landing="Квиз украшения на заказ"] .process-grid article > img { height: 150px; }
+  body[data-landing="Квиз украшения на заказ"] .process-grid article > h3 { font-size: 1.4rem; line-height: 1.15; }
+  body[data-landing="Квиз украшения на заказ"] .process-grid article > p { font-size: .85rem; line-height: 1.45; }
+}
+/* Five optional questions and a separate contact step. */
+.quiz-shell { overflow: hidden; }
+.quiz-side { min-width: 0; min-height: 0; padding: 28px; }
+.quiz-side > b { white-space: normal; }
+.quiz-side__visual { grid-template-rows: minmax(0, 1fr) auto; gap: 8px; }
+.quiz-side__visual img { min-height: 0; }
+.quiz-side__visual figcaption { font: 400 .68rem/1.4 var(--sans); color: #756c60; text-align: center; }
+.quiz-side .progress { position: static; min-width: 0; width: 100%; box-sizing: border-box; align-self: end; }
+.quiz-main .options { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.quiz-main .option { min-height: 0; }
+.quiz-navigation { flex-wrap: wrap; }
+.quiz-navigation .quiz-next { margin-top: 0; margin-left: auto; }
+.quiz-skip { padding: 12px 8px; border: 0; background: transparent; color: #756c60; font: 500 .8rem/1.3 var(--sans); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.quiz-question-hint { font: 400 .85rem/1.4 var(--sans); margin: -8px 0 18px; color: #756c60; }
+.quiz-main .step .choice-row { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 780px; }
+.quiz-skip:focus-visible, .quiz-back:focus-visible, .quiz-main .option:focus-visible, .quiz-main .chip:focus-visible { outline: 3px solid #9b723b; outline-offset: 3px; }
 /* A calmer, more compact first screen for the visual quiz. */
 .hero h1 {
   max-width: 720px;
@@ -28,7 +57,7 @@
 .quiz-main .option.selected, .quiz-main .chip.selected, .quiz-contact-channels__options input:checked + span { box-shadow: 0 6px 16px rgba(114, 79, 33, .16); }
 .quiz-contact-fields input { box-shadow: 0 4px 12px rgba(35, 27, 18, .055); }
 .quiz-main .option { display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: 0; }
-.quiz-main .option img { position: static; width: 100%; height: 155px; padding: 9px; object-fit: contain; background: #fff; opacity: 1; }
+.quiz-main .option img { position: static; width: 100%; height: 115px; padding: 9px; object-fit: contain; background: #fff; opacity: 1; }
 .quiz-main .option span { display: block; align-self: end; padding: 8px 11px 10px; background: #fff; font: 500 1rem/1.18 var(--serif); }
 .quiz-main .option:hover img { transform: none; }
 .step[data-step="2"] .choice-row, .step[data-step="3"] .choice-row, .step[data-step="4"] .choice-row { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 780px; }
@@ -79,21 +108,22 @@
   .hero-note { order: 6; margin-top: 14px; font-size: .92rem; }
   .hero-note i { width: 29px; height: 29px; flex: none; }
   .quiz-main .option { min-height: 0; }
-  .quiz-main .option img { height: clamp(112px, 35vw, 170px); }
+  .quiz-main .options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .quiz-main .option img { height: clamp(90px, 28vw, 140px); }
   .quiz-main .option span { min-height: 42px; font-size: .9rem; }
   .step h3 { font-size: clamp(1.85rem, 7vw, 2.6rem); line-height: 1.05; }
   .quiz-main .choice-row .chip { min-height: 50px; font-size: .93rem; }
   .quiz-side { grid-template-columns: minmax(0, 1fr) 112px; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px 15px; padding: 20px; border-right: 0; border-bottom: 1px solid #e9e1d5; }
   .quiz-side > small { grid-column: 1; grid-row: 1; }
   .quiz-side > b { grid-column: 1; grid-row: 2; font: 500 .98rem/1.35 var(--sans); }
-  .quiz-side__visual { grid-column: 2; grid-row: 1 / 3; width: 112px; height: 122px; min-height: 0; max-height: none; }
+  .quiz-side__visual { grid-column: 2; grid-row: 1 / 3; width: 112px; height: 145px; min-height: 0; max-height: none; }
   .quiz-side .progress { grid-column: 1 / -1; grid-row: 3; }
   .quiz-contact-fields { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 390px) {
   .quiz-side { grid-template-columns: minmax(0, 1fr) 96px; gap: 8px 12px; }
-  .quiz-side__visual { width: 96px; height: 110px; }
+  .quiz-side__visual { width: 96px; height: 135px; }
   .quiz-contact-channels__options { gap: 6px; }
   .quiz-contact-channels__options span { font-size: .83rem; min-height: 50px; }
   .quiz-contact-actions .btn { flex: 1; }
