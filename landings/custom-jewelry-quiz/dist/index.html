@@ -860,7 +860,7 @@
     <link rel="stylesheet" href="../assets/company-story.css" />
     <link rel="stylesheet" href="../assets/contact-buttons.css" />
     <link rel="stylesheet" href="../assets/contact-modal-mobile.css" />
-    <link rel="stylesheet" href="../assets/quiz-refinement.css" />
+    <link rel="stylesheet" href="../assets/quiz-refinement.css?v=3" />
     <link rel="stylesheet" href="../assets/campaign-polish.css?v=6" />
     <link rel="stylesheet" href="../assets/jewel-polish.css?v=6" />
     <link rel="stylesheet" href="../assets/legal-footer.css?v=1" />
@@ -955,10 +955,11 @@
               >Воплотим в реальность вашу мечту об идеальном украшении</b
             >
             <figure class="quiz-side__visual">
-              <img id="quiz-side-image" src="../assets/quiz-gallery/ring-pink.jpg" alt="Кольцо с розовым бриллиантом" />
+              <img id="quiz-side-image" src="../assets/gems-ring.webp" alt="Камни и кольцо — идеи для будущего украшения" />
+              <figcaption>Иллюстрация для вдохновения, не финальный дизайн</figcaption>
             </figure>
             <div class="progress">
-              <div class="progress-meta"><span id="step-num">Шаг 1 из 5</span><b id="progress-value">0%</b></div>
+              <div class="progress-meta"><span id="step-num">Вопрос 1 из 5</span><b id="progress-value">0%</b></div>
               <div class="progress-track" role="progressbar" aria-label="Прогресс квиза" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="progress-bar" id="progress-bar"></span></div>
             </div>
           </aside>
@@ -967,37 +968,48 @@
               <h3>Какое украшение хотите заказать?</h3>
               <div class="options">
                 <button class="option" data-value="Кольцо">
-                  <img src="../assets/ring.jpg" alt="" /><span
+                  <img src="../assets/quiz-ring-classic.jpg" alt="" /><span
                     >Кольцо</span
                   ></button
                 ><button class="option" data-value="Серьги">
-                  <img src="../assets/earrings.jpg" alt="" /><span
+                  <img src="../assets/quiz-earrings-classic.jpg" alt="" /><span
                     >Серьги</span
                   ></button
                 ><button class="option" data-value="Браслет">
-                  <img src="../assets/bracelet.jpg" alt="" /><span
+                  <img src="../assets/quiz-bracelet-classic.jpg" alt="" /><span
                     >Браслет</span
                   ></button
-                ><button class="option" data-value="Другое украшение">
+                ><button class="option" type="button" data-value="Подвеска">
+                  <img src="../assets/quiz-pendant-classic.jpg" alt="" /><span>Подвеска</span>
+                </button><button class="option" data-value="Другое украшение">
                   <img src="../assets/gems-ring.webp" alt="" /><span
                     >Другое</span
                   >
                 </button>
               </div>
+              <div class="quiz-navigation"><button class="quiz-skip" type="button">Пропустить</button><button class="btn quiz-next" type="button">Далее</button></div>
             </div>
             <div class="step" data-step="2">
-              <h3>Есть ли фото, эскиз или пример?</h3>
+              <h3>Из какого металла вы хотите украшение?</h3>
               <div class="choice-row">
-                <button class="chip" data-value="Есть фото или референс">
-                  Есть фото или референс</button
-                ><button class="chip" data-value="Есть эскиз">Есть эскиз</button
-                ><button class="chip" data-value="Есть только идея">
-                  Есть только идея
-                </button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Серебро">Серебро</button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Золото">Золото</button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Платина">Платина</button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><button class="quiz-skip" type="button">Пропустить</button><button class="btn quiz-next" type="button">Далее</button></div>
             </div>
-            <div class="step" data-step="3">
+            <div class="step" data-step="3" data-multiple="true">
+              <h3>Какие ювелирные вставки вы хотите использовать?</h3>
+              <p class="quiz-question-hint">Можно выбрать несколько вариантов</p>
+              <div class="choice-row">
+                <button class="chip" type="button" aria-pressed="false" data-value="Натуральные бриллианты">Натуральные бриллианты</button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Лабораторные бриллианты">Лабораторные бриллианты</button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Цветные драгоценные или полудрагоценные камни">Цветные драгоценные или полудрагоценные камни</button>
+                <button class="chip" type="button" aria-pressed="false" data-value="Пока не знаю">Пока не знаю</button>
+              </div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><button class="quiz-skip" type="button">Пропустить</button><button class="btn quiz-next" type="button">Далее</button></div>
+            </div>
+            <div class="step" data-step="4">
               <h3>Из каких материалов хотите изготовить украшение?</h3>
               <div class="choice-row">
                 <button
@@ -1010,9 +1022,9 @@
                   Хочу переделать своё украшение</button
                 ><button class="chip" data-value="Нужно обсудить">Нужно обсудить</button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><button class="quiz-skip" type="button">Пропустить</button><button class="btn quiz-next" type="button">Далее</button></div>
             </div>
-            <div class="step" data-step="4">
+            <div class="step" data-step="5">
               <h3>На какой бюджет ориентируетесь?</h3>
               <div class="choice-row">
                 <button class="chip" data-value="до 100 000 ₽">до 100 000 ₽</button>
@@ -1021,9 +1033,9 @@
                 <button class="chip" data-value="более 250 000 ₽">более 250 000 ₽</button>
                 <button class="chip" data-value="пока не определился">пока не определился</button>
               </div>
-              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button></div>
+              <div class="quiz-navigation"><button class="quiz-back" type="button">Назад</button><button class="quiz-skip" type="button">Пропустить</button><button class="btn quiz-next" type="button">Далее</button></div>
             </div>
-            <div class="step" data-step="5">
+            <div class="step" data-step="6">
               <h3>Куда отправить расчёт?</h3>
               <form id="quiz-contact-form" class="quiz-contact-form">
                 <fieldset class="quiz-contact-channels">
@@ -1058,23 +1070,23 @@
           <figure class="work">
             <img
               src="../assets/quiz-gallery/ring-pink.jpg"
-              alt="Кольцо с розовым бриллиантом"
+              alt="Кольцо с бриллиантами"
             />
-            <figcaption>Кольцо с розовым бриллиантом</figcaption>
+            <figcaption>Кольцо с бриллиантами</figcaption>
           </figure>
           <figure class="work">
             <img
               src="../assets/quiz-gallery/ring-pattern.jpg"
-              alt="Узорное кольцо"
+              alt="Кольцо с бриллиантами из белого золота"
             />
-            <figcaption>Узорное кольцо</figcaption>
+            <figcaption>Кольцо с бриллиантами из белого золота</figcaption>
           </figure>
           <figure class="work">
             <img
               src="../assets/quiz-gallery/ring-flower.jpg"
-              alt="Кольцо с цветочным мотивом"
+              alt="Кольцо с бриллиантом цвета коньяка"
             />
-            <figcaption>Кольцо с цветочным мотивом</figcaption>
+            <figcaption>Кольцо с бриллиантом цвета коньяка</figcaption>
           </figure>
           <figure class="work">
             <img
@@ -1125,34 +1137,6 @@
             />
             <figcaption>Серьги-трансформеры</figcaption>
           </figure>
-          <figure class="work">
-            <img
-              src="../assets/quiz-gallery/ring-sapphire.jpg"
-              alt="Кольцо с сапфирами"
-            />
-            <figcaption>Кольцо с цветными камнями</figcaption>
-          </figure>
-          <figure class="work">
-            <img
-              src="../assets/quiz-gallery/earrings-beryl.jpg"
-              alt="Серьги с бериллами"
-            />
-            <figcaption>Серьги с бериллами</figcaption>
-          </figure>
-          <figure class="work">
-            <img
-              src="../assets/quiz-gallery/ring-flower.jpg"
-              alt="Кольцо с цветочным мотивом"
-            />
-            <figcaption>Кольцо с цветочным мотивом</figcaption>
-          </figure>
-          <figure class="work">
-            <img
-              src="../assets/quiz-gallery/bracelet-tennis.jpg"
-              alt="Браслет"
-            />
-            <figcaption>Браслет с камнями</figcaption>
-          </figure>
         </div>
         <button class="catalog-more" type="button" aria-controls="quiz-catalog-grid" aria-expanded="false">Смотреть ещё</button>
       </section>
@@ -1173,7 +1157,7 @@
               color: var(--ink);
             "
           >
-            Обсудить материалы
+            Связаться с ювелиром
           </button>
         </div>
         <div class="materials-visual">
@@ -1278,7 +1262,7 @@
         </div>
         <div class="reviews-proof"><img src="../assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
       </section>
-      <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Создайте украшение с особым смыслом</h2></div><img src="../assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
+      <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Создайте украшение с&nbsp;особым смыслом</h2></div><img src="../assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
     </main>
     <footer class="footer" id="contacts">
       <div class="footer-info">
@@ -1443,66 +1427,84 @@
           }
         }
       });
-      const totalSteps = 5;
-      const answers = Array(totalSteps - 1).fill("");
-      const sideImages = [
-        { src: "../assets/quiz-gallery/ring-pink.jpg", alt: "Кольцо с розовым бриллиантом" },
-        { src: "../assets/quiz-gallery/ring-pattern.jpg", alt: "Узорное кольцо" },
-        { src: "../assets/quiz-gallery/ring-flower.jpg", alt: "Кольцо с цветочным мотивом" },
-        { src: "../assets/quiz-gallery/ring-sapphire.jpg", alt: "Кольцо с сапфиром" },
-        { src: "../assets/quiz-gallery/bracelet-tennis.jpg", alt: "Теннисный браслет с цветными камнями" }
-      ];
+      const totalSteps = 6;
+      const questionLabels = ["Украшение", "Металл", "Вставки", "Материалы", "Бюджет"];
+      const answers = Array(questionLabels.length).fill("");
+      const sideImages = {
+        "Кольцо": { src: "../assets/quiz-ring-classic.jpg", alt: "Иллюстрация классического кольца с бриллиантом" },
+        "Серьги": { src: "../assets/quiz-earrings-classic.jpg", alt: "Иллюстрация классических парных серёг" },
+        "Браслет": { src: "../assets/quiz-bracelet-classic.jpg", alt: "Иллюстрация классического теннисного браслета" },
+        "Подвеска": { src: "../assets/quiz-pendant-classic.jpg", alt: "Иллюстрация классической подвески" }
+      };
+      const fallbackImage = { src: "../assets/gems-ring.webp", alt: "Камни и кольцо — идеи для будущего украшения" };
       let step = 1;
-      let advanceTimer;
       const refreshSummary = () => {
-        document.querySelector("#side-text").innerHTML = answers.some(Boolean)
-          ? answers.filter(Boolean).join("<br>")
+        document.querySelector("#side-text").textContent = answers.some(Boolean)
+          ? answers.filter(Boolean).join(" · ")
           : "Воплотим в реальность вашу мечту об идеальном украшении";
+        const image = document.querySelector("#quiz-side-image");
+        const selectedImage = sideImages[answers[0]] || fallbackImage;
+        if (image.getAttribute("src") !== selectedImage.src) image.src = selectedImage.src;
+        image.alt = selectedImage.alt;
       };
       const refreshProgress = () => {
-        const completed = answers.filter(Boolean).length + (document.querySelector("#quiz-contact-form").dataset.submitted === "true" ? 1 : 0);
-        const percent = Math.round((completed / totalSteps) * 100);
-        document.querySelector("#step-num").textContent = `Шаг ${step} из ${totalSteps}`;
+        const submitted = document.querySelector("#quiz-contact-form").dataset.submitted === "true";
+        const percent = submitted ? 100 : Math.round(((step - 1) / totalSteps) * 100);
+        document.querySelector("#step-num").textContent = step < totalSteps
+          ? `Вопрос ${step} из ${questionLabels.length}` : "Контактные данные";
         document.querySelector("#progress-value").textContent = `${percent}%`;
         document.querySelector("#progress-bar").style.width = `${percent}%`;
         document.querySelector(".progress-track").setAttribute("aria-valuenow", String(percent));
       };
       const go = (n) => {
         step = Math.min(Math.max(n, 1), totalSteps);
-        document
-          .querySelectorAll(".step")
-          .forEach((x) => x.classList.toggle("active", +x.dataset.step === step));
-        const image = document.querySelector("#quiz-side-image");
-        image.src = sideImages[step - 1].src;
-        image.alt = sideImages[step - 1].alt;
+        document.querySelectorAll(".step").forEach(x => x.classList.toggle("active", +x.dataset.step === step));
         refreshSummary();
         refreshProgress();
-        document
-          .querySelector(".quiz-shell")
-          .scrollIntoView({ block: "start", behavior: "smooth" });
+        const heading = document.querySelector(".step.active h3");
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+        document.querySelector(".quiz-shell").scrollIntoView({
+          block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+        });
+      };
+      const setSelected = (button, selected) => {
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
       };
       const choose = (button) => {
-        window.clearTimeout(advanceTimer);
-        const selectedStep = +button.closest(".step").dataset.step;
-        button.parentElement
-          .querySelectorAll(".option, .chip")
-          .forEach((item) => item.classList.remove("selected"));
-        button.classList.add("selected");
-        answers[selectedStep - 1] = button.dataset.value;
+        const section = button.closest(".step");
+        const selectedStep = +section.dataset.step;
+        const buttons = [...section.querySelectorAll(".option, .chip")];
+        if (section.dataset.multiple === "true") {
+          const selecting = !button.classList.contains("selected");
+          if (button.dataset.value === "Пока не знаю") {
+            buttons.forEach(item => setSelected(item, item === button && selecting));
+          } else {
+            buttons.filter(item => item.dataset.value === "Пока не знаю").forEach(item => setSelected(item, false));
+            setSelected(button, selecting);
+          }
+          answers[selectedStep - 1] = buttons.filter(item => item.classList.contains("selected")).map(item => item.dataset.value).join(", ");
+        } else {
+          buttons.forEach(item => setSelected(item, item === button));
+          answers[selectedStep - 1] = button.dataset.value;
+        }
         refreshSummary();
-        advanceTimer = window.setTimeout(() => {
-          go(selectedStep + 1);
-        }, 300);
       };
-      document
-        .querySelectorAll(".step .option, .step .chip")
-        .forEach((button) => button.addEventListener("click", () => choose(button)));
-      document
-        .querySelectorAll(".quiz-back")
-        .forEach((button) => button.addEventListener("click", () => {
-          window.clearTimeout(advanceTimer);
-          go(step - 1);
-        }));
+      document.querySelectorAll(".step .option, .step .chip").forEach(button => {
+        button.type = "button";
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", () => choose(button));
+      });
+      document.querySelectorAll(".quiz-back").forEach(button => button.addEventListener("click", () => go(step - 1)));
+      document.querySelectorAll(".quiz-next").forEach(button => button.addEventListener("click", () => go(step + 1)));
+      document.querySelectorAll(".quiz-skip").forEach(button => button.addEventListener("click", () => {
+        answers[step - 1] = "";
+        document.querySelectorAll(".step.active .option, .step.active .chip").forEach(item => setSelected(item, false));
+        go(step + 1);
+      }));
+      refreshSummary();
+      refreshProgress();
       document.querySelector("#quiz-contact-form").addEventListener("submit", (e) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -1512,7 +1514,7 @@
           type: "Расчёт по квизу",
           name: String(data.get("name") || "").trim(),
           phone: String(data.get("phone") || "").trim(),
-          message: [...answers, `Способ связи: ${data.get("channel")}`].join("; ")
+          message: [...answers.map((answer, index) => `${questionLabels[index]}: ${answer || "Не указано"}`), `Способ связи: ${data.get("channel")}`].join("; ")
         });
         form.dataset.submitted = "true";
         form.hidden = true;
