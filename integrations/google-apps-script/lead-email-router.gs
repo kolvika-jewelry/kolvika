@@ -12,19 +12,14 @@ const KOLVIKA_LEADS = Object.freeze({
 });
 
 function kolvikaLeadRecipient_(row) {
-  const landing = String(row[1] || '').toLowerCase();
-  const type = String(row[2] || '').toLowerCase();
-  const message = String(row[5] || '').toLowerCase();
-
-  // Переделка и переплавка идут ювелиру, даже если запрос пришёл с лендинга ремонта.
-  if (/передел|переплав/.test(type + ' ' + message)) return KOLVIKA_LEADS.jewelryEmail;
-  if (/ремонт|пайк|закрепк|полировк|чистк|реставрац|родирован/.test(type + ' ' + landing)) {
-    return KOLVIKA_LEADS.repairEmail;
+  const landing = String(row[1] || '').trim();
+  if (landing === 'Ремонт украшений') {
+    return { email: KOLVIKA_LEADS.repairEmail, subject: 'Заявка на ремонт — KOLVIKA' };
   }
-  if (/заказ|изготовлен|квиз|украшен/.test(type + ' ' + landing)) {
-    return KOLVIKA_LEADS.jewelryEmail;
+  if (landing === 'Украшения на заказ' || landing === 'Квиз украшения на заказ') {
+    return { email: KOLVIKA_LEADS.jewelryEmail, subject: 'Заявка на изготовление — KOLVIKA' };
   }
-  return null;
+  return null; // Незнакомый лендинг нельзя отправлять наугад.
 }
 
 function kolvikaLeadSheet_() {
@@ -41,6 +36,9 @@ function kolvikaLeadSheet_() {
 /** Выполнить вручную ОДИН раз. Старые строки помечаются без отправки писем. */
 function setupKolvikaLeadEmails() {
   const sheet = kolvikaLeadSheet_();
+  if (sheet.getMaxColumns() < KOLVIKA_LEADS.notificationColumn) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), KOLVIKA_LEADS.notificationColumn - sheet.getMaxColumns());
+  }
   const statusHeader = sheet.getRange(1, KOLVIKA_LEADS.notificationColumn);
   const currentHeader = statusHeader.getDisplayValue();
   if (currentHeader && currentHeader !== 'Email-уведомление') {
@@ -74,21 +72,20 @@ function sendKolvikaLeadEmails() {
       const state = row[KOLVIKA_LEADS.notificationColumn - 1];
       if (/^(ОТПРАВЛЕНО|ПРОПУЩЕНО)/.test(state)) return;
       if (!row[4]) return; // Ещё не завершённая строка.
-      const recipient = kolvikaLeadRecipient_(row);
-      if (!recipient) {
+      const route = kolvikaLeadRecipient_(row);
+      if (!route) {
         sheet.getRange(offset + 2, KOLVIKA_LEADS.notificationColumn).setValue('ТРЕБУЕТ МАРШРУТА');
         return;
       }
       if (MailApp.getRemainingDailyQuota() < 1) throw new Error('Исчерпан дневной лимит писем');
-      const subject = 'KOLVIKA — новая заявка: ' + (row[2] || row[1]);
       const labels = ['Дата и время', 'Лендинг', 'Тип обращения', 'Имя', 'Телефон',
         'Сообщение', 'UTM source', 'UTM medium', 'UTM campaign', 'UTM term',
         'UTM content', 'Другие UTM', 'Страница', 'Referrer'];
       const body = labels.map((label, index) => label + ': ' + (row[index] || '—')).join('\n') +
         '\n\nЛид записан в таблице «Лиды и Оффлайн конверсии Колвика».';
-      MailApp.sendEmail({to: recipient, subject: subject, body: body, name: 'KOLVIKA — заявки сайта'});
+      MailApp.sendEmail({to: route.email, subject: route.subject, body: body, name: 'KOLVIKA — заявки сайта'});
       sheet.getRange(offset + 2, KOLVIKA_LEADS.notificationColumn)
-        .setValue('ОТПРАВЛЕНО ' + recipient + ' ' + new Date().toISOString());
+        .setValue('ОТПРАВЛЕНО ' + route.email + ' ' + new Date().toISOString());
     });
     SpreadsheetApp.flush();
   } finally {
