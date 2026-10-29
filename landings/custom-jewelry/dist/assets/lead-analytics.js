@@ -4,6 +4,16 @@
   var COUNTER_ID = 112938684;
   var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtuT4b6ZFmorJqCanJS_IWlUKlKqmjpbXcekvGsY5n3u_x2cf5yMfDt-V6k6Ie3Ie_BA/exec";
   var clientId = "";
+  var formStates = new WeakMap();
+  var receiptCallbacks = Object.create(null);
+
+  // Google Apps Script не даёт прочитать ответ no-cors POST. Отдельный GET
+  // подтверждает наличие именно этой заявки в таблице, не раскрывая её данные.
+  window.__kolvikaLeadAck = function (receipt) {
+    if (receipt && receiptCallbacks[receipt.request_id]) {
+      receiptCallbacks[receipt.request_id](receipt);
+    }
+  };
 
   function syncClientIdFields() {
     document.querySelectorAll("form").forEach(function (form) {
@@ -51,7 +61,11 @@
 
   function reachGoal(name) {
     if (typeof window.ym === "function") {
-      window.ym(COUNTER_ID, "reachGoal", name);
+      try {
+        window.ym(COUNTER_ID, "reachGoal", name);
+      } catch (error) {
+        // Сбой счётчика не меняет результат сохранения заявки.
+      }
     }
   }
 
@@ -63,11 +77,119 @@
     return tags;
   }
 
+  function makeRequestId() {
+    return window.crypto && typeof window.crypto.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : "";
+  }
+
+  function receiptExists(requestId) {
+    return new Promise(function (resolve) {
+      var script = document.createElement("script");
+      var finished = false;
+      var timer;
+      function finish(saved) {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        delete receiptCallbacks[requestId];
+        script.remove();
+        resolve(saved);
+      }
+      receiptCallbacks[requestId] = function (receipt) {
+        finish(receipt.request_id === requestId && receipt.saved === true);
+      };
+      script.onerror = function () { finish(false); };
+      script.async = true;
+      script.src = LEAD_ENDPOINT + "?receipt=" + encodeURIComponent(requestId) + "&t=" + Date.now();
+      timer = window.setTimeout(function () { finish(false); }, 1800);
+      document.head.appendChild(script);
+    });
+  }
+
+  function waitForReceipt(requestId) {
+    var deadline = Date.now() + 12000;
+    function check() {
+      return receiptExists(requestId).then(function (saved) {
+        if (saved || Date.now() >= deadline) return saved;
+        return new Promise(function (resolve) {
+          window.setTimeout(resolve, 500);
+        }).then(check);
+      });
+    }
+    return check();
+  }
+
+  function feedback(form, state, phase, message) {
+    var button = form.querySelector('[type="submit"]');
+    if (button) {
+      button.disabled = phase !== "error";
+      button.textContent = phase === "pending" ? "Отправляем…" :
+        phase === "success" ? "Заявка отправлена" : state.buttonLabel;
+    }
+    var note = form.querySelector(".lead-send-status");
+    if (!note) {
+      note = document.createElement("p");
+      note.className = "lead-send-status";
+      note.setAttribute("role", "status");
+      note.setAttribute("aria-live", "polite");
+      note.style.gridColumn = "1 / -1";
+      note.style.fontSize = "14px";
+      note.style.lineHeight = "1.4";
+      note.style.margin = "12px 0 0";
+      form.appendChild(note);
+    }
+    note.textContent = message;
+  }
+
+  function sendAndConfirm(state) {
+    var requestId = state.data.request_id;
+    var checkBeforeRetry = state.attempts > 0
+      ? receiptExists(requestId)
+      : Promise.resolve(false);
+    return checkBeforeRetry.then(function (alreadySaved) {
+      if (alreadySaved) return true;
+      state.attempts++;
+      var body = new URLSearchParams();
+      Object.keys(state.data).forEach(function (key) {
+        body.append(key, state.data[key] == null ? "" : String(state.data[key]));
+      });
+      // Opaque response и успешное завершение fetch не считаются подтверждением.
+      try {
+        Promise.resolve(fetch(LEAD_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: body.toString(),
+          keepalive: true
+        })).catch(function () {});
+      } catch (error) {
+        // Запрос мог дойти до сервера даже при сетевой ошибке: проверим ID.
+      }
+      return waitForReceipt(requestId);
+    });
+  }
+
   window.KolvikaLead = {
-    submit: function (payload) {
+    submit: function (payload, form) {
+      if (!form) return Promise.resolve({ ok: false, reason: "missing_form" });
+      var signature = JSON.stringify(payload || {});
+      var state = formStates.get(form);
+      if (state && state.promise) return state.promise;
+      if (state && state.confirmed) return Promise.resolve({ ok: true });
+      if (state && state.signature !== signature) {
+        feedback(form, state, "error", "Данные изменились после первой попытки. Чтобы не создать дубль, напишите ювелиру напрямую.");
+        return Promise.resolve({ ok: false, reason: "changed" });
+      }
+      var requestId = state ? state.data.request_id : makeRequestId();
+      if (!requestId) {
+        var fallback = state || { buttonLabel: form.querySelector('[type="submit"]')?.textContent || "Отправить" };
+        feedback(form, fallback, "error", "Не удалось отправить заявку. Напишите ювелиру напрямую.");
+        return Promise.resolve({ ok: false, reason: "no_request_id" });
+      }
       var tags = collectUtms();
       var standardTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-      var data = Object.assign(
+      var data = state ? state.data : Object.assign(
         {
           landing: document.body.dataset.landing || document.title,
           type: "Заявка",
@@ -81,28 +203,45 @@
           utm_other: Object.keys(tags)
             .filter(function (key) { return standardTags.indexOf(key) === -1; })
             .map(function (key) { return key + "=" + tags[key]; })
-            .join("&")
+            .join("&"),
+          request_id: requestId
         },
         payload || {}
       );
-
-      reachGoal("lead_submit");
-
-      requestClientId(function (id) {
-        data.ym_client_id = id;
-        var body = new URLSearchParams();
-        Object.keys(data).forEach(function (key) {
-          body.append(key, data[key] == null ? "" : String(data[key]));
+      data.request_id = requestId;
+      if (!state) {
+        state = {
+          data: data,
+          signature: signature,
+          attempts: 0,
+          confirmed: false,
+          buttonLabel: form.querySelector('[type="submit"]')?.textContent || "Отправить"
+        };
+        formStates.set(form, state);
+      }
+      feedback(form, state, "pending", "Проверяем, дошла ли заявка…");
+      state.promise = new Promise(function (resolve) {
+        requestClientId(function (id) {
+          data.ym_client_id = id;
+          sendAndConfirm(state).then(function (saved) {
+            if (saved) {
+              state.confirmed = true;
+              reachGoal("lead_submit");
+              feedback(form, state, "success", "Заявка получена.");
+              resolve({ ok: true });
+            } else {
+              feedback(form, state, "error", "Не удалось подтвердить получение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+              resolve({ ok: false, reason: "unconfirmed" });
+            }
+            state.promise = null;
+          }).catch(function () {
+            feedback(form, state, "error", "Не удалось подтвердить получение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+            state.promise = null;
+            resolve({ ok: false, reason: "unconfirmed" });
+          });
         });
-
-        fetch(LEAD_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body: body.toString(),
-          keepalive: true
-        }).catch(function () {});
       });
+      return state.promise;
     },
     goal: reachGoal
   };

@@ -1961,11 +1961,9 @@
               name: t,
               phone: o,
               message: "Прошу перезвонить по поводу изготовления украшения на заказ."
+            }, e.currentTarget).then((result) => {
+              if (result.ok) e.currentTarget.reset();
             });
-            e.currentTarget.reset();
-            const button = e.currentTarget.querySelector('[type="submit"]');
-            button.textContent = "Заявка отправлена";
-            button.disabled = true;
           }),
         document.addEventListener("keydown", (e) => {
           if (
@@ -2087,7 +2085,7 @@
         }),
       );
     </script>
-    <script src="assets/lead-analytics.js"></script>
+    <script src="assets/lead-analytics.js?v=2"></script>
     <script src="assets/campaign-polish.js"></script>
     <script src="assets/mobile-contact.js"></script>
     <script src="assets/mobile-nav.js?v=7"></script>

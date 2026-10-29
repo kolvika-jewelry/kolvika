@@ -10,11 +10,9 @@
         name:String(data.get("name")||"").trim(),
         phone:String(data.get("phone")||"").trim(),
         message:"Заявка из заключительного блока сайта"
+      },form).then(function(result){
+        if(result.ok) form.reset();
       });
-      form.reset();
-      var button=form.querySelector('button[type="submit"]');
-      button.textContent="Заявка отправлена";
-      button.disabled=true;
     });
   });
 })();

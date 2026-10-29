@@ -2062,15 +2062,12 @@
               name: String(data.get("name") || "").trim(),
               phone: String(data.get("phone") || "").trim(),
               message: String(data.get("message") || "Ремонт ювелирного изделия").trim()
+            }, form).then((result) => {
+              if (!result.ok) return;
+              form.reset();
+              const note = form.querySelector(".callback-send-note");
+              if (note) note.hidden = false;
             });
-            form.reset();
-            const button = form.querySelector('[type="submit"]');
-            if (button) {
-              button.textContent = "Заявка отправлена";
-              button.disabled = true;
-            }
-            const note = form.querySelector(".callback-send-note");
-            if (note) note.hidden = false;
           }),
         ),
         document.addEventListener("keydown", (e) => {
@@ -2109,7 +2106,7 @@
         ),
       );
     </script>
-    <script src="assets/lead-analytics.js"></script>
+    <script src="assets/lead-analytics.js?v=2"></script>
     <script src="assets/campaign-polish.js"></script>
     <script src="assets/mobile-contact.js"></script>
     <script src="assets/mobile-nav.js?v=7"></script>
