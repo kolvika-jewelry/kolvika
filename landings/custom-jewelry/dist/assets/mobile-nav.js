@@ -29,7 +29,7 @@
     <div class="mobile-site-menu__contacts">
       <a class="mobile-site-menu__messenger" href="${telegram.href}" target="_blank" rel="noopener" aria-label="Telegram"><img src="${telegram.querySelector('img').src}" alt=""></a>
       <a class="mobile-site-menu__messenger" href="${max.href}" target="_blank" rel="noopener" aria-label="MAX"><img src="${max.querySelector('img').src}" alt=""></a>
-      <a class="mobile-site-menu__call" href="tel:+74957998910">+7 (495) 799-89-10</a>
+      <a class="mobile-site-menu__call" href="tel:+74950014511">+7 (495) 001-45-11</a>
     </div>`;
   nav.insertAdjacentElement('afterend', menu);
 

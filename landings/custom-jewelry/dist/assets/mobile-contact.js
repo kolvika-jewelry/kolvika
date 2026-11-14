@@ -39,7 +39,7 @@
   const repairAction = isRepair ? '<button class="mobile-direct-contact__repair" type="button">Обсудить</button>' : '';
   const directBar = document.querySelector('.mobile-contact-bar') ? '' : `
     <nav class="mobile-direct-contact${isRepair ? ' mobile-direct-contact--repair' : ''}" aria-label="Быстрая связь">
-      <a class="mobile-direct-contact__call" href="tel:+74957998910">Позвонить</a>
+      <a class="mobile-direct-contact__call" href="tel:+74950014511">Позвонить</a>
       <a class="mobile-direct-contact__telegram" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener">Telegram</a>
       <a class="mobile-direct-contact__max" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener">MAX</a>
       ${repairAction}
