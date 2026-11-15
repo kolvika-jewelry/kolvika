@@ -1,0 +1,161 @@
+/* Design polish: readable type sizes, softer shapes, tidier rhythm. Loaded last. */
+
+/* ---------- Type floors (nothing smaller than ~12px) ---------- */
+.notice, .notice * { font-size: 12.5px !important; }
+.nav a, .nav-call, .nav-call * , header a { font-size: 12.5px; }
+.nav a:not(.nav-call) { letter-spacing: .07em; }
+.button, .btn, .nav-button, .materials-link, .quiz-skip,
+.reviews-block__all, .footer-messenger, .trust-block__link, .call,
+.hero-contact-desktop, .catalog-more, .messenger-button {
+  font-size: 12.5px !important;
+  letter-spacing: .07em !important;
+}
+.eyebrow, [class*="__eyebrow"], .quiz-side small {
+  font-size: 12px !important;
+  letter-spacing: .14em !important;
+}
+figcaption, small, .hero-stamp, .note, .footer-note, .when-closed,
+[class*="__note"], .final-cta__note, .legal-footer__note, .quiz-side figcaption {
+  font-size: 12.5px !important;
+  line-height: 1.5;
+}
+.hero-stamp span, .hero-stamp small { font-size: 12px !important; }
+.final-cta__note a, .footer-note a { font-size: inherit !important; }
+.step p, .steps p, .process p, .service p, .service small,
+.extra p, .price-group p, .trust-block__item span, .company-story__fact span,
+.work figcaption, .metrics span, .numbers span, .stat span {
+  font-size: 14.5px !important;
+  line-height: 1.55;
+}
+th { font-size: 12px !important; letter-spacing: .08em; }
+.legal-footer p, .legal-footer a, footer small { font-size: 13px !important; }
+footer h3 { font-size: 12px !important; letter-spacing: .14em; }
+label > span { font-size: 12px !important; }
+button[type="submit"] { font-size: 12.5px; letter-spacing: .07em; }
+
+/* ---------- Softer shapes ---------- */
+.button, .btn, .nav-button, .materials-link, button[type="submit"],
+.messenger-button, .quiz-next, .catalog-more {
+  border-radius: 8px !important;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, filter .2s ease;
+}
+.button, .nav-button, .materials-link {
+  box-shadow: 0 6px 18px rgba(150, 120, 70, .22) !important;
+}
+.button:hover, .nav-button:hover, .btn:hover, button[type="submit"]:hover {
+  transform: translateY(-1px);
+}
+.button:hover, .nav-button:hover { box-shadow: 0 10px 24px rgba(150, 120, 70, .3) !important; }
+
+.card, .work, .extra, .service, .step, .process-visual, .before-after-mini figure,
+.reviews-block__card, .price-group, .quiz-shell, .option, .catalog-grid .work,
+.company-story__fact, .trust-block__item, .intro-strip img, .gallery-grid .card img,
+.final-cta img, .company-story__visual, .trust-block__visual,
+.company-story__visual img, .trust-block__visual img, .reviews-proof img {
+  border-radius: 10px;
+}
+.card img, .work img, .process-visual img, .extra img, .service img { border-radius: inherit; }
+input, textarea, select { border-radius: 8px !important; }
+iframe { border-radius: 10px; }
+
+/* ---------- Rhythm and alignment ---------- */
+:root { --dp-gap: clamp(14px, 1.4vw, 22px); }
+@media (min-width: 801px) {
+  .hero h1 { font-size: clamp(46px, 4.9vw, 68px) !important; line-height: 1.04 !important; }
+  .title, main h2.title { font-size: clamp(38px, 3.8vw, 54px) !important; line-height: 1.08 !important; }
+  .hero p:not(.eyebrow) { font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; max-width: 34em; }
+  .hero-actions, .hero-actions--desktop { gap: 12px; }
+  .hero-actions .button, .hero-actions .btn { min-height: 50px; padding-inline: 24px; }
+  .nav { gap: clamp(14px, 1.6vw, 28px); }
+  .reviews-block__card { padding: 24px 26px; }
+}
+.button, .btn, .nav-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+.nav-button { min-height: 40px; }
+
+/* Equal-height card rows, aligned bottoms */
+.service-grid, .extra-grid, .reviews-block__content, .trust-block__items,
+.company-story__facts, .gallery-grid { align-items: stretch; }
+.service-grid > *, .extra-grid > *, .reviews-block__content > *,
+.trust-block__items > *, .company-story__facts > * { height: 100%; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+  body { -webkit-text-size-adjust: 100%; }
+  .button, .btn { min-height: 50px; font-size: 13px !important; }
+  .hero h1 { line-height: 1.06 !important; }
+  .title, main h2.title, main h2 { line-height: 1.1; }
+  .reviews-block__card { padding: 20px; }
+  .step p, .steps p, .process p, .service p, .extra p { font-size: 15px !important; }
+  .nav { padding-inline: 18px; }
+}
+
+/* ---------- One shared content column ---------- */
+:root { --dp-col: 1240px; --dp-pad: max(24px, calc((100vw - var(--dp-col)) / 2)); }
+@media (min-width: 801px) {
+  .nav, .notice, main > section:not(.hero):not(.final-cta), main > div:not(.hero),
+  .before-after-mini, .materials-band, .company-story, .trust-block, .reviews-block,
+  body > footer, #contacts {
+    padding-left: var(--dp-pad) !important;
+    padding-right: var(--dp-pad) !important;
+  }
+  .hero-copy { padding-left: var(--dp-pad) !important; }
+  .company-story__inner, .trust-block__inner, .reviews-block__content, .footer-grid,
+  .footer-top, .gallery-grid, .service-grid, .extra-grid, .process-body, .process-head,
+  .services-head, .works-head, .price-head, .quiz-shell, .catalog-grid, .intro-carousel {
+    max-width: none !important; margin-left: 0 !important; margin-right: 0 !important;
+  }
+  .company-story__inner, .trust-block__inner, .legal-footer { padding-left: 0 !important; padding-right: 0 !important; }
+}
+
+.nav .btn, .nav .button, .nav-button, .nav a.btn { white-space: nowrap; }
+
+
+/* ---------- Alignment fixes (shared column, equal gutters) ---------- */
+@media (min-width: 801px) {
+  .final-cta { padding-left: 0 !important; padding-right: 0 !important; }
+  .final-cta__content { padding-left: var(--dp-pad) !important; padding-right: clamp(24px, 4vw, 64px) !important; }
+  .final-cta > img { border-radius: 0; }
+  .gift-block { gap: 0; }
+  .gift-block > div:first-child { padding-left: 0 !important; padding-right: clamp(24px, 4vw, 64px) !important; }
+  .gift-block > img { border-radius: 10px; }
+  .reviews-proof { display: block !important; text-align: left !important; }
+  .reviews-proof > :last-child { margin: 0 !important; justify-self: start !important; text-align: left !important; }
+  .company-story__facts { gap: 14px !important; background: none !important; }
+  .company-story__fact { border-radius: 10px !important; box-shadow: 0 8px 22px rgba(60, 45, 20, .08); border: 0 !important; }
+}
+
+/* ---------- Corners and depth: one language ---------- */
+.card, .work, .extra, .service, .repair-cases article, .price-group, .step:not(.active),
+.reviews-block__card, .company-story__fact, .trust-block__item, .before-after-mini figure,
+.process-visual, .quiz-shell, .option, .intro-strip img, .gallery-grid .card, .catalog-grid .work,
+.company-story__visual, .trust-block__visual, .gift-block img, .final-cta > img, .materials-band img,
+.hero-card, .hero-stamp, .numbers, .metrics, .footer-leadbox, .footer-map, .contact-modal, .modal {
+  border-radius: 10px;
+}
+.quiz-shell { box-shadow: 0 14px 40px rgba(50, 38, 18, .10); }
+.card, .work, .price-group, .before-after-mini figure, .trust-block__item { box-shadow: 0 6px 18px rgba(50, 38, 18, .08); }
+.numbers, .metrics { border-radius: 12px; box-shadow: 0 10px 30px rgba(50, 38, 18, .10); }
+img { border-radius: inherit; }
+.hero img, .hero-photo img, .hero-visual img, .logo img, .nav img, .top img { border-radius: 0; }
+.materials-band__visual, .fx-par-wrap:not(section):not(.hero-photo):not(.hero-visual):not(.hero-art) { border-radius: 10px; overflow: hidden; }
+
+/* Floating stat strips: no extra inner gutters, aligned to the shared column */
+@media (min-width: 801px) {
+  main > div.numbers:not(.hero):not(.x), main > div.metrics:not(.hero):not(.x), main > section.metrics:not(.hero):not(.x), main > .numbers:not(.hero):not(.x) {
+    padding-left: 0 !important; padding-right: 0 !important;
+    margin-left: var(--dp-pad) !important; margin-right: var(--dp-pad) !important;
+    width: auto !important; max-width: none !important;
+  }
+}
+
+.reviews-proof > p { margin: 0 !important; text-align: left !important; }
+/* Quiz options: image centered above caption */
+.quiz .option { align-items: center !important; text-align: center !important; justify-content: flex-end !important; gap: 8px; }
+.quiz .option img { margin: 0 auto !important; }
+.quiz .option span { text-align: center !important; }
+/* Quiz: single-choice steps advance automatically, no "Далее" */
+.quiz .step:not([data-multiple]) .quiz-next { display: none !important; }
+
+/* Trust cards: breathing room inside */
+.trust-block__item { padding: 22px 26px 24px !important; }
+@media (max-width: 800px) { .trust-block__item { padding: 18px 20px 20px !important; } }

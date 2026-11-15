@@ -1,0 +1,45 @@
+/* Scroll storytelling & motion layer. Active only when html.fx is set by scroll-fx.js */
+
+/* ---------- Hero entrance ---------- */
+@keyframes fxUp { from { opacity: 0; transform: translate3d(0, 26px, 0); } to { opacity: 1; transform: none; } }
+@keyframes fxZoom { from { transform: scale(1.12); } to { transform: scale(1.0); } }
+.fx .hero-copy > *, .fx .hero > div:first-child > * { animation: fxUp .9s cubic-bezier(.2,.7,.2,1) both; }
+.fx .hero-copy > *:nth-child(2) { animation-delay: .08s; }
+.fx .hero-copy > *:nth-child(3) { animation-delay: .16s; }
+.fx .hero-copy > *:nth-child(4) { animation-delay: .24s; }
+.fx .hero-copy > *:nth-child(5) { animation-delay: .32s; }
+.fx .hero-photo, .fx .hero-visual { overflow: hidden; }
+.fx .hero-photo img, .fx .hero-visual img { animation: fxZoom 1.8s cubic-bezier(.2,.7,.2,1) both; }
+
+/* ---------- Staggered reveal for cards ---------- */
+.fx .fx-item {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(.985);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--fx-d, 0ms);
+  will-change: opacity, transform;
+}
+.fx .fx-item.fx-in { opacity: 1; transform: none; will-change: auto; }
+
+/* ---------- Parallax wrappers ---------- */
+.fx .fx-par-wrap { overflow: hidden; }
+.fx .fx-par { transform: translate3d(0, var(--py, 0px), 0) scale(1.1); will-change: transform; }
+
+/* ---------- 3D tilt on hover ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .fx .fx-tilt { transition: transform .35s ease, box-shadow .35s ease; transform-style: preserve-3d; }
+  .fx .fx-tilt.fx-in.is-tilt { transition: transform .08s linear, box-shadow .35s ease; box-shadow: 0 22px 44px rgba(0, 0, 0, .18); }
+}
+
+/* ---------- Header on scroll ---------- */
+.fx .nav { transition: box-shadow .3s ease, background-color .3s ease; }
+.fx .nav.is-scrolled { box-shadow: 0 6px 22px rgba(0, 0, 0, .08); }
+
+@media (max-width: 800px) {
+  .fx .fx-item { transform: translate3d(0, 18px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx *, .fx *::before, .fx *::after { animation: none !important; transition: none !important; }
+  .fx .fx-item { opacity: 1 !important; transform: none !important; }
+}

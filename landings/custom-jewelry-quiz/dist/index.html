@@ -865,6 +865,8 @@
     <link rel="stylesheet" href="../assets/jewel-polish.css?v=6" />
     <link rel="stylesheet" href="../assets/legal-footer.css?v=1" />
     <link rel="stylesheet" href="../assets/viewport-fit.css?v=1" />
+    <link rel="stylesheet" href="../assets/design-polish.css?v=1" />
+    <link rel="stylesheet" href="../assets/scroll-fx.css?v=1" />
   </head>
   <body data-landing="Квиз украшения на заказ">
     <button class="sticky contact-trigger" type="button" aria-label="Открыть варианты связи"></button>
@@ -942,7 +944,7 @@
         <div class="quiz-heading reveal">
           <div>
             <p class="eyebrow">Короткий расчёт</p>
-            <h2 class="title">Воплотим в реальность<br />вашу мечту</h2>
+            <h2 class="title">Узнайте стоимость<br />вашего украшения</h2>
           </div>
           <p>
             Ответьте на 5 вопросов, и мы пришлём вам варианты и стоимость
@@ -953,7 +955,7 @@
           <aside class="quiz-side">
             <small>Ваш выбор</small
             ><b id="side-text"
-              >Воплотим в реальность вашу мечту об идеальном украшении</b
+              >Расчёт стоимости вашего украшения</b
             >
             <figure class="quiz-side__visual">
               <img id="quiz-side-image" src="../assets/gems-ring.webp" alt="Камни и кольцо — идеи для будущего украшения" />
@@ -1261,7 +1263,7 @@
           <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Ирина Г.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>Памятный камень из старого украшения превратили в новую подвеску.</p></article>
           <article class="reviews-block__card"><div class="reviews-block__card-head"><b>Татьяна К.</b><span aria-label="5 из 5 звёзд">★★★★★</span></div><p>После полировки и родирования кольца снова выглядят нарядно.</p></article>
         </div>
-        <div class="reviews-proof"><img src="../assets/yandex-maps-proof.webp" alt="Скриншот карточки KOLVIKA на Яндекс Картах: рейтинг 5,0, 156 оценок и 90 отзывов" /><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
+        <div class="reviews-proof"><p><b>5,0 из 5 · Яндекс Карты</b><span>156 оценок, 90 отзывов на момент проверки 23.09.2026. Выше — краткие пересказы опубликованных отзывов.</span><a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Проверить первоисточник ↗</a></p></div>
       </section>
       <section class="gift-block"><div><p class="eyebrow">Для особенного момента</p><h2>Создайте украшение с&nbsp;особым смыслом</h2></div><img src="../assets/gift-packaging-concept.webp" alt="Визуализация подарочной коробки и пакета для украшения" /></section>
     </main>
@@ -1364,7 +1366,7 @@
           </article>
         </div>
         <form class="callback" id="callback">
-          <h3>Оставьте телефон — мастер перезвонит</h3>
+          <h3>Оставьте телефон, а мы вам перезвоним или напишем</h3>
           <div class="formrow">
             <label
               >Ваше имя<input name="name" autocomplete="name" required /></label
@@ -1442,7 +1444,7 @@
       const refreshSummary = () => {
         document.querySelector("#side-text").textContent = answers.some(Boolean)
           ? answers.filter(Boolean).join(" · ")
-          : "Воплотим в реальность вашу мечту об идеальном украшении";
+          : "Расчёт стоимости вашего украшения";
         const image = document.querySelector("#quiz-side-image");
         const selectedImage = sideImages[answers[0]] || fallbackImage;
         if (image.getAttribute("src") !== selectedImage.src) image.src = selectedImage.src;
@@ -1465,9 +1467,7 @@
         const heading = document.querySelector(".step.active h3");
         heading.tabIndex = -1;
         heading.focus({ preventScroll: true });
-        document.querySelector(".quiz-shell").scrollIntoView({
-          block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
-        });
+        // блок квиза остаётся на месте — без прокрутки при смене вопроса
       };
       const setSelected = (button, selected) => {
         button.classList.toggle("selected", selected);
@@ -1489,6 +1489,8 @@
         } else {
           buttons.forEach(item => setSelected(item, item === button));
           answers[selectedStep - 1] = button.dataset.value;
+          // одиночный выбор: сразу следующий вопрос, без кнопки «Далее»
+          setTimeout(() => { if (step === selectedStep) go(selectedStep + 1); }, 380);
         }
         refreshSummary();
       };
@@ -1575,9 +1577,10 @@
     </script>
     <script src="../assets/lead-analytics.js?v=2"></script>
 <script src="../assets/engagement.js?v=1" defer></script>
-<script src="../assets/dynamic-title.js?v=1" defer></script>
+<script src="../assets/dynamic-title.js?v=2" defer></script>
     <script src="../assets/campaign-polish.js"></script>
     <script src="../assets/mobile-contact.js"></script>
     <script src="../assets/mobile-nav.js?v=7"></script>
+      <script src="../assets/scroll-fx.js?v=1" defer></script>
   </body>
 </html>
