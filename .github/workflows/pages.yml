@@ -8,6 +8,7 @@ on:
       - 'landings/custom-jewelry/dist/**'
       - 'landings/custom-jewelry-quiz/dist/**'
       - 'landings/jewelry-repair/dist/**'
+      - 'landings/scroll-lab/dist/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -38,6 +39,8 @@ jobs:
           cp -R landings/jewelry-repair/dist/. _site/repair/
           cp -R landings/custom-jewelry-quiz/dist/. _site/quiz/
           cp -R landings/custom-jewelry/dist/assets _site/repair/assets
+          mkdir -p _site/lab
+          cp -R landings/scroll-lab/dist/. _site/lab/
       - name: Upload landing
         uses: actions/upload-pages-artifact@v3
         with:

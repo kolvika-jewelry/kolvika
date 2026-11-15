@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Изготовление украшений на заказ в Москве — KOLVIKA (тест)</title>
+  <meta name="description" content="Тестовая версия лендинга: изготовление украшений на заказ в Москве." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Manrope:wght@400;500;600;700&display=swap" />
+  <style>
+    :root { --gold: #d9bd86; --gold-d: #b99a63; --ink: #14110e; --cream: #f4efe6; --paper: #f8f5ef; --nav-h: 70px; --col: 1240px; --pad: max(22px, calc((100vw - var(--col)) / 2)); --r: 10px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--ink); scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+    body { font-family: "Manrope", system-ui, sans-serif; color: var(--cream); background: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- header (same set as the other landings) ---------- */
+    .top { position: fixed; inset: 0 0 auto 0; z-index: 70; height: var(--nav-h); display: flex; align-items: center; gap: 22px; padding: 0 var(--pad); background: rgba(20,17,14,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .top .logo img { height: 40px; width: auto; filter: brightness(0) invert(.95); }
+    .top nav { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 28px); margin-left: auto; }
+    .top nav a { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: rgba(244,239,230,.86); white-space: nowrap; transition: color .2s; }
+    .top nav a:hover { color: var(--gold); }
+    .top .tel { font-size: 13px; letter-spacing: .04em; font-weight: 700; white-space: nowrap; }
+    .msg { display: inline-flex; width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex: none; transition: transform .2s; }
+    .msg:hover { transform: translateY(-2px); }
+    .msg img { width: 100%; height: 100%; object-fit: cover; }
+    .top .right { display: flex; align-items: center; gap: 12px; }
+    .burger { display: none; width: 44px; height: 44px; border: 1px solid rgba(244,239,230,.35); border-radius: 8px; background: transparent; color: var(--cream); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+    .burger i { display: block; width: 20px; height: 2px; background: currentColor; transition: transform .25s, opacity .25s; }
+    .burger.open i:nth-child(1) { transform: translateY(7px) rotate(45deg); } .burger.open i:nth-child(2) { opacity: 0; } .burger.open i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .menu { position: fixed; z-index: 69; top: var(--nav-h); left: 0; right: 0; background: rgba(20,17,14,.98); padding: 16px 22px 26px; display: none; flex-direction: column; gap: 4px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .menu.open { display: flex; }
+    .menu a.l { padding: 14px 4px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .menu .row { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    @media (max-width: 1120px) { .top nav { display: none; } .top .right { margin-left: auto; } .burger { display: flex; } }
+    @media (max-width: 640px) { .top .tel, .top .right .msg { display: none; } .top .right .btn { display: none; } }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; border-radius: 8px; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; text-align: center; white-space: nowrap; transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; border: 0; font-family: inherit; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.gold { color: #1b1712; background: linear-gradient(135deg, #e6d1a1, var(--gold-d)); box-shadow: 0 8px 24px rgba(185,154,99,.28); }
+    .btn.line { color: var(--cream); border: 1px solid rgba(244,239,230,.5); background: transparent; }
+    .btn.dark { color: var(--cream); background: #1c1812; }
+    .btn.small { min-height: 40px; padding: 0 18px; }
+
+    /* ---------- hero ---------- */
+    .hero { position: relative; min-height: 100svh; display: grid; align-items: center; padding: calc(var(--nav-h) + 40px) var(--pad) 130px; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 56%; transform: scale(1.1); animation: zoomOut 2.2s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,17,14,.94) 0%, rgba(20,17,14,.78) 38%, rgba(20,17,14,.1) 72%, rgba(20,17,14,.22) 100%), linear-gradient(180deg, rgba(20,17,14,.4), rgba(20,17,14,0) 25%, rgba(20,17,14,0) 70%, rgba(20,17,14,.85)); }
+    @keyframes zoomOut { from { transform: scale(1.18); } to { transform: scale(1.04); } }
+    @keyframes rise { from { opacity: 0; transform: translate3d(0, 26px, 0); } to { opacity: 1; transform: none; } }
+    .hero-copy { position: relative; z-index: 2; max-width: 680px; }
+    .hero-copy > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+    .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero h1 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -.01em; animation-delay: .08s; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero .sub { margin-top: 22px; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.6; color: rgba(244,239,230,.9); max-width: 34em; animation-delay: .16s; }
+    .hero .cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; animation-delay: .24s; }
+    .rating { margin-top: 20px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(244,239,230,.82); animation-delay: .32s; flex-wrap: wrap; }
+    .rating .st { color: var(--gold); letter-spacing: .12em; }
+    .rating a { border-bottom: 1px solid rgba(244,239,230,.35); }
+    .chips { position: absolute; z-index: 3; left: var(--pad); right: max(var(--pad), 34%); bottom: 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; animation: rise 1s .5s cubic-bezier(.2,.7,.2,1) both; }
+    .chips div { background: rgba(244,239,230,.08); border: 1px solid rgba(244,239,230,.16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: var(--r); padding: 16px 18px; }
+    .chips b { display: block; font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 24px; color: var(--gold); line-height: 1.1; }
+    .chips span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.4; color: rgba(244,239,230,.82); }
+    @media (max-width: 1100px) { .chips { right: var(--pad); } }
+    @media (max-width: 860px) { .chips { grid-template-columns: repeat(2, 1fr); bottom: 18px; } .chips div { padding: 12px 14px; } .chips b { font-size: 20px; } .hero { padding-bottom: 220px; } .hero-bg img { object-position: 84% 52%; } }
+
+    /* ---------- story ---------- */
+    .story-head { padding: clamp(70px, 10vw, 130px) var(--pad) 40px; }
+    .story-head h2 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.08; max-width: 14em; }
+    .story-head h2 em { color: var(--gold); font-style: italic; }
+    .story-head p.l { margin-top: 16px; max-width: 38em; color: rgba(244,239,230,.75); font-size: clamp(15px, 1.3vw, 18px); }
+    .track { position: relative; height: 760vh; }
+    .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .layer { position: absolute; inset: 0; will-change: clip-path; }
+    .layer img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); will-change: transform; }
+    .shade { position: absolute; inset: 0; z-index: 20; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(20,17,14,0) 0%, rgba(20,17,14,.55) 70%, rgba(20,17,14,.92) 100%), linear-gradient(180deg, rgba(20,17,14,.6) 0%, rgba(20,17,14,.05) 35%, rgba(20,17,14,.05) 55%, rgba(20,17,14,.88) 100%); }
+    canvas.dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; z-index: 21; }
+    .copy { z-index: 22; position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(70px, 12vh, 140px); max-width: 960px; }
+    .scene-copy { position: absolute; left: 0; right: 0; bottom: 0; opacity: 0; will-change: transform, opacity; }
+    .scene-copy .num { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+    .scene-copy h3 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(36px, 6vw, 88px); line-height: 1.02; letter-spacing: -.01em; }
+    .scene-copy h3 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; }
+    .scene-copy h3 .w > span { display: inline-block; transform: translateY(110%); transition: transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i) * 70ms); }
+    .scene-copy.on h3 .w > span { transform: none; }
+    .scene-copy p { margin-top: 18px; max-width: 34em; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.55; color: rgba(244,239,230,.88); opacity: 0; transform: translateY(14px); transition: opacity .8s ease .35s, transform .8s ease .35s; }
+    .scene-copy.on p { opacity: 1; transform: none; }
+    .steps { position: absolute; right: var(--pad); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 13px; z-index: 25; }
+    .steps button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: flex-end; gap: 12px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,239,230,.55); transition: color .3s; }
+    .steps button i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(244,239,230,.6); transition: all .3s; }
+    .steps button.on { color: var(--cream); }
+    .steps button.on i { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 14px rgba(217,189,134,.8); transform: scale(1.25); }
+    .rail { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: rgba(255,255,255,.1); z-index: 26; }
+    .rail > i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--gold-d), #f0dfb4); }
+    .counter { position: absolute; left: var(--pad); top: calc(var(--nav-h) + 22px); font-size: 12px; letter-spacing: .22em; color: rgba(244,239,230,.75); z-index: 25; }
+    .stage-cta { position: absolute; right: var(--pad); bottom: 26px; z-index: 27; }
+    @media (max-width: 760px) { .steps { top: auto; bottom: 22px; right: 50%; transform: translateX(50%); flex-direction: row; gap: 10px; } .steps button span { display: none; } .copy { bottom: 84px; } .stage-cta { display: none; } }
+
+    /* ---------- light sections ---------- */
+    .light { background: var(--paper); color: #1c1812; position: relative; z-index: 3; }
+    .light.alt { background: #efe8dc; }
+    .sec { padding: clamp(60px, 8vw, 110px) var(--pad); }
+    .sec h2 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(32px, 4.2vw, 56px); line-height: 1.08; max-width: 16em; }
+    .sec .lead { margin-top: 14px; max-width: 40em; font-size: clamp(15px, 1.3vw, 18px); color: #55493a; }
+    .eyebrow.dark { color: #8a6c37; }
+    .cta-row { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .grid4 { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card { background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 8px 26px rgba(60,45,20,.09); display: flex; flex-direction: column; }
+    .card .ph { aspect-ratio: 16 / 11; overflow: hidden; background: #eee; }
+    .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+    .card:hover .ph img { transform: scale(1.06); }
+    .card .tx { padding: 22px 24px 26px; }
+    .card h3 { font-size: 18px; font-weight: 700; color: #1c1812; line-height: 1.25; }
+    .card p { margin-top: 10px; font-size: 15px; line-height: 1.6; color: #4d4234; }
+    @media (max-width: 1000px) { .grid4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .grid4 { grid-template-columns: 1fr; } }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ba figure { position: relative; border-radius: var(--r); overflow: hidden; box-shadow: 0 8px 26px rgba(60,45,20,.12); aspect-ratio: 1 / 1; background: #fff; }
+    .ba img { width: 100%; height: 100%; object-fit: cover; }
+    .ba figcaption { position: absolute; left: 10px; bottom: 10px; background: rgba(20,17,14,.85); color: #fff; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 10px; border-radius: 6px; }
+    .checks { margin-top: 22px; display: grid; gap: 10px; list-style: none; }
+    .checks li { position: relative; padding-left: 28px; font-size: 15.5px; color: #3c3226; }
+    .checks li::before { content: ""; position: absolute; left: 0; top: 7px; width: 14px; height: 8px; border-left: 2px solid #b99a63; border-bottom: 2px solid #b99a63; transform: rotate(-45deg); }
+    @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+    .works { margin-top: 36px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .works figure { background: #fff; border-radius: var(--r); box-shadow: 0 8px 22px rgba(60,45,20,.08); aspect-ratio: 1 / 1; padding: 14px; display: grid; place-items: center; overflow: hidden; }
+    .works img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .works figure:hover img { transform: scale(1.07); }
+    @media (max-width: 1000px) { .works { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px) { .works { grid-template-columns: repeat(2, 1fr); gap: 10px; } .works figure { padding: 8px; } }
+
+    .rev { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .rev article { background: #fff; border-radius: var(--r); padding: 24px 26px; box-shadow: 0 8px 22px rgba(60,45,20,.08); }
+    .rev .h { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 700; }
+    .rev .h span { color: #b88f3c; letter-spacing: .1em; font-size: 14px; }
+    .rev p { margin-top: 12px; font-size: 15px; line-height: 1.6; color: #43382b; }
+    .rev-foot { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+    .rev-foot b { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(26px, 3vw, 38px); }
+    .rev-foot span { color: #55493a; font-size: 14.5px; max-width: 38em; }
+    .rev-foot a { font-weight: 700; border-bottom: 1px solid #b99a63; color: #6d5427; }
+    @media (max-width: 960px) { .rev { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .rev { grid-template-columns: 1fr; gap: 8px; margin-top: 22px; } .rev article { padding: 8px 12px; } .rev .h { font-size: 14px; } .rev p { margin-top: 2px; font-size: 13px; line-height: 1.35; } .grid4 .card .ph { aspect-ratio: 16 / 6; } .grid4 .card .tx { padding: 14px 16px 16px; } .grid4 .card p { font-size: 14px; margin-top: 6px; } .grid4 { gap: 10px; margin-top: 24px; } .sec { padding-top: 40px; padding-bottom: 40px; } .faq summary { padding: 16px 48px 16px 18px; font-size: 15px; } }
+
+    .about { display: grid; grid-template-columns: minmax(280px, 5fr) 6fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+    .about img { border-radius: var(--r); box-shadow: 0 14px 40px rgba(60,45,20,.16); }
+    .facts { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .facts div { background: #fff; border-radius: var(--r); padding: 16px 18px; box-shadow: 0 6px 18px rgba(60,45,20,.08); }
+    .facts b { display: block; font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 22px; color: #1c1812; line-height: 1.15; }
+    .facts span { display: block; margin-top: 6px; font-size: 13.5px; color: #55493a; line-height: 1.45; }
+    @media (max-width: 860px) { .about { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } }
+
+    .faq { margin-top: 34px; display: grid; gap: 10px; max-width: 900px; }
+    .faq details { background: #fff; border-radius: var(--r); box-shadow: 0 6px 18px rgba(60,45,20,.07); }
+    .faq summary { list-style: none; cursor: pointer; padding: 20px 56px 20px 24px; font-weight: 700; font-size: 16px; position: relative; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-size: 26px; font-weight: 400; color: #8a6c37; transition: transform .25s; }
+    .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+    .faq details p { padding: 0 24px 22px; font-size: 15.5px; color: #4d4234; line-height: 1.65; }
+
+    /* ---------- final CTA + contacts ---------- */
+    .final { position: relative; z-index: 3; padding: clamp(70px, 9vw, 120px) var(--pad); background: radial-gradient(90% 80% at 80% 10%, #2e2519 0%, var(--ink) 70%); display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(30px, 5vw, 72px); align-items: start; }
+    .final h2 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: clamp(34px, 4.6vw, 64px); line-height: 1.05; }
+    .final h2 em { color: var(--gold); }
+    .final .lead { margin-top: 18px; max-width: 32em; color: rgba(244,239,230,.84); font-size: clamp(15px, 1.35vw, 18px); }
+    .final .btns { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact { background: rgba(244,239,230,.06); border: 1px solid rgba(244,239,230,.14); border-radius: var(--r); overflow: hidden; }
+    .contact iframe { width: 100%; height: 280px; border: 0; display: block; background: #222; }
+    .contact .in { padding: 22px 24px 26px; display: grid; gap: 10px; font-size: 15px; }
+    .contact .in b { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 26px; display: block; }
+    .contact a.u { border-bottom: 1px solid rgba(244,239,230,.3); }
+    .contact .row { display: flex; gap: 10px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+    .contact small { color: rgba(244,239,230,.62); font-size: 13px; line-height: 1.5; }
+    @media (max-width: 900px) { .final { grid-template-columns: 1fr; } }
+    .legal { position: relative; z-index: 3; padding: 34px var(--pad) 90px; background: #0e0c0a; font-size: 13px; line-height: 1.7; color: rgba(244,239,230,.6); }
+    .legal a { color: rgba(244,239,230,.8); border-bottom: 1px solid rgba(244,239,230,.25); }
+    .legal nav { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 10px 0; }
+
+    /* mobile sticky action bar */
+    .bar { position: fixed; z-index: 65; left: 0; right: 0; bottom: 0; display: none; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(20,17,14,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,.1); transform: translateY(110%); transition: transform .35s ease; }
+    .bar.show { transform: none; }
+    .bar .btn { flex: 1; min-height: 46px; padding: 0 12px; }
+    @media (max-width: 760px) { .bar { display: flex; } }
+
+    /* ---------- reveal ---------- */
+    .rv { opacity: 0; transform: translate3d(0, 26px, 0); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+    .rv.in { opacity: 1; transform: none; }
+
+    .static .track { height: auto; } .static .stage { position: relative; height: auto; overflow: visible; } .static .layer { position: relative; height: 60svh; }
+    .static .scene-copy { position: relative; opacity: 1; margin: 20px var(--pad) 50px; } .static .scene-copy h3 .w > span, .static .scene-copy p { transform: none; opacity: 1; }
+    .static .copy, .static .steps, .static .rail, .static .counter, .static canvas.dust, .static .shade, .static .stage-cta { display: none; }
+    .static .rv { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .hero-bg img, .hero-copy > *, .chips { animation: none; } }
+  </style>
+<script>
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+  ym(112938684,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+</script>
+</head>
+<body data-landing="Украшения на заказ — лаборатория">
+  <header class="top">
+    <a class="logo" href="../" aria-label="KOLVIKA jewelry"><img src="../assets/kolvika-logo.png" alt="KOLVIKA jewelry" /></a>
+    <nav aria-label="Разделы">
+      <a href="#story">Как делаем</a>
+      <a href="#benefits">Что входит</a>
+      <a href="#works">Примеры</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="right">
+      <a class="tel" href="tel:+74950014511">+7 (495) 001-45-11</a>
+      <a class="msg" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener" aria-label="Telegram"><img src="../assets/telegram.png" alt="" /></a>
+      <a class="msg" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener" aria-label="MAX"><img src="../assets/max.png" alt="" /></a>
+      <a class="btn gold small" href="../quiz/">Рассчитать стоимость</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><i></i><i></i><i></i></button>
+    </div>
+  </header>
+  <div class="menu" id="menu">
+    <a class="l" href="#story">Как делаем</a>
+    <a class="l" href="#benefits">Что входит</a>
+    <a class="l" href="#works">Примеры</a>
+    <a class="l" href="#reviews">Отзывы</a>
+    <a class="l" href="#contacts">Контакты</a>
+    <div class="row">
+      <a class="btn gold" href="../quiz/">Рассчитать стоимость</a>
+      <a class="btn line" href="tel:+74950014511">+7 (495) 001-45-11</a>
+    </div>
+    <div class="row">
+      <a class="msg" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener" aria-label="Telegram"><img src="../assets/telegram.png" alt="" /></a>
+      <a class="msg" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener" aria-label="MAX"><img src="../assets/max.png" alt="" /></a>
+    </div>
+  </div>
+
+  <section class="hero" id="top">
+    <div class="hero-bg"><img src="../assets/hero-model-brunette.png" alt="Украшение на заказ от ювелирного ателье KOLVIKA" /></div>
+    <div class="hero-copy">
+      <p class="eyebrow">Ювелирное ателье KOLVIKA · Москва</p>
+      <h1>Изготовление украшений <em>на заказ</em> в Москве</h1>
+      <p class="sub">Кольца, серьги, колье и браслеты по вашему фото, эскизу или идее. Из вашего золота и камней или из наших. Срок — от 14 дней после согласования дизайна.</p>
+      <div class="cta">
+        <a class="btn gold" href="../quiz/">Рассчитать стоимость</a>
+        <a class="btn line" href="tel:+74950014511">Позвонить ювелиру</a>
+      </div>
+      <p class="rating"><span class="st">★★★★★</span><b>5,0</b> на Яндекс Картах · <a href="#reviews">читать отзывы</a></p>
+    </div>
+    <div class="chips">
+      <div><b>от 14 дней</b><span>после согласования дизайна</span></div>
+      <div><b>3D-модель</b><span>показываем до изготовления</span></div>
+      <div><b>Ваш металл</b><span>или наш — как вам удобнее</span></div>
+      <div><b>Чек и паспорт</b><span>к каждому изделию</span></div>
+    </div>
+  </section>
+
+  <div class="story-head" id="story">
+    <p class="eyebrow">Как мы делаем украшение</p>
+    <h2>От эскиза до готового кольца — <em>на ваших глазах</em></h2>
+    <p class="l">Листайте вниз: покажем, как идея превращается в украшение в нашей мастерской.</p>
+  </div>
+
+  <section class="track" id="track" aria-label="Этапы создания украшения">
+    <div class="stage" id="stage">
+      <div class="layer"><img src="../assets/materials-gold-design.jpg" alt="Эскизы и золото для будущего украшения" /></div>
+      <div class="layer"><img src="../assets/jewelry-3d-design.webp" alt="3D-модель кольца" /></div>
+      <div class="layer"><img src="../assets/repair-modern-gem-selection.jpg" alt="Подбор камней" /></div>
+      <div class="layer"><img src="../assets/repair-modern-casting.jpg" alt="Литьё" /></div>
+      <div class="layer"><img src="../assets/repair-modern-setting.jpg" alt="Закрепка камня" /></div>
+      <div class="layer"><img src="../assets/repair-modern-polishing.jpg" alt="Полировка" /></div>
+      <div class="layer"><img src="../assets/final-sapphire-ring.webp" alt="Готовое кольцо с сапфиром" /></div>
+      <div class="shade"></div>
+      <canvas class="dust" id="dust"></canvas>
+      <div class="counter" id="counter">01 / 07</div>
+      <div class="copy" id="copy">
+        <div class="scene-copy"><span class="num">01 · Эскиз</span><h3>Начинаем с вашей идеи</h3><p>Вы присылаете фото, эскиз или описание. Мастер уточняет детали и предлагает направление.</p></div>
+        <div class="scene-copy"><span class="num">02 · 3D-модель</span><h3>Показываем украшение до изготовления</h3><p>Готовим 3D-модель, согласуем дизайн и стоимость до начала работы.</p></div>
+        <div class="scene-copy"><span class="num">03 · Камни</span><h3>Подбираем камни</h3><p>Натуральные камни и лабораторные бриллианты — или ваши собственные.</p></div>
+        <div class="scene-copy"><span class="num">04 · Литьё</span><h3>Отливаем в металле</h3><p>Работаем с вашим золотом или предлагаем свой металл.</p></div>
+        <div class="scene-copy"><span class="num">05 · Закрепка</span><h3>Закрепляем вручную</h3><p>Мастера вставляют и закрепляют камни в собственной мастерской.</p></div>
+        <div class="scene-copy"><span class="num">06 · Полировка</span><h3>Доводим до блеска</h3><p>Финишная отделка и полировка — чтобы украшение выглядело безупречно.</p></div>
+        <div class="scene-copy"><span class="num">07 · Готово</span><h3>Получаете готовое украшение</h3><p>В фирменной упаковке и с паспортом изделия.</p></div>
+      </div>
+      <nav class="steps" id="steps" aria-label="Этапы">
+        <button data-go="0"><span>Эскиз</span><i></i></button>
+        <button data-go="1"><span>3D-модель</span><i></i></button>
+        <button data-go="2"><span>Камни</span><i></i></button>
+        <button data-go="3"><span>Литьё</span><i></i></button>
+        <button data-go="4"><span>Закрепка</span><i></i></button>
+        <button data-go="5"><span>Полировка</span><i></i></button>
+        <button data-go="6"><span>Готово</span><i></i></button>
+      </nav>
+      <a class="btn gold stage-cta" href="../quiz/">Рассчитать стоимость</a>
+      <div class="rail" id="rail"><i></i></div>
+    </div>
+  </section>
+
+  <section class="light sec" id="benefits">
+    <p class="eyebrow dark rv">Что входит в заказ</p>
+    <h2 class="rv" style="--d:60ms">Всё, чтобы украшение получилось таким, как вы задумали</h2>
+    <p class="lead rv" style="--d:120ms">Берём на себя весь путь: эскиз, 3D-модель, подбор материалов, изготовление и документы. Вы решаете — мы делаем.</p>
+    <div class="grid4">
+      <article class="card rv" style="--d:0ms"><div class="ph"><img src="../assets/repair-workshop-2.jpg" alt="Мастер за работой" loading="lazy" /></div><div class="tx"><h3>Срок — от 14 дней</h3><p>Отсчитываем после согласования дизайна, поэтому вы заранее знаете, когда получите украшение.</p></div></article>
+      <article class="card rv" style="--d:80ms"><div class="ph"><img src="../assets/jewelry-3d-design.webp" alt="3D-модель украшения" loading="lazy" /></div><div class="tx"><h3>3D-модель до изготовления</h3><p>Вы видите будущее украшение со всех сторон и вносите правки до того, как мастер возьмётся за металл.</p></div></article>
+      <article class="card rv" style="--d:160ms"><div class="ph"><img src="../assets/materials-gems-gold-20260924.jpg" alt="Золото и камни" loading="lazy" /></div><div class="tx"><h3>Ваше золото или наше</h3><p>Переплавим ваше золото и используем ваши камни — или подберём материалы под идею и бюджет.</p></div></article>
+      <article class="card rv" style="--d:240ms"><div class="ph"><img src="../assets/stone-certificate.jpg" alt="Сертификат камня" loading="lazy" /></div><div class="tx"><h3>Чек, паспорт и сертификат</h3><p>Учёт через ГИИС ДМДК, к заказу — чек и паспорт изделия. Сертификат камня — по необходимости или запросу.</p></div></article>
+    </div>
+    <div class="cta-row rv"><a class="btn dark" href="../quiz/">Узнать стоимость за 5 вопросов</a></div>
+  </section>
+
+  <section class="light alt sec" id="remake">
+    <div class="split">
+      <div>
+        <p class="eyebrow dark rv">Переделка и переплавка</p>
+        <h2 class="rv" style="--d:60ms">Старое золото — в новое украшение</h2>
+        <p class="lead rv" style="--d:120ms">Принесите металл, камни или старые украшения: переплавим, сохраним то, что дорого, и сделаем вещь, которую захочется носить.</p>
+        <ul class="checks rv" style="--d:180ms">
+          <li>Оценим материалы и заранее согласуем стоимость работы</li>
+          <li>Покажем 3D-модель нового украшения до изготовления</li>
+          <li>Сохраним ваши камни и памятные детали</li>
+        </ul>
+        <div class="cta-row rv" style="--d:240ms"><a class="btn dark" href="../quiz/">Рассчитать стоимость</a><a class="btn line" style="color:#1c1812;border-color:#1c1812" href="tel:+74950014511">Позвонить</a></div>
+      </div>
+      <div class="ba rv" style="--d:120ms">
+        <figure><img src="../assets/repair-before-ring.webp" alt="Кольцо до реставрации" loading="lazy" /><figcaption>До</figcaption></figure>
+        <figure><img src="../assets/repair-after-ring.webp" alt="То же кольцо после реставрации" loading="lazy" /><figcaption>После</figcaption></figure>
+        <figure><img src="../assets/repair-before-bracelet.webp" alt="Браслет до восстановления камней" loading="lazy" /><figcaption>До</figcaption></figure>
+        <figure><img src="../assets/repair-after-bracelet.webp" alt="Тот же браслет после восстановления камней" loading="lazy" /><figcaption>После</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="light sec" id="works">
+    <p class="eyebrow dark rv">Примеры</p>
+    <h2 class="rv" style="--d:60ms">Украшения, которые мы помогли создать</h2>
+    <div class="works">
+      <figure class="rv" style="--d:0ms"><img src="../assets/ring.jpg" alt="Кольцо с морганитом и бриллиантами" loading="lazy" /></figure>
+      <figure class="rv" style="--d:40ms"><img src="../assets/quiz-gallery/ring-flower.jpg" alt="Кольцо-цветок" loading="lazy" /></figure>
+      <figure class="rv" style="--d:80ms"><img src="../assets/quiz-gallery/ring-pattern.jpg" alt="Кольцо с узором" loading="lazy" /></figure>
+      <figure class="rv" style="--d:120ms"><img src="../assets/quiz-gallery/ring-sapphire.jpg" alt="Кольцо с сапфиром" loading="lazy" /></figure>
+      <figure class="rv" style="--d:160ms"><img src="../assets/quiz-gallery/bracelet-tennis.jpg" alt="Теннисный браслет" loading="lazy" /></figure>
+      <figure class="rv" style="--d:0ms"><img src="../assets/quiz-gallery/earrings-beryl.jpg" alt="Серьги с бериллами" loading="lazy" /></figure>
+      <figure class="rv" style="--d:40ms"><img src="../assets/quiz-gallery/earrings-tanzanite.jpg" alt="Пусеты с танзанитами" loading="lazy" /></figure>
+      <figure class="rv" style="--d:80ms"><img src="../assets/quiz-gallery/earrings-tourmaline.jpg" alt="Пусеты с турмалинами" loading="lazy" /></figure>
+      <figure class="rv" style="--d:120ms"><img src="../assets/quiz-gallery/earrings-long.jpg" alt="Длинные серьги" loading="lazy" /></figure>
+      <figure class="rv" style="--d:160ms"><img src="../assets/quiz-gallery/transformers.jpg" alt="Серьги-трансформеры" loading="lazy" /></figure>
+    </div>
+    <div class="cta-row rv"><a class="btn dark" href="../quiz/">Хочу такое же — рассчитать стоимость</a></div>
+  </section>
+
+  <section class="light alt sec" id="reviews">
+    <p class="eyebrow dark rv">Отзывы клиентов</p>
+    <h2 class="rv" style="--d:60ms">Что говорят о работе с нами</h2>
+    <p class="lead rv" style="--d:120ms">Ниже — краткие пересказы опубликованных отзывов с Яндекс Карт.</p>
+    <div class="rev">
+      <article class="rv" style="--d:0ms"><div class="h"><b>Анна S.</b><span>★★★★★</span></div><p>Отмечает внимательный сервис, соответствие ожиданиям и красивую упаковку.</p></article>
+      <article class="rv" style="--d:60ms"><div class="h"><b>Яна С.</b><span>★★★★★</span></div><p>Заказала серьги с бриллиантами дистанционно и получила их в согласованный срок.</p></article>
+      <article class="rv" style="--d:120ms"><div class="h"><b>Кирилл</b><span>★★★★★</span></div><p>Подобрали камень и сделали для него индивидуальную оправу раньше обещанного срока.</p></article>
+      <article class="rv" style="--d:0ms"><div class="h"><b>Ольга В.</b><span>★★★★★</span></div><p>Для украшения подготовили 3D-дизайн; итоговую стоимость согласовали заранее.</p></article>
+      <article class="rv" style="--d:60ms"><div class="h"><b>Ирина Г.</b><span>★★★★★</span></div><p>Памятный камень из старого украшения превратили в новую подвеску.</p></article>
+      <article class="rv" style="--d:120ms"><div class="h"><b>Татьяна К.</b><span>★★★★★</span></div><p>После полировки и родирования кольца снова выглядят нарядно.</p></article>
+    </div>
+    <div class="rev-foot rv">
+      <b>5,0 из 5 · Яндекс Карты</b>
+      <a href="https://yandex.ru/maps/org/kolvika/202204531483/reviews/" target="_blank" rel="noopener">Смотреть все отзывы</a>
+    </div>
+  </section>
+
+  <section class="light sec" id="about">
+    <div class="about">
+      <img class="rv" src="../assets/team-kolvika.jpg" alt="Команда KOLVIKA" loading="lazy" />
+      <div>
+        <p class="eyebrow dark rv">О мастерской</p>
+        <h2 class="rv" style="--d:60ms">Больше 20 лет опыта в ювелирном деле</h2>
+        <p class="lead rv" style="--d:120ms">Собственное производство полного цикла, собственная экспертиза и лаборатория. Подбор камней, ювелирное производство и работа с частными заказами — от эскиза до готового украшения.</p>
+        <div class="facts rv" style="--d:180ms">
+          <div><b>Эскизы и 3D</b><span>Видите украшение до изготовления</span></div>
+          <div><b>Камни</b><span>Натуральные и лабораторные бриллианты</span></div>
+          <div><b>Литьё, закрепка</b><span>Всё делаем в своей мастерской</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>Сколько делается украшение?</summary><p>От 14 дней после согласования дизайна. Точный срок называем до начала работы.</p></details>
+      <details class="rv" style="--d:40ms"><summary>Можно сделать украшение из моего золота и камней?</summary><p>Да. Можно принести металл, камни или старые украшения для переплавки. Если своих материалов нет, подберём металл и натуральные камни под вашу идею и бюджет.</p></details>
+      <details class="rv" style="--d:80ms"><summary>Увижу ли я украшение до изготовления?</summary><p>Да. Готовим 3D-модель, вы видите будущее украшение и согласуете дизайн и стоимость до начала работы.</p></details>
+      <details class="rv" style="--d:120ms"><summary>Какие документы вы выдаёте?</summary><p>К каждому заказу — кассовый чек и паспорт изделия. Учёт изделий ведём через ГИИС ДМДК. Сертификат лаборатории на камень организуем по необходимости или по запросу.</p></details>
+      <details class="rv" style="--d:160ms"><summary>Как узнать стоимость?</summary><p>Стоимость зависит от металла, камней и сложности работы, поэтому называем её после обсуждения. Ответьте на 5 вопросов в квизе — в течение дня пришлём варианты и стоимость изготовления.</p></details>
+    </div>
+  </section>
+
+  <section class="final" id="contacts">
+    <div>
+      <p class="eyebrow rv">Ваша история начинается здесь</p>
+      <h2 class="rv" style="--d:60ms">Рассчитайте стоимость <em>вашего украшения</em></h2>
+      <p class="lead rv" style="--d:120ms">Ответьте на 5 вопросов о металле, камнях и бюджете. В течение дня пришлём варианты и стоимость изготовления.</p>
+      <div class="btns rv" style="--d:180ms">
+        <a class="btn gold" href="../quiz/">Рассчитать стоимость</a>
+        <a class="btn line" href="tel:+74950014511">Позвонить</a>
+      </div>
+    </div>
+    <div class="contact rv" style="--d:120ms">
+      <iframe title="KOLVIKA на карте" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=37.503286%2C55.758230&z=16&pt=37.503286%2C55.758230%2Cpm2rdm"></iframe>
+      <div class="in">
+        <b>Приглашаем в офис и шоурум</b>
+        <span>Москва, Береговой проезд, д. 4/6, стр. 2 · Пн–Пт 10:00–19:00</span>
+        <span><a class="u" href="tel:+74950014511">+7 (495) 001-45-11</a> · <a class="u" href="tel:+79639968512">+7 (963) 996-85-12</a></span>
+        <span><a class="u" href="mailto:jewelry@kolvika.ru">jewelry@kolvika.ru</a></span>
+        <div class="row">
+          <a class="msg" href="https://t.me/kolvikajewelry" target="_blank" rel="noopener" aria-label="Telegram"><img src="../assets/telegram.png" alt="" /></a>
+          <a class="msg" href="https://max.ru/u/f9LHodD0cOI4g-uBJsVW5pUD094Y6odkduNePwKVwKDNAKVIAYgPVIW1dg4" target="_blank" rel="noopener" aria-label="MAX"><img src="../assets/max.png" alt="" /></a>
+          <small>Напишите в мессенджер — фото или эскиз можно прикрепить к сообщению.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="legal">
+    <p>Изображения этапов — иллюстрации. Тестовая версия страницы.</p>
+    <p>Общество с ограниченной ответственностью «КОЛВИКА» · ИНН 7730257442 · КПП 773001001 · ОГРН 1207700182580</p>
+    <p>Юридический и фактический адрес: 121087, г. Москва, Береговой проезд, д. 4/6, стр. 2, эт. 1, пом. 1, ком. 35.</p>
+    <nav aria-label="Документы компании">
+      <a href="https://kolvika.jewelry/page/rekvizity" target="_blank" rel="noopener">Полные реквизиты</a>
+      <a href="https://kolvika.jewelry/page/politika-konfidentsialnosti" target="_blank" rel="noopener">Политика обработки персональных данных</a>
+      <a href="https://kolvika.jewelry/page/exchange" target="_blank" rel="noopener">Гарантии и возврат</a>
+    </nav>
+    <p>Стоимость и сроки работ согласовываются индивидуально после обсуждения заказа и осмотра изделия.</p>
+  </footer>
+
+  <div class="bar" id="bar"><a class="btn gold" href="../quiz/">Рассчитать стоимость</a><a class="btn line" href="tel:+74950014511">Позвонить</a></div>
+
+  <script>
+    (function () {
+      var burger = document.getElementById("burger"), menu = document.getElementById("menu");
+      burger.addEventListener("click", function () { var o = menu.classList.toggle("open"); burger.classList.toggle("open", o); burger.setAttribute("aria-expanded", o); });
+      menu.addEventListener("click", function (e) { if (e.target.closest("a")) { menu.classList.remove("open"); burger.classList.remove("open"); } });
+      var bar = document.getElementById("bar");
+      var hero = document.querySelector(".hero");
+      addEventListener("scroll", function () { bar.classList.toggle("show", scrollY > hero.offsetHeight * 0.7); }, { passive: true });
+
+      var N = 7;
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var rv = [].slice.call(document.querySelectorAll(".rv"));
+      if (reduce || !("IntersectionObserver" in window)) { document.body.classList.add("static"); return; }
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .12, rootMargin: "0px 0px -4% 0px" });
+      rv.forEach(function (el) { io.observe(el); });
+
+      var track = document.getElementById("track");
+      var layers = [].slice.call(document.querySelectorAll(".layer"));
+      var scenes = [].slice.call(document.querySelectorAll(".scene-copy"));
+      var btns = [].slice.call(document.querySelectorAll("#steps button"));
+      var rail = document.getElementById("rail"), counter = document.getElementById("counter");
+      var cv = document.getElementById("dust"), cx = cv.getContext("2d");
+
+      scenes.forEach(function (s) {
+        var h = s.querySelector("h3"); var words = h.textContent.trim().split(/\s+/);
+        h.innerHTML = words.map(function (w, i) { return '<span class="w"><span style="--i:' + i + '">' + w + "</span></span>"; }).join(" ");
+      });
+      function size() { var k = devicePixelRatio > 1 ? 1.5 : 1; cv.width = innerWidth * k; cv.height = innerHeight * k; }
+      size(); addEventListener("resize", size);
+
+      var P = []; for (var k = 0; k < (innerWidth < 760 ? 36 : 66); k++) P.push({ x: Math.random(), y: Math.random(), r: 1.2 + Math.random() * 3, s: .2 + Math.random() * .8, a: Math.random() * 6.28, v: .6 + Math.random() * 1.4 });
+      var vel = 0, lastY = scrollY;
+      function dust(t) {
+        cx.clearRect(0, 0, cv.width, cv.height);
+        for (var i = 0; i < P.length; i++) {
+          var p = P[i];
+          p.y -= (0.0004 * p.s + vel * 0.00007 * p.v); p.x += Math.sin(t * 0.0006 + p.a) * 0.0003;
+          if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); } if (p.y > 1.05) { p.y = -0.05; p.x = Math.random(); }
+          var tw = .45 + .55 * Math.abs(Math.sin(t * 0.002 * p.v + p.a));
+          cx.save(); cx.translate(p.x * cv.width, p.y * cv.height); cx.rotate(p.a + t * 0.0004 * p.v);
+          cx.fillStyle = "rgba(231,203,140," + (0.5 * tw).toFixed(2) + ")";
+          cx.fillRect(-p.r, -p.r * .6, p.r * 2, p.r * 1.2); cx.restore();
+        }
+      }
+      function frame(t) {
+        var r = track.getBoundingClientRect();
+        var live = r.bottom > -50 && r.top < innerHeight + 50;
+        var y = scrollY; vel += ((y - lastY) - vel) * 0.18; lastY = y;
+        if (live) {
+          var total = track.offsetHeight - innerHeight;
+          var p = Math.max(0, Math.min(1, -r.top / total)), f = p * (N - 1);
+          for (var i = 0; i < N; i++) {
+            var d = f - i, L = layers[i], img = L.firstElementChild;
+            L.style.visibility = (d > -1.001 && d < 1.001) ? "visible" : "hidden";
+            L.style.zIndex = i;
+            L.style.clipPath = d < 0 ? "inset(" + ((-d) * 100).toFixed(2) + "% 0 0 0)" : "inset(0 0 0 0)";
+            img.style.transform = "scale(" + (1.14 - Math.max(0, Math.min(1, d + 1)) * 0.1).toFixed(3) + ") translate3d(0," + (d * -2.5).toFixed(2) + "%,0)";
+          }
+          for (var s = 0; s < N; s++) {
+            var dd = f - s, a = Math.abs(dd), S = scenes[s];
+            S.style.opacity = Math.max(0, 1 - a * 2.4).toFixed(2);
+            S.style.transform = "translate3d(0," + (dd * -50).toFixed(1) + "px,0)";
+            S.classList.toggle("on", a < 0.42);
+          }
+          var cur = Math.max(0, Math.min(N - 1, Math.round(f)));
+          btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); });
+          counter.textContent = "0" + (cur + 1) + " / 0" + N;
+          rail.style.setProperty("--p", p.toFixed(3));
+          dust(t);
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var i = +b.dataset.go, total = track.offsetHeight - innerHeight;
+          scrollTo({ top: track.getBoundingClientRect().top + scrollY + (i / (N - 1)) * total + 2, behavior: "smooth" });
+        });
+      });
+    })();
+  </script>
+<script src="../assets/lead-analytics.js?v=2"></script>
+<script src="../assets/engagement.js?v=1" defer></script>
+</body>
+</html>
