@@ -80,128 +80,130 @@
   footer .legal-footer { margin-top: 16px !important; }
 }
 
-/* ---------- Mobile ---------- */
+/* ---------- Mobile: no horizontal swipe rows, compact stacked cards ---------- */
 @media (max-width: 800px) {
   main > section:not(.hero):not(.final-cta):not(.materials):not(.gift-block),
-  body > footer,
-  main > footer {
-    padding-top: clamp(28px, 4.5vh, 40px) !important;
-    padding-bottom: clamp(28px, 4.5vh, 40px) !important;
+  body > footer, main > footer {
+    padding-top: clamp(26px, 4vh, 38px) !important;
+    padding-bottom: clamp(26px, 4vh, 38px) !important;
   }
 
-  /* First screen of repair landing: copy + photo fit one screen */
-  main > .hero .hero-photo {
-    min-height: 0 !important;
-    height: clamp(180px, 30svh, 300px);
-    overflow: hidden;
-  }
+  /* hero photo of the repair landing */
+  main > .hero .hero-photo { min-height: 0 !important; height: clamp(180px, 30svh, 300px); overflow: hidden; }
   main > .hero .hero-photo > img { width: 100%; height: 100% !important; object-fit: cover; }
 
-  /* Card lists -> one swipeable row (next card peeks out) */
+  /* everything that used to swipe is now a plain stacked list */
   .reviews-block .reviews-block__content,
   main > #services .service-grid,
   main > .extras .extra-grid,
   main > .process .process-grid,
-  main > #process .steps,
   main > .process .steps,
+  main > #process .steps,
   .company-story .company-story__facts,
   .trust-block .trust-block__items {
     display: grid !important;
-    grid-template-columns: none !important;
+    grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-flow: column !important;
-    grid-auto-columns: 82% !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: auto !important;
     gap: 10px !important;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin-right: -20px;
-    padding-right: 20px;
+    overflow: visible !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    scroll-snap-type: none !important;
   }
-  .trust-block .trust-block__items,
-  .company-story .company-story__facts { grid-auto-columns: 62% !important; }
+  .trust-block .trust-block__items > *,
+  .company-story .company-story__facts > * { border: 0 !important; box-shadow: 0 4px 14px rgba(60, 45, 20, .08) !important; border-radius: 10px !important; }
 
-  /* Photo grids -> two swipeable rows */
+  /* photo galleries: 2 per row, all visible, no swiping */
   main > .gallery .gallery-grid,
   main > #works .gallery,
   main > .catalog .catalog-grid {
     display: grid !important;
-    grid-template-columns: none !important;
-    grid-template-rows: repeat(2, auto) !important;
-    grid-auto-flow: column !important;
-    grid-auto-columns: 44% !important;
-    gap: 8px !important;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin-right: -20px;
-    padding-right: 20px;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: auto !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    background: none !important;
   }
-  .reviews-block .reviews-block__content > *,
-  main > #services .service-grid > *,
-  main > .extras .extra-grid > *,
-  main > .process .process-grid > *,
-  main > #process .steps > *,
-  main > .process .steps > *,
-  .company-story .company-story__facts > *,
-  .trust-block .trust-block__items > *,
-  main > .gallery .gallery-grid > *,
-  main > #works .gallery > *,
-  main > .catalog .catalog-grid > * { scroll-snap-align: start; min-width: 0; }
-  .reviews-block .reviews-block__content::-webkit-scrollbar,
-  main > #services .service-grid::-webkit-scrollbar,
-  main > .extras .extra-grid::-webkit-scrollbar,
-  main > .process .process-grid::-webkit-scrollbar,
-  main > #process .steps::-webkit-scrollbar,
-  main > .process .steps::-webkit-scrollbar,
-  .company-story .company-story__facts::-webkit-scrollbar,
-  .trust-block .trust-block__items::-webkit-scrollbar,
-  main > .gallery .gallery-grid::-webkit-scrollbar,
-  main > #works .gallery::-webkit-scrollbar,
-  main > .catalog .catalog-grid::-webkit-scrollbar { display: none; }
-
-  /* Collapsible catalog on quiz: show all items in the swipe row */
-  main > .catalog .catalog-grid > [hidden],
-  main > .catalog .catalog-grid > .is-hidden { display: flex !important; }
+  main > .catalog .catalog-grid > :nth-child(n+9) { display: none !important; }
   main > .catalog .catalog-more { display: none !important; }
+  main > .catalog .catalog-grid .work img { height: 120px !important; }
+  main > .catalog .catalog-grid .work figcaption { font-size: 13px !important; padding: 8px 10px !important; }
+  main > .gallery .gallery-grid .card { height: auto !important; aspect-ratio: 1 / 1 !important; }
 
-  /* Headings spacing */
-  main > #services .services-head,
-  main > #works .works-head,
-  main > .gallery .gallery-head,
-  main > .process .process-head,
-  main > .quiz .quiz-heading { margin-bottom: 18px !important; }
-  main > .price .price-head { margin-bottom: 16px !important; gap: 10px !important; }
+  /* headings spacing */
+  main > #services .services-head, main > #works .works-head, main > .gallery .gallery-head,
+  main > .process .process-head, main > .quiz .quiz-heading { margin-bottom: 14px !important; }
+  main > .price .price-head { margin-bottom: 14px !important; gap: 8px !important; }
 
-  /* Company story */
+  /* company story: full-width photo, compact cards */
   .company-story .company-story__lead { font-size: 15px !important; line-height: 1.5 !important; }
-  .company-story .company-story__note { font-size: 14px !important; line-height: 1.5 !important; }
-  .company-story .company-story__visual { height: 170px; overflow: hidden; margin-top: 14px !important; }
+  .company-story .company-story__note { font-size: 13.5px !important; line-height: 1.5 !important; }
+  .company-story .company-story__visual { height: 190px; overflow: hidden; margin-top: 14px !important; }
   .company-story .company-story__visual img { width: 100%; height: 100% !important; object-fit: cover; }
+  .company-story .company-story__fact { padding: 12px 16px !important; }
+  .company-story .company-story__fact b { font-size: 19px !important; margin-bottom: 4px; }
+  .company-story .company-story__fact span, .company-story .company-story__fact p { font-size: 14px !important; line-height: 1.4 !important; }
 
-  /* Trust */
-  .trust-block .trust-block__visual { height: 150px; overflow: hidden; margin-top: 16px !important; }
+  /* trust: compact stacked cards */
+  .trust-block .trust-block__visual { height: 150px; overflow: hidden; margin-top: 14px !important; }
   .trust-block .trust-block__visual img { width: 100%; height: 100% !important; object-fit: cover; }
+  .trust-block .trust-block__item { padding: 12px 16px !important; }
+  .trust-block .trust-block__item b { font-size: 18px !important; }
+  .trust-block .trust-block__item span { font-size: 14px !important; line-height: 1.4 !important; }
+  .trust-block .trust-block__copy { font-size: 14.5px !important; line-height: 1.5 !important; }
 
-  /* Main: intro strip, process gallery */
+  /* reviews: six compact cards on one screen */
+  .reviews-block { padding-top: 24px !important; padding-bottom: 24px !important; }
+  .reviews-block h2 { font-size: 28px !important; margin-bottom: 12px !important; }
+  .reviews-block .reviews-block__content { gap: 8px !important; }
+  .reviews-block .reviews-block__content { grid-auto-rows: auto !important; align-items: start !important; }
+  body .reviews-block .reviews-block__content > .reviews-block__card:nth-child(n+1) { display: flex !important; flex-direction: column !important; }
+  .reviews-block .reviews-block__card { padding: 8px 12px !important; min-height: 0 !important; height: auto !important; justify-content: flex-start !important; gap: 4px !important; }
+  .reviews-block .reviews-block__card-head { margin-bottom: 2px !important; }
+  .reviews-block .reviews-block__card-head b { font-size: 14px !important; }
+  .reviews-block .reviews-block__card p { font-size: 13px !important; line-height: 1.35 !important; margin: 0 !important; }
+  .reviews-block .reviews-block__card-head span { font-size: 11px !important; }
+  .reviews-block h2 { margin-bottom: 8px !important; }
+  .reviews-block .reviews-proof { display: block !important; margin-top: 12px !important; }
+  .reviews-block .reviews-proof b { font-size: 20px !important; }
+
+  /* process steps: compact, all four on one screen */
+  main > .process .process-head p { font-size: 13.5px !important; line-height: 1.45 !important; margin-top: 8px !important; }
+  main > .process .process-head h2 { font-size: 30px !important; }
+  main > .process .step, main > #process .step { padding: 6px 12px !important; gap: 4px 10px !important; }
+  main > .process .step .step-icon, main > .process .step img { width: 28px !important; height: 28px !important; }
+  main > .process .step h3 { font-size: 17px !important; margin-bottom: 2px !important; }
+  main > .process .step p, main > #process .step p { font-size: 13px !important; line-height: 1.35 !important; margin: 0 !important; }
+  main > .process .process-visual { aspect-ratio: auto !important; height: 150px !important; }
+  main > .process .process-gallery { margin-top: 10px !important; }
+  main > .process .button { margin-top: 10px !important; }
+  main > .process .process-grid article { padding: 12px 14px !important; }
+
+  /* materials band: photo edge to edge */
+  .materials-band { padding-left: 20px !important; padding-right: 20px !important; }
+  .materials-band__visual { margin: 0 -20px !important; width: calc(100% + 40px) !important; max-width: none !important; border-radius: 0 !important; }
+  .materials-band__visual img { border-radius: 0 !important; width: 100%; }
+
+  main > .extras .extra { min-height: 0 !important; height: 190px !important; }
+
+  /* main: intro strip + process gallery */
   main > .intro .intro-strip { margin-top: 12px !important; }
   main > .intro .intro-strip img { height: 170px !important; }
-  main > .process .process-gallery { margin-top: 18px !important; }
-  main > .process .process-visual { aspect-ratio: auto !important; height: 220px !important; }
 
-  /* Reviews: proof screenshot beside the text */
-  .reviews-block .reviews-proof { grid-template-columns: 42% 1fr !important; align-items: center; margin-top: 18px !important; }
-  .reviews-block .reviews-proof img { height: auto !important; max-height: 160px; object-fit: contain; }
-
-  /* Quiz: compact side panel and image options in 3 columns */
+  /* quiz: compact side panel and 3-column image options */
   main > .quiz .quiz-side__visual { display: none !important; }
   main > .quiz .quiz-side { grid-template-columns: 1fr !important; gap: 4px 12px !important; }
   main > .quiz .options:has(.option img) { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; }
   main > .quiz .options .option img { height: 64px !important; width: 100% !important; object-fit: contain; }
-  main > .process .process-visual { height: 180px !important; }
 
-  /* Footer */
-  footer iframe { height: 170px !important; }
+  footer iframe { height: 190px !important; }
+  footer .footer-map { height: auto !important; min-height: 0 !important; }
 }
