@@ -313,8 +313,11 @@ def exchange_authorization_code(code: str) -> None:
 
 
 def amo_configured() -> bool:
+    if not os.environ.get("AMOCRM_ACCOUNT_URL", "").strip():
+        return False
+    if os.environ.get("AMOCRM_LONG_LIVED_TOKEN", "").strip():
+        return True
     required = (
-        "AMOCRM_ACCOUNT_URL",
         "AMOCRM_CLIENT_ID",
         "AMOCRM_CLIENT_SECRET",
         "AMOCRM_REDIRECT_URI",
@@ -336,6 +339,10 @@ def amo_base_url() -> str:
 
 
 def refresh_access_token() -> str:
+    long_lived_token = os.environ.get("AMOCRM_LONG_LIVED_TOKEN", "").strip()
+    if long_lived_token:
+        return long_lived_token
+
     with token_lock:
         expires_at = float(get_state("access_token_expires_at") or "0")
         access_token = get_state("access_token")
@@ -402,6 +409,8 @@ def api_request(method: str, path: str, payload: Any) -> Any:
                 raw = response.read()
                 return json.loads(raw.decode("utf-8")) if raw else {}
         except HTTPError as error:
+            if error.code == 401 and os.environ.get("AMOCRM_LONG_LIVED_TOKEN", "").strip():
+                raise AmoCRMError("api_long_lived_token_unauthorized", retryable=False) from None
             if error.code == 401 and attempt == 0:
                 set_state({"access_token_expires_at": "0"})
                 continue
