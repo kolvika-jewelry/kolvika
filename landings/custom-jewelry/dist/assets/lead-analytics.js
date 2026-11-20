@@ -2,18 +2,9 @@
   "use strict";
 
   var COUNTER_ID = 112938684;
-  var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtuT4b6ZFmorJqCanJS_IWlUKlKqmjpbXcekvGsY5n3u_x2cf5yMfDt-V6k6Ie3Ie_BA/exec";
+  var LEAD_ENDPOINT = "/api/leads";
   var clientId = "";
   var formStates = new WeakMap();
-  var receiptCallbacks = Object.create(null);
-
-  // Google Apps Script не даёт прочитать ответ no-cors POST. Отдельный GET
-  // подтверждает наличие именно этой заявки в таблице, не раскрывая её данные.
-  window.__kolvikaLeadAck = function (receipt) {
-    if (receipt && receiptCallbacks[receipt.request_id]) {
-      receiptCallbacks[receipt.request_id](receipt);
-    }
-  };
 
   function syncClientIdFields() {
     document.querySelectorAll("form").forEach(function (form) {
@@ -74,6 +65,9 @@
     new URLSearchParams(window.location.search).forEach(function (value, key) {
       if (/^utm_/i.test(key)) tags[key.toLowerCase()] = value;
     });
+    if (window.KolvikaUtm && typeof window.KolvikaUtm.get === "function") {
+      return Object.assign(tags, window.KolvikaUtm.get());
+    }
     return tags;
   }
 
@@ -81,43 +75,6 @@
     return window.crypto && typeof window.crypto.randomUUID === "function"
       ? window.crypto.randomUUID()
       : "";
-  }
-
-  function receiptExists(requestId) {
-    return new Promise(function (resolve) {
-      var script = document.createElement("script");
-      var finished = false;
-      var timer;
-      function finish(saved) {
-        if (finished) return;
-        finished = true;
-        window.clearTimeout(timer);
-        delete receiptCallbacks[requestId];
-        script.remove();
-        resolve(saved);
-      }
-      receiptCallbacks[requestId] = function (receipt) {
-        finish(receipt.request_id === requestId && receipt.saved === true);
-      };
-      script.onerror = function () { finish(false); };
-      script.async = true;
-      script.src = LEAD_ENDPOINT + "?receipt=" + encodeURIComponent(requestId) + "&t=" + Date.now();
-      timer = window.setTimeout(function () { finish(false); }, 1800);
-      document.head.appendChild(script);
-    });
-  }
-
-  function waitForReceipt(requestId) {
-    var deadline = Date.now() + 12000;
-    function check() {
-      return receiptExists(requestId).then(function (saved) {
-        if (saved || Date.now() >= deadline) return saved;
-        return new Promise(function (resolve) {
-          window.setTimeout(resolve, 500);
-        }).then(check);
-      });
-    }
-    return check();
   }
 
   function feedback(form, state, phase, message) {
@@ -144,29 +101,17 @@
 
   function sendAndConfirm(state) {
     var requestId = state.data.request_id;
-    var checkBeforeRetry = state.attempts > 0
-      ? receiptExists(requestId)
-      : Promise.resolve(false);
-    return checkBeforeRetry.then(function (alreadySaved) {
-      if (alreadySaved) return true;
-      state.attempts++;
-      var body = new URLSearchParams();
-      Object.keys(state.data).forEach(function (key) {
-        body.append(key, state.data[key] == null ? "" : String(state.data[key]));
+    state.attempts++;
+    return fetch(LEAD_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(state.data),
+      keepalive: true
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (body) {
+        return response.ok && body.ok === true &&
+          body.saved === true && body.request_id === requestId;
       });
-      // Opaque response и успешное завершение fetch не считаются подтверждением.
-      try {
-        Promise.resolve(fetch(LEAD_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body: body.toString(),
-          keepalive: true
-        })).catch(function () {});
-      } catch (error) {
-        // Запрос мог дойти до сервера даже при сетевой ошибке: проверим ID.
-      }
-      return waitForReceipt(requestId);
     });
   }
 
@@ -188,22 +133,13 @@
         return Promise.resolve({ ok: false, reason: "no_request_id" });
       }
       var tags = collectUtms();
-      var standardTags = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
       var data = state ? state.data : Object.assign(
         {
           landing: document.body.dataset.landing || document.title,
           type: "Заявка",
           page: window.location.href,
           referrer: document.referrer || "",
-          utm_source: tags.utm_source || "",
-          utm_medium: tags.utm_medium || "",
-          utm_campaign: tags.utm_campaign || "",
-          utm_term: tags.utm_term || "",
-          utm_content: tags.utm_content || "",
-          utm_other: Object.keys(tags)
-            .filter(function (key) { return standardTags.indexOf(key) === -1; })
-            .map(function (key) { return key + "=" + tags[key]; })
-            .join("&"),
+          utm: tags,
           request_id: requestId
         },
         payload || {}
@@ -219,7 +155,7 @@
         };
         formStates.set(form, state);
       }
-      feedback(form, state, "pending", "Проверяем, дошла ли заявка…");
+      feedback(form, state, "pending", "Сохраняем заявку на сервере…");
       state.promise = new Promise(function (resolve) {
         requestClientId(function (id) {
           data.ym_client_id = id;
@@ -227,15 +163,15 @@
             if (saved) {
               state.confirmed = true;
               reachGoal("lead_submit");
-              feedback(form, state, "success", "Заявка получена.");
+              feedback(form, state, "success", "Заявка принята и передана в обработку.");
               resolve({ ok: true });
             } else {
-              feedback(form, state, "error", "Не удалось подтвердить получение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+              feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
               resolve({ ok: false, reason: "unconfirmed" });
             }
             state.promise = null;
           }).catch(function () {
-            feedback(form, state, "error", "Не удалось подтвердить получение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+            feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
             state.promise = null;
             resolve({ ok: false, reason: "unconfirmed" });
           });

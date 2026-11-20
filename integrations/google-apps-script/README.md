@@ -1,4 +1,9 @@
-# Уведомления о лидах KOLVIKA
+# Legacy: уведомления о лидах через Google Apps Script
+
+> Текущие формы на доменах `custom.kolvika.jewelry`, `repair.kolvika.jewelry`
+> и `quiz.kolvika.jewelry` используют серверный приёмник из
+> [`integrations/server`](../server/README.md). Код ниже оставлен для истории и
+> не является частью нового потока заявок.
 
 Файл `lead-email-router.gs` предназначен для Google Apps Script, который обслуживает вкладку «Лиды с AI-лендингов» таблицы «Лиды и Оффлайн конверсии Колвика». Он не меняет действующий `doPost` или формы сайта.
 

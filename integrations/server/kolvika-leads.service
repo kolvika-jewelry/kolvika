@@ -1,0 +1,26 @@
+[Unit]
+Description=KOLVIKA landing lead receiver and amoCRM delivery queue
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kolvika-leads
+Group=kolvika-leads
+WorkingDirectory=/opt/kolvika-leads
+EnvironmentFile=/etc/kolvika-leads.env
+StateDirectory=kolvika-leads
+StateDirectoryMode=0700
+ExecStart=/usr/bin/python3 /opt/kolvika-leads/lead_service.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target
