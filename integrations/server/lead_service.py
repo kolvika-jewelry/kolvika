@@ -791,7 +791,16 @@ def main() -> None:
                 init_db()
             print(create_oauth_authorization_url())
             return
-        raise SystemExit("Usage: lead_service.py [oauth-link]")
+        if sys.argv[1:] == ["oauth-code"]:
+            if not db_path().exists():
+                init_db()
+            code = os.environ.get("AMOCRM_AUTH_CODE", "").strip()
+            if not code:
+                raise SystemExit("AMOCRM_AUTH_CODE is required")
+            exchange_authorization_code(code)
+            print("OAuth authorization code exchanged; tokens stored in SQLite.")
+            return
+        raise SystemExit("Usage: lead_service.py [oauth-link|oauth-code]")
     logging.basicConfig(
         level=os.environ.get("LOG_LEVEL", "INFO").upper(),
         format="%(asctime)s %(levelname)s %(message)s",
