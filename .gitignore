@@ -1,3 +1,6 @@
 .DS_Store
 .sites-runtime/
 .openai/hosting.json.tmp
+.env
+.env.*
+!.env.example
