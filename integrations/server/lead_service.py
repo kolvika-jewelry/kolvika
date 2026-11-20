@@ -787,7 +787,8 @@ def main() -> None:
     os.umask(0o077)
     if len(sys.argv) > 1:
         if sys.argv[1:] == ["oauth-link"]:
-            init_db()
+            if not db_path().exists():
+                init_db()
             print(create_oauth_authorization_url())
             return
         raise SystemExit("Usage: lead_service.py [oauth-link]")
