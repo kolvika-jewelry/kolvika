@@ -8,8 +8,10 @@ import json
 import logging
 import os
 import re
+import secrets
 import signal
 import sqlite3
+import sys
 import threading
 import time
 import uuid
@@ -18,7 +20,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlencode, urlsplit
 from urllib.request import Request, urlopen
 
 
@@ -95,8 +97,8 @@ def init_db() -> None:
             )
             """
         )
-        # Recover jobs interrupted by a service restart. request_id is also
-        # sent to amoCRM so its configured duplicate control can be applied.
+        # Recover jobs interrupted by a service restart. request_id prevents
+        # repeated browser submissions from entering the local queue twice.
         conn.execute(
             "UPDATE leads SET amo_status = 'queued', amo_next_attempt_at = 0 "
             "WHERE amo_status = 'sending'"
@@ -225,6 +227,91 @@ def set_state(values: dict[str, str]) -> None:
         )
 
 
+def oauth_app_configured() -> bool:
+    required = (
+        "AMOCRM_ACCOUNT_URL",
+        "AMOCRM_CLIENT_ID",
+        "AMOCRM_CLIENT_SECRET",
+        "AMOCRM_REDIRECT_URI",
+    )
+    return all(os.environ.get(key, "").strip() for key in required)
+
+
+def create_oauth_authorization_url() -> str:
+    if not oauth_app_configured():
+        raise AmoCRMError("oauth_app_not_configured", retryable=False)
+    state = secrets.token_urlsafe(32)
+    set_state({
+        "oauth_setup_state": state,
+        "oauth_setup_expires_at": str(time.time() + 15 * 60),
+    })
+    params = urlencode({"client_id": os.environ["AMOCRM_CLIENT_ID"], "state": state})
+    return "https://www.amocrm.ru/oauth?" + params
+
+
+def consume_oauth_state(state: str) -> bool:
+    with connect_db() as conn:
+        row = conn.execute(
+            "SELECT value FROM app_state WHERE key = 'oauth_setup_state'"
+        ).fetchone()
+        expires = conn.execute(
+            "SELECT value FROM app_state WHERE key = 'oauth_setup_expires_at'"
+        ).fetchone()
+        if not row or not expires or not secrets.compare_digest(row["value"], state):
+            return False
+        try:
+            if float(expires["value"]) <= time.time():
+                return False
+        except ValueError:
+            return False
+        updated = conn.execute(
+            "UPDATE app_state SET value = '' "
+            "WHERE key = 'oauth_setup_state' AND value = ?",
+            (state,),
+        )
+        return updated.rowcount == 1
+
+
+def exchange_authorization_code(code: str) -> None:
+    if not oauth_app_configured():
+        raise AmoCRMError("oauth_app_not_configured", retryable=False)
+    body = json.dumps({
+        "client_id": os.environ["AMOCRM_CLIENT_ID"],
+        "client_secret": os.environ["AMOCRM_CLIENT_SECRET"],
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": os.environ["AMOCRM_REDIRECT_URI"],
+    }).encode("utf-8")
+    request = Request(
+        amo_base_url() + "/oauth2/access_token",
+        data=body,
+        headers={"Content-Type": "application/json", "Accept": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=20) as response:
+            tokens = json.loads(response.read().decode("utf-8"))
+    except HTTPError as error:
+        raise AmoCRMError(
+            "oauth_code_http_" + str(error.code),
+            retryable=error.code == 429 or error.code >= 500,
+        ) from None
+    except (URLError, TimeoutError, json.JSONDecodeError):
+        raise AmoCRMError("oauth_code_network_or_response_error") from None
+
+    access_token = tokens.get("access_token")
+    refresh_token = tokens.get("refresh_token")
+    expires_in = tokens.get("expires_in")
+    if not access_token or not refresh_token or not isinstance(expires_in, (int, float)):
+        raise AmoCRMError("oauth_code_invalid_token_response", retryable=False)
+    set_state({
+        "access_token": str(access_token),
+        "refresh_token": str(refresh_token),
+        "access_token_expires_at": str(time.time() + int(expires_in)),
+        "oauth_setup_expires_at": "0",
+    })
+
+
 def amo_configured() -> bool:
     required = (
         "AMOCRM_ACCOUNT_URL",
@@ -351,14 +438,57 @@ def amo_lead_name(lead: dict[str, Any]) -> str:
     return (title + " — " + person)[:250]
 
 
+def canonical_phone(value: str) -> str:
+    digits = re.sub(r"\D", "", value)
+    if len(digits) == 11 and digits.startswith("8"):
+        return "7" + digits[1:]
+    if len(digits) == 10:
+        return "7" + digits
+    return digits
+
+
+def find_existing_contact_id(phone: str) -> int | None:
+    wanted = canonical_phone(phone)
+    if not wanted:
+        return None
+    response = api_request(
+        "GET",
+        "/api/v4/contacts?" + urlencode({"query": phone, "limit": 250}),
+        None,
+    )
+    embedded = response.get("_embedded", {}) if isinstance(response, dict) else {}
+    contacts = embedded.get("contacts", []) if isinstance(embedded, dict) else []
+    for contact in contacts:
+        if not isinstance(contact, dict) or not contact.get("id"):
+            continue
+        fields = contact.get("custom_fields_values") or []
+        if not isinstance(fields, list):
+            continue
+        for field in fields:
+            if not isinstance(field, dict) or field.get("field_code") != "PHONE":
+                continue
+            values = field.get("values") or []
+            if isinstance(values, list) and any(
+                isinstance(item, dict)
+                and canonical_phone(str(item.get("value", ""))) == wanted
+                for item in values
+            ):
+                return int(contact["id"])
+    return None
+
+
 def create_amo_lead(lead: dict[str, Any]) -> int:
-    contact: dict[str, Any] = {
-        "name": lead["name"] or lead["phone"],
-        "custom_fields_values": [{
-            "field_code": "PHONE",
-            "values": [{"value": lead["phone"], "enum_code": "WORK"}],
-        }],
-    }
+    contact_id = find_existing_contact_id(lead["phone"])
+    if contact_id:
+        contact = {"id": contact_id, "is_main": True}
+    else:
+        contact = {
+            "name": lead["name"] or lead["phone"],
+            "custom_fields_values": [{
+                "field_code": "PHONE",
+                "values": [{"value": lead["phone"], "enum_code": "WORK"}],
+            }],
+        }
     lead_item: dict[str, Any] = {
         "name": amo_lead_name(lead),
         "request_id": lead["request_id"],
@@ -519,7 +649,9 @@ class LeadHandler(BaseHTTPRequestHandler):
     server_version = "KolvikaLeadService/1.0"
 
     def log_message(self, format: str, *args: Any) -> None:
-        logging.info("%s - %s", self.address_string(), format % args)
+        # OAuth callbacks carry a short-lived authorization code in the query
+        # string. Never write request paths or query values to application logs.
+        logging.info("%s %s %s", self.address_string(), self.command, urlsplit(self.path).path)
 
     def send_json(self, status: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -530,8 +662,42 @@ class LeadHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def send_html(self, status: int, title: str, message: str) -> None:
+        body = (
+            "<!doctype html><html lang=\"ru\"><meta charset=\"utf-8\">"
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
+            "<title>" + title + "</title><main><h1>" + title + "</h1><p>" + message + "</p></main>"
+        ).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def redirect_clean_callback(self, path: str) -> None:
+        self.send_response(303)
+        self.send_header("Location", path)
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+
     def do_GET(self) -> None:
-        if urlsplit(self.path).path != "/healthz":
+        parsed = urlsplit(self.path)
+        if parsed.path == "/api/amocrm/callback":
+            self.handle_amocrm_callback(parse_qs(parsed.query, keep_blank_values=True))
+            return
+        if parsed.path == "/api/amocrm/oauth-complete":
+            self.send_html(
+                200,
+                "amoCRM подключена",
+                "OAuth-токены сохранены на сервере. Это окно можно закрыть.",
+            )
+            return
+        if parsed.path != "/healthz":
             self.send_json(404, {"ok": False, "error": "not_found"})
             return
         try:
@@ -543,6 +709,31 @@ class LeadHandler(BaseHTTPRequestHandler):
             })
         except sqlite3.Error:
             self.send_json(503, {"ok": False, "error": "storage_unavailable"})
+
+    def handle_amocrm_callback(self, query: dict[str, list[str]]) -> None:
+        if query.get("error"):
+            self.send_html(400, "Доступ не предоставлен", "Авторизация интеграции была отменена.")
+            return
+        state = (query.get("state") or [""])[0]
+        code = (query.get("code") or [""])[0]
+        if not state or not code or not consume_oauth_state(state):
+            self.send_html(
+                400,
+                "Ссылка авторизации недействительна",
+                "Создайте новую ссылку авторизации из консоли сервера и повторите подключение.",
+            )
+            return
+        try:
+            exchange_authorization_code(code)
+        except AmoCRMError as error:
+            logging.warning("amoCRM OAuth callback failed error=%s", error.code)
+            self.send_html(
+                502,
+                "Не удалось завершить подключение",
+                "Создайте новую ссылку авторизации и повторите подключение.",
+            )
+            return
+        self.redirect_clean_callback("/api/amocrm/oauth-complete")
 
     def do_POST(self) -> None:
         if urlsplit(self.path).path != "/api/leads":
@@ -594,6 +785,12 @@ class LeadHandler(BaseHTTPRequestHandler):
 
 def main() -> None:
     os.umask(0o077)
+    if len(sys.argv) > 1:
+        if sys.argv[1:] == ["oauth-link"]:
+            init_db()
+            print(create_oauth_authorization_url())
+            return
+        raise SystemExit("Usage: lead_service.py [oauth-link]")
     logging.basicConfig(
         level=os.environ.get("LOG_LEVEL", "INFO").upper(),
         format="%(asctime)s %(levelname)s %(message)s",
