@@ -15,10 +15,11 @@ import sys
 import threading
 import time
 import uuid
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlencode, urlsplit
 from urllib.request import Request, urlopen
@@ -57,17 +58,22 @@ def db_path() -> Path:
     return Path(os.environ.get("LEADS_DB_PATH", DEFAULT_DB_PATH))
 
 
-def connect_db() -> sqlite3.Connection:
+@contextmanager
+def connect_db() -> Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(db_path(), timeout=10)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA busy_timeout = 10000")
-    return conn
+    try:
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA busy_timeout = 10000")
+        with conn:
+            yield conn
+    finally:
+        conn.close()
 
 
 def init_db() -> None:
     path = db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    with sqlite3.connect(path, timeout=10) as conn:
+    with closing(sqlite3.connect(path, timeout=10)) as conn, conn:
         conn.execute("PRAGMA journal_mode = WAL")
         conn.execute(
             """
