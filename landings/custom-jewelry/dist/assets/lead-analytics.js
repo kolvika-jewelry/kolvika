@@ -123,13 +123,13 @@
       if (state && state.promise) return state.promise;
       if (state && state.confirmed) return Promise.resolve({ ok: true });
       if (state && state.signature !== signature) {
-        feedback(form, state, "error", "Данные изменились после первой попытки. Чтобы не создать дубль, напишите ювелиру напрямую.");
+        feedback(form, state, "error", "Не удалось подтвердить отправку. Свяжитесь с нами, чтобы проверить заявку.");
         return Promise.resolve({ ok: false, reason: "changed" });
       }
       var requestId = state ? state.data.request_id : makeRequestId();
       if (!requestId) {
         var fallback = state || { buttonLabel: form.querySelector('[type="submit"]')?.textContent || "Отправить" };
-        feedback(form, fallback, "error", "Не удалось отправить заявку. Напишите ювелиру напрямую.");
+        feedback(form, fallback, "error", "Не получилось отправить заявку. Попробуйте ещё раз.");
         return Promise.resolve({ ok: false, reason: "no_request_id" });
       }
       var tags = collectUtms();
@@ -155,21 +155,21 @@
         };
         formStates.set(form, state);
       }
-      feedback(form, state, "pending", "Сохраняем заявку на сервере…");
+      feedback(form, state, "pending", "Отправляем заявку…");
       data.ym_client_id = clientId;
       state.promise = sendAndConfirm(state).then(function (saved) {
         if (saved) {
           state.confirmed = true;
           reachGoal("lead_submit");
-          feedback(form, state, "success", "Заявка принята и передана в обработку.");
+          feedback(form, state, "success", "Спасибо! Заявка принята. Мы свяжемся с вами по указанному номеру.");
           state.promise = null;
           return { ok: true };
         }
-        feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+        feedback(form, state, "error", "Не получилось отправить заявку. Попробуйте ещё раз.");
         state.promise = null;
         return { ok: false, reason: "unconfirmed" };
       }).catch(function () {
-        feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+        feedback(form, state, "error", "Не получилось отправить заявку. Попробуйте ещё раз.");
         state.promise = null;
         return { ok: false, reason: "unconfirmed" };
       });
