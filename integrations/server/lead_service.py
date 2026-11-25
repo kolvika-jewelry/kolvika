@@ -445,6 +445,11 @@ def configured_lead_fields(lead: dict[str, Any]) -> list[dict[str, Any]]:
     if not isinstance(mapping, dict):
         raise AmoCRMError("invalid_lead_field_map", retryable=False)
 
+    # Verified field in this account. Keep explicit deployment overrides and
+    # never apply an account-specific ID to another amoCRM/Kommo account.
+    if urlsplit(os.environ.get("AMOCRM_ACCOUNT_URL", "")).hostname == "kolvika.amocrm.ru":
+        mapping = {"ym_client_id": 2839145, **mapping}
+
     fields = []
     for key, raw_id in mapping.items():
         value = lead["utm"].get(key) if key.lower().startswith("utm_") else lead.get(key)
