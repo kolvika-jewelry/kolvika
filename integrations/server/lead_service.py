@@ -34,6 +34,17 @@ ALLOWED_HOSTS = {
     "repair.kolvika.jewelry",
     "quiz.kolvika.jewelry",
 }
+BASE_DEAL_TAG = "Jewerly"
+LANDING_DEAL_TAGS_BY_HOST = {
+    "custom.kolvika.jewelry": "custom",
+    "repair.kolvika.jewelry": "repair",
+    "quiz.kolvika.jewelry": "quiz",
+}
+LANDING_DEAL_TAGS_BY_NAME = {
+    "украшения на заказ": "custom",
+    "ремонт украшений": "repair",
+    "квиз украшения на заказ": "quiz",
+}
 UTM_KEY_RE = re.compile(r"^utm_[a-z0-9_]{1,63}$", re.IGNORECASE)
 stop_worker = threading.Event()
 delivery_lock = threading.Lock()
@@ -453,6 +464,20 @@ def amo_lead_name(lead: dict[str, Any]) -> str:
     return (title + " — " + person)[:250]
 
 
+def deal_tags(lead: dict[str, Any]) -> list[dict[str, str]]:
+    try:
+        host = (urlsplit(lead["page"]).hostname or "").lower()
+    except ValueError:
+        host = ""
+    landing_tag = LANDING_DEAL_TAGS_BY_HOST.get(host)
+    if not landing_tag:
+        landing_tag = LANDING_DEAL_TAGS_BY_NAME.get(lead["landing"].casefold())
+    tags = [{"name": BASE_DEAL_TAG}]
+    if landing_tag:
+        tags.append({"name": landing_tag})
+    return tags
+
+
 def canonical_phone(value: str) -> str:
     digits = re.sub(r"\D", "", value)
     if len(digits) == 11 and digits.startswith("8"):
@@ -507,7 +532,7 @@ def create_amo_lead(lead: dict[str, Any]) -> int:
     lead_item: dict[str, Any] = {
         "name": amo_lead_name(lead),
         "request_id": lead["request_id"],
-        "_embedded": {"contacts": [contact]},
+        "_embedded": {"contacts": [contact], "tags": deal_tags(lead)},
     }
     field_values = configured_lead_fields(lead)
     if field_values:

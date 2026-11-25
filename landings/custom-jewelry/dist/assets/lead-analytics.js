@@ -156,26 +156,22 @@
         formStates.set(form, state);
       }
       feedback(form, state, "pending", "Сохраняем заявку на сервере…");
-      state.promise = new Promise(function (resolve) {
-        requestClientId(function (id) {
-          data.ym_client_id = id;
-          sendAndConfirm(state).then(function (saved) {
-            if (saved) {
-              state.confirmed = true;
-              reachGoal("lead_submit");
-              feedback(form, state, "success", "Заявка принята и передана в обработку.");
-              resolve({ ok: true });
-            } else {
-              feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
-              resolve({ ok: false, reason: "unconfirmed" });
-            }
-            state.promise = null;
-          }).catch(function () {
-            feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
-            state.promise = null;
-            resolve({ ok: false, reason: "unconfirmed" });
-          });
-        });
+      data.ym_client_id = clientId;
+      state.promise = sendAndConfirm(state).then(function (saved) {
+        if (saved) {
+          state.confirmed = true;
+          reachGoal("lead_submit");
+          feedback(form, state, "success", "Заявка принята и передана в обработку.");
+          state.promise = null;
+          return { ok: true };
+        }
+        feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+        state.promise = null;
+        return { ok: false, reason: "unconfirmed" };
+      }).catch(function () {
+        feedback(form, state, "error", "Сервер не подтвердил сохранение заявки. Данные остались в форме. Попробуйте ещё раз или напишите ювелиру.");
+        state.promise = null;
+        return { ok: false, reason: "unconfirmed" };
       });
       return state.promise;
     },
